@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="serviceTemplate" class="com.example.mybank.chapter03.service.ServiceTemplate">
+        <property name="webServiceInvoker" ref="webServiceInvoker" />
+        <property name="jmsMessageSender" ref="jmsMessageSender" />
+        <property name="emailMessageSender" ref="emailMessageSender" />
+    </bean>
+
+    <bean id="fixedDepositService" parent="serviceTemplate"
+          class="com.example.mybank.chapter03.service.FixedDepositServiceImpl">
+        <property name="fixedDepositDao" ref="fixedDepositDao" />
+    </bean>
+
+    <bean id="personalBankingService" parent="serviceTemplate"
+          class="com.example.mybank.chapter03.service.PersonalBankingServiceImpl">
+        <constructor-arg ref="personalBankingDao" />
+    </bean>
+
+    <bean id="controllerFactory" class="com.example.mybank.chapter03.controller.ControllerFactory" />
+
+    <bean id="controllerTemplate" abstract="true" factory-bean="controllerFactory" factory-method="getController"/>
+
+    <bean id="fixedDepositController" parent="controllerTemplate">
+        <constructor-arg value="fixedDepositController" />
+        <property name="fixedDepositService" ref="fixedDepositService" />
+    </bean>
+
+    <bean id="userRequestController" parent="controllerTemplate">
+        <constructor-arg value="userRequestController" />
+        <property name="serviceTemplate" ref="serviceTemplate" />
+    </bean>
+
+    <bean id="databaseOperations" class="com.example.mybank.chapter03.utils.DatabaseOperations" />
+
+    <bean id="daoTemplate" abstract="true">
+        <property name="databaseOperations" ref="databaseOperations" />
+    </bean>
+
+    <bean id="databaseInfo" class="com.example.mybank.chapter03.DatabaseInfo" />
+
+    <bean id="fixedDepositDaoFactory" class="com.example.mybank.chapter03.dao.FixedDepositDaoFactory" />
+
+    <bean id="fixedDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" parent="daoTemplate">
+        <constructor-arg value="jdbc" />
+    </bean>
+
+    <bean id="personalBankingDao" class="com.example.mybank.chapter03.dao.PersonalBankingDaoImpl" parent="daoTemplate" />
+
+    <bean id="emailMessageSender" class="com.example.mybank.chapter03.EmailMessageSender" />
+
+    <bean id="jmsMessageSender" class="com.example.mybank.chapter03.JmsMessageSender" />
+
+    <bean id="webServiceInvoker" class="com.example.mybank.chapter03.WebServiceInvoker" />
+</beans>

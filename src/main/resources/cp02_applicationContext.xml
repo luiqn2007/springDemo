@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="controller" class="com.example.mybank.chapter02.controller.FixedDepositControllerImpl">
+        <property name="fixedDepositService" ref="serivce" />
+    </bean>
+
+    <bean id="serivce" class="com.example.mybank.chapter02.service.FixedDepositServiceImpl">
+        <property name="fixedDepositDao" ref="dao" />
+    </bean>
+
+    <bean id="daoFactory" class="com.example.mybank.chapter02.dao.FixedDepositDaoFactory" />
+
+    <bean id="databaseInfo" class="com.example.mybank.chapter02.DatabaseInfo" />
+
+    <bean id="dao" factory-bean="daoFactory" factory-method="getFixedDepositDao">
+        <constructor-arg value="jdbc" />
+        <property name="databaseInfo" ref="databaseInfo" />
+    </bean>
+
+    <bean id="emailMessageSender" class="com.example.mybank.chapter02.EmailMessageSender" />
+
+    <bean id="jmsMessageSender" class="com.example.mybank.chapter02.JmsMessageSender" />
+
+    <bean id="webServiceInvoker" class="com.example.mybank.chapter02.WebServiceInvoker" />
+
+    <bean id="personalBankingService" class="com.example.mybank.chapter02.service.PersonalBankingService">
+        <constructor-arg index="0" ref="jmsMessageSender" />
+        <constructor-arg index="1" ref="emailMessageSender" />
+        <constructor-arg index="2" ref="webServiceInvoker" />
+    </bean>
+</beans>

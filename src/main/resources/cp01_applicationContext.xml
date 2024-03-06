@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="controller" class="com.example.mybank.chapter01.FixedDepositController">
+    <bean id="controller" class="com.example.mybank.chapter01.FixedDepositControllerV1">
         <property name="fixedDepositService" ref="serivce" />
     </bean>
 
