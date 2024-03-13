@@ -6,6 +6,7 @@ public class ControllerFactory {
         return switch (name) {
             case "fixedDepositController" -> new FixedDepositControllerImpl();
             case "userRequestController" -> new UserRequestControllerImpl();
+            case "personalBankingController" -> null;
             default -> throw new IllegalArgumentException("Unknown controller type " + name);
         };
     }

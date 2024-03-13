@@ -3,55 +3,97 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="myPropertyEditorRegistrar" class="com.example.mybank.chapter03.beans.MyPropertyEditorRegistrar"/>
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars" ref="myPropertyEditorRegistrar" />
+    </bean>
+
+    <bean id="databaseInfo" class="com.example.mybank.chapter03.DatabaseInfo"/>
+
+    <bean id="daoTemplate" abstract="true">
+        <property name="databaseOperations" ref="databaseOperations"/>
+    </bean>
+
+    <bean id="databaseOperations" class="com.example.mybank.chapter03.utils.DatabaseOperations"/>
+
     <bean id="serviceTemplate" class="com.example.mybank.chapter03.service.ServiceTemplate">
-        <property name="webServiceInvoker" ref="webServiceInvoker" />
-        <property name="jmsMessageSender" ref="jmsMessageSender" />
-        <property name="emailMessageSender" ref="emailMessageSender" />
+        <constructor-arg ref="webServiceInvoker"/>
+        <constructor-arg ref="jmsMessageSender"/>
+        <constructor-arg ref="emailMessageSender"/>
+    </bean>
+
+    <bean id="emailMessageSender" class="com.example.mybank.chapter03.EmailMessageSender"/>
+    <bean id="jmsMessageSender" class="com.example.mybank.chapter03.JmsMessageSender"/>
+    <bean id="webServiceInvoker" class="com.example.mybank.chapter03.WebServiceInvoker"/>
+
+    <bean id="controllerFactory" class="com.example.mybank.chapter03.controller.ControllerFactory"/>
+
+    <bean id="controllerTemplate" abstract="true" factory-bean="controllerFactory" factory-method="getController"/>
+
+    <!-- Fixed Deposit Service -->
+
+    <bean id="fixedDepositController" parent="controllerTemplate">
+        <constructor-arg value="fixedDepositController"/>
+        <property name="fixedDepositService" ref="fixedDepositService"/>
     </bean>
 
     <bean id="fixedDepositService" parent="serviceTemplate"
           class="com.example.mybank.chapter03.service.FixedDepositServiceImpl">
-        <property name="fixedDepositDao" ref="fixedDepositDao" />
+        <property name="fixedDepositDao" ref="fixedDepositDao"/>
+    </bean>
+
+    <bean id="fixedDepositDaoFactory" class="com.example.mybank.chapter03.dao.FixedDepositDaoFactory"/>
+
+    <bean id="fixedDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao"
+          parent="daoTemplate">
+        <constructor-arg value="jdbc"/>
+    </bean>
+
+    <bean id="fixedDepositDetails" class="com.example.mybank.chapter03.beans.FixedDepositDetails" scope="prototype"/>
+
+    <!-- Personal Banking Service -->
+
+    <bean id="personalBankingController" parent="controllerTemplate">
+        <constructor-arg value="personalBankingController"/>
+        <property name="personalBankingService" ref="personalBankingService"/>
     </bean>
 
     <bean id="personalBankingService" parent="serviceTemplate"
           class="com.example.mybank.chapter03.service.PersonalBankingServiceImpl">
-        <constructor-arg ref="personalBankingDao" />
+        <constructor-arg name="personalBankingDao" ref="personalBankingDao"/>
     </bean>
 
-    <bean id="controllerFactory" class="com.example.mybank.chapter03.controller.ControllerFactory" />
+    <bean id="personalBankingDao" class="com.example.mybank.chapter03.dao.PersonalBankingDaoImpl" parent="daoTemplate"/>
 
-    <bean id="controllerTemplate" abstract="true" factory-bean="controllerFactory" factory-method="getController"/>
-
-    <bean id="fixedDepositController" parent="controllerTemplate">
-        <constructor-arg value="fixedDepositController" />
-        <property name="fixedDepositService" ref="fixedDepositService" />
-    </bean>
+    <!-- User Request Service -->
 
     <bean id="userRequestController" parent="controllerTemplate">
-        <constructor-arg value="userRequestController" />
-        <property name="serviceTemplate" ref="serviceTemplate" />
+        <constructor-arg value="userRequestController"/>
+        <property name="serviceTemplate" ref="serviceTemplate"/>
     </bean>
 
-    <bean id="databaseOperations" class="com.example.mybank.chapter03.utils.DatabaseOperations" />
+    <!-- Transfer Funds Service -->
 
-    <bean id="daoTemplate" abstract="true">
-        <property name="databaseOperations" ref="databaseOperations" />
+    <bean id="transferFundsService" class="com.example.mybank.chapter03.service.TransferFundsServiceImpl">
+        <constructor-arg type="java.lang.String" value="http://someUrl.com/xyz"/>
+        <constructor-arg type="boolean" value="true"/>
+        <constructor-arg type="long" value="200"/>
+        <constructor-arg type="int" value="5"/>
     </bean>
 
-    <bean id="databaseInfo" class="com.example.mybank.chapter03.DatabaseInfo" />
-
-    <bean id="fixedDepositDaoFactory" class="com.example.mybank.chapter03.dao.FixedDepositDaoFactory" />
-
-    <bean id="fixedDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" parent="daoTemplate">
-        <constructor-arg value="jdbc" />
+    <!-- Bank Service -->
+    <bean id="bankDetails" class="com.example.mybank.chapter03.beans.BankDetails">
+        <property name="bankName" value="My Person Bank" />
+        <property name="bankPrimaryBusiness" value="Retail banking" />
+        <property name="headOfficeAddress" value="Retail bank office" />
+        <property name="privateBank" value="y" />
+        <property name="primaryCurrency" value="INR" />
+        <property name="dateOfInception" value="30-01-2012" />
+        <property name="branchAddresses">
+            <value>
+                x = Branch x's address
+                y = Branch y's address
+            </value>
+        </property>
     </bean>
-
-    <bean id="personalBankingDao" class="com.example.mybank.chapter03.dao.PersonalBankingDaoImpl" parent="daoTemplate" />
-
-    <bean id="emailMessageSender" class="com.example.mybank.chapter03.EmailMessageSender" />
-
-    <bean id="jmsMessageSender" class="com.example.mybank.chapter03.JmsMessageSender" />
-
-    <bean id="webServiceInvoker" class="com.example.mybank.chapter03.WebServiceInvoker" />
 </beans>

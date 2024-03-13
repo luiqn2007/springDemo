@@ -1,6 +1,6 @@
 package com.example.mybank.chapter03.dao;
 
-import com.example.mybank.chapter03.FixedDepositDetails;
+import com.example.mybank.chapter03.beans.FixedDepositDetails;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class FixedDepositHibernateDao extends FixedDepositDao {
 
     @Override
     public boolean createFixedDetail(FixedDepositDetails fdd) {
-        fixedDeposits.put(fdd.id(), fdd);
+        fixedDeposits.put(fdd.getId(), fdd);
         return true;
     }
 }

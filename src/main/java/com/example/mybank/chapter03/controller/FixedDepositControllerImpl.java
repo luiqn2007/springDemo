@@ -1,10 +1,14 @@
 package com.example.mybank.chapter03.controller;
 
-import com.example.mybank.chapter03.FixedDepositDetails;
+import com.example.mybank.chapter03.beans.FixedDepositDetails;
 import com.example.mybank.chapter03.service.FixedDepositService;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+@Setter
+@Getter
 public class FixedDepositControllerImpl implements FixedDepositController {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -13,17 +17,6 @@ public class FixedDepositControllerImpl implements FixedDepositController {
 
     public FixedDepositControllerImpl() {
         LOGGER.info("initializing");
-    }
-
-    @Override
-    public void setFixedDepositService(FixedDepositService fixedDepositService) {
-        LOGGER.info("Setting fixedDepositService property");
-        this.fixedDepositService = fixedDepositService;
-    }
-
-    @Override
-    public FixedDepositService getFixedDepositService() {
-        return fixedDepositService;
     }
 
     @Override

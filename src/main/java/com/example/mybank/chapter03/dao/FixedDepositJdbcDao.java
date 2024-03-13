@@ -1,7 +1,8 @@
 package com.example.mybank.chapter03.dao;
 
 import com.example.mybank.chapter03.DatabaseInfo;
-import com.example.mybank.chapter03.FixedDepositDetails;
+import com.example.mybank.chapter03.beans.FixedDepositDetails;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +13,9 @@ import java.util.Map;
 public class FixedDepositJdbcDao extends FixedDepositDao {
 
     private final Map<Long, FixedDepositDetails> fixedDeposits = new HashMap<>();
-    private DatabaseInfo databaseInfo;
 
-    public void setDatabaseInfo(DatabaseInfo databaseInfo) {
-        this.databaseInfo = databaseInfo;
-    }
+    @Setter
+    private DatabaseInfo databaseInfo;
 
     @Override
     public FixedDepositDetails getFixedDeposit(long id) {
@@ -25,7 +24,7 @@ public class FixedDepositJdbcDao extends FixedDepositDao {
 
     @Override
     public boolean createFixedDetail(FixedDepositDetails fdd) {
-        fixedDeposits.put(fdd.id(), fdd);
+        fixedDeposits.put(fdd.getId(), fdd);
         return true;
     }
 }

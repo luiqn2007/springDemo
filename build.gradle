@@ -27,6 +27,12 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+    compileOnly "org.projectlombok:lombok:${lombok_version}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
+    testCompileOnly "org.projectlombok:lombok:${lombok_version}"
 }
 
 tasks.named('test') {

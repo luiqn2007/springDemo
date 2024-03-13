@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class SpringDemoApplicationChapter2Test {
+class SpringIoCTest {
 
     private static ApplicationContext context;
 
