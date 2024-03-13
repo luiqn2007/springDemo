@@ -12,12 +12,12 @@
         <property name="propertyEditorRegistrars" ref="myPropertyEditorRegistrar" />
     </bean>
 
-    <bean id="dataTypes" class="com.example.mybank.chapter03.bean.DataTypesExample">
+    <bean id="dataTypes" class="com.example.mybank.bean.DataTypesExample">
         <property name="stringType" value="My Person Bank"/>
         <property name="byteArray" value="Retail banking"/>
         <property name="charArray" value="Address of head office"/>
         <property name="charType" value="y"/>
-        <property name="classType" value="com.example.mybank.chapter03.bean.DataTypesExample"/>
+        <property name="classType" value="com.example.mybank.bean.DataTypesExample"/>
         <property name="currencyType" value="INR"/>
         <property name="booleanType" value="true"/>
         <property name="dateType" value="30-01-2012"/>

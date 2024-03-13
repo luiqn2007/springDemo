@@ -2,7 +2,7 @@ package com.example.mybank;
 
 import com.example.mybank.chapter01.FixedDepositControllerV1;
 import com.example.mybank.chapter02.controller.FixedDepositControllerV2;
-import com.example.mybank.chapter03.controller.FixedDepositController;
+import com.example.mybank.controller.FixedDepositController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
