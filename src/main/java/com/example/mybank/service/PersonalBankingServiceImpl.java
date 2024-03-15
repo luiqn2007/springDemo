@@ -1,6 +1,6 @@
 package com.example.mybank.service;
 
-import com.example.mybank.BankStatement;
+import com.example.mybank.beans.BankStatement;
 import com.example.mybank.EmailMessageSender;
 import com.example.mybank.JmsMessageSender;
 import com.example.mybank.WebServiceInvoker;

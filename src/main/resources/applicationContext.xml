@@ -68,6 +68,13 @@
     </bean>
 
     <!-- Bank Service -->
+
+    <bean id="bankStatement" class="com.example.mybank.beans.BankStatement"
+          c:_0="30-01-2012"
+          c:_1="100000.00"
+          c:_2="Credit"
+          c:_3="1110202"/>
+
     <bean id="bankDetails" class="com.example.mybank.beans.BankDetails"
           p:bankName="My Person Bank"
           p:bankPrimaryBusiness="Retail banking"

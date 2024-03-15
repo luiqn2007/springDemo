@@ -1,6 +1,6 @@
 package com.example.mybank.dao;
 
-import com.example.mybank.BankStatement;
+import com.example.mybank.beans.BankStatement;
 import com.example.mybank.utils.DatabaseOperations;
 
 public interface PersonalBankingDao {
