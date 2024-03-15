@@ -1,6 +1,6 @@
-package com.example.mybank.chapter03.service;
+package com.example.mybank.service;
 
-import com.example.mybank.chapter03.BankStatement;
+import com.example.mybank.BankStatement;
 
 /**
  * 允许客户端检索银行账户对账单

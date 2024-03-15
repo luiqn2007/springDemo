@@ -1,4 +1,4 @@
-package com.example.mybank.chapter03.utils;
+package com.example.mybank.utils;
 
 /**
  * 数据库操作类

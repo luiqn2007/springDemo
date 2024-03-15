@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myPropertyEditorRegistrar" class="com.example.mybank.beans.MyPropertyEditorRegistrar"/>
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer"
+          p:propertyEditorRegistrars-ref="myPropertyEditorRegistrar"/>
+
+    <bean id="databaseInfo" class="com.example.mybank.DatabaseInfo"/>
+
+    <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations"/>
+
+    <bean id="serviceTemplate" class="com.example.mybank.service.ServiceTemplate"
+          c:jmsMessageSender-ref="jmsMessageSender"
+          c:emailMessageSender-ref="emailMessageSender"
+          c:webServiceInvoker-ref="webServiceInvoker"/>
+
+    <bean id="emailMessageSender" class="com.example.mybank.EmailMessageSender"/>
+    <bean id="jmsMessageSender" class="com.example.mybank.JmsMessageSender"/>
+    <bean id="webServiceInvoker" class="com.example.mybank.WebServiceInvoker"/>
+
+    <bean id="controllerFactory" class="com.example.mybank.controller.ControllerFactory"/>
+
+    <bean id="controllerTemplate" abstract="true" factory-bean="controllerFactory" factory-method="getController"/>
+
+    <!-- Fixed Deposit Service -->
+
+    <bean id="fixedDepositController" parent="controllerTemplate" c:_0="fixedDepositController"
+          p:fixedDepositService-ref="fixedDepositService"/>
+
+    <bean id="fixedDepositService" parent="serviceTemplate" p:fixedDepositDao-ref="fixedDepositDao"
+          class="com.example.mybank.service.FixedDepositServiceImpl"/>
+
+    <bean id="fixedDepositDaoFactory" class="com.example.mybank.dao.FixedDepositDaoFactory"/>
+
+    <bean id="fixedDepositDao" p:databaseInfo-ref="databaseInfo" c:_0="jdbc"
+          factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao"/>
+
+    <bean id="fixedDepositDetails" class="com.example.mybank.beans.FixedDepositDetails" scope="prototype"/>
+
+    <!-- Personal Banking Service -->
+
+    <bean id="personalBankingController" parent="controllerTemplate" c:_0="personalBankingController"
+          p:personalBankingService-ref="personalBankingService"/>
+
+    <bean id="personalBankingService" parent="serviceTemplate"
+          class="com.example.mybank.service.PersonalBankingServiceImpl"
+          c:personalBankingDao-ref="personalBankingDao"/>
+
+    <bean id="personalBankingDao" class="com.example.mybank.dao.PersonalBankingDaoImpl"/>
+
+    <!-- User Request Service -->
+
+    <bean id="userRequestController" parent="controllerTemplate" c:_0="userRequestController"
+          p:serviceTemplate-ref="serviceTemplate"/>
+
+    <!-- Transfer Funds Service -->
+
+    <bean id="transferFundsService" class="com.example.mybank.service.TransferFundsServiceImpl">
+        <constructor-arg type="java.lang.String" value="http://someUrl.com/xyz"/>
+        <constructor-arg type="boolean" value="true"/>
+        <constructor-arg type="long" value="200"/>
+        <constructor-arg type="int" value="5"/>
+    </bean>
+
+    <!-- Bank Service -->
+    <bean id="bankDetails" class="com.example.mybank.beans.BankDetails"
+          p:bankName="My Person Bank"
+          p:bankPrimaryBusiness="Retail banking"
+          p:headOfficeAddress="Retail bank office"
+          p:privateBank="y"
+          p:primaryCurrency="INR"
+          p:dateOfInception="30-01-2012">
+        <property name="branchAddresses">
+            <value>
+                x = Branch x's address
+                y = Branch y's address
+            </value>
+        </property>
+    </bean>
+</beans>

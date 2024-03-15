@@ -1,7 +1,7 @@
-package com.example.mybank.chapter03.dao;
+package com.example.mybank.dao;
 
-import com.example.mybank.chapter03.BankStatement;
-import com.example.mybank.chapter03.utils.DatabaseOperations;
+import com.example.mybank.BankStatement;
+import com.example.mybank.utils.DatabaseOperations;
 
 public interface PersonalBankingDao {
 

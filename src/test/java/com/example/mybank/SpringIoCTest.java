@@ -1,7 +1,8 @@
 package com.example.mybank;
 
-import com.example.mybank.chapter02.controller.FixedDepositControllerV2;
-import com.example.mybank.chapter02.dao.FixedDepositDao;
+import com.example.mybank.beans.FixedDepositDetails;
+import com.example.mybank.controller.FixedDepositController;
+import com.example.mybank.dao.FixedDepositDao;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanCreationException;
@@ -29,8 +30,8 @@ class SpringIoCTest {
      */
     @Test
     void testInstances() {
-        FixedDepositControllerV2 controller1 = (FixedDepositControllerV2) context.getBean("container");
-        FixedDepositControllerV2 controller2 = (FixedDepositControllerV2) context.getBean("container");
+        FixedDepositController controller1 = (FixedDepositController) context.getBean("container");
+        FixedDepositController controller2 = (FixedDepositController) context.getBean("container");
         assertSame(controller1, controller2, "Different FixedDepositController instance");
     }
 
@@ -39,7 +40,7 @@ class SpringIoCTest {
      */
     @Test
     void testReference() {
-        FixedDepositControllerV2 controller = (FixedDepositControllerV2) context.getBean("container");
+        FixedDepositController controller = (FixedDepositController) context.getBean("container");
 
         FixedDepositDao dao1 = controller.getFixedDepositService().getFixedDepositDao();
         FixedDepositDao dao2 = (FixedDepositDao) context.getBean("dao");
@@ -52,8 +53,8 @@ class SpringIoCTest {
     @Test
     void testSingletonScope() {
         ApplicationContext anotherContext = new ClassPathXmlApplicationContext("cp02_applicationContext_test.xml");
-        FixedDepositControllerV2 controller1 = (FixedDepositControllerV2) context.getBean("container");
-        FixedDepositControllerV2 controller2 = (FixedDepositControllerV2) anotherContext.getBean("container");
+        FixedDepositController controller1 = (FixedDepositController) context.getBean("container");
+        FixedDepositController controller2 = (FixedDepositController) anotherContext.getBean("container");
         assertNotSame(controller1, controller2, "Same FixedDepositController instance");
     }
 

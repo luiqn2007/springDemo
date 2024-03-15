@@ -1,10 +1,13 @@
-package com.example.mybank.chapter03.service;
+package com.example.mybank.service;
 
-import com.example.mybank.chapter03.beans.FixedDepositDetails;
-import com.example.mybank.chapter03.dao.FixedDepositDao;
+import com.example.mybank.dao.FixedDepositDao;
+import com.example.mybank.beans.FixedDepositDetails;
 
 public interface FixedDepositService {
+
     void setFixedDepositDao(FixedDepositDao fixedDepositDao);
+
+    FixedDepositDao getFixedDepositDao();
 
     FixedDepositDetails getFixedDepositDetails(long id);
 

@@ -1,4 +1,4 @@
-package com.example.mybank.chapter03.service;
+package com.example.mybank.service;
 
 public interface TransferFundsService {
 }

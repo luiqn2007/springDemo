@@ -1,4 +1,4 @@
-package com.example.mybank.chapter03.service;
+package com.example.mybank.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

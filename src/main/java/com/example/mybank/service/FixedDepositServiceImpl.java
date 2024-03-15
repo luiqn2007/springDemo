@@ -1,10 +1,10 @@
-package com.example.mybank.chapter03.service;
+package com.example.mybank.service;
 
-import com.example.mybank.chapter03.EmailMessageSender;
-import com.example.mybank.chapter03.beans.FixedDepositDetails;
-import com.example.mybank.chapter03.JmsMessageSender;
-import com.example.mybank.chapter03.WebServiceInvoker;
-import com.example.mybank.chapter03.dao.FixedDepositDao;
+import com.example.mybank.EmailMessageSender;
+import com.example.mybank.JmsMessageSender;
+import com.example.mybank.WebServiceInvoker;
+import com.example.mybank.beans.FixedDepositDetails;
+import com.example.mybank.dao.FixedDepositDao;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
