@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="bankapp-dao.xml" />
+
+    <bean id="emailMessageSender" class="com.example.mybank.base.EmailMessageSender"/>
+    <bean id="jmsMessageSender" class="com.example.mybank.base.JmsMessageSender"/>
+    <bean id="webServiceInvoker" class="com.example.mybank.base.WebServiceInvoker"/>
+
+    <bean id="serviceTemplate" class="com.example.mybank.base.ServiceTemplate"
+          c:jmsMessageSender-ref="jmsMessageSender"
+          c:emailMessageSender-ref="emailMessageSender"
+          c:webServiceInvoker-ref="webServiceInvoker"/>
+
+    <bean id="eventSenderFactory" class="com.example.mybank.event.EventSenderFactoryBean"
+          p:databasePropertiesFile="META-INF/config/database.properties"/>
+
+    <bean id="fixedDepositService" parent="serviceTemplate" class="com.example.mybank.service.FixedDepositServiceImpl"
+          p:fixedDepositDao-ref="fixedDepositDao" p:eventSender-ref="eventSenderFactory"/>
+
+    <bean id="personalBankingService" parent="serviceTemplate" class="com.example.mybank.service.PersonalBankingServiceImpl"
+          c:personalBankingDao-ref="personalBankingDao"/>
+
+    <bean id="transferFundsService" class="com.example.mybank.service.TransferFundsServiceImpl"
+          c:webServiceUrl="http://someUrl.com/xyz"
+          c:active="true"
+          c:timeout="200"
+          c:numberOfRetrialAttempts="5" />
+</beans>

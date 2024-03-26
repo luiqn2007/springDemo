@@ -1,4 +1,4 @@
-package com.example.mybank;
+package com.example.mybank.base;
 
 public class JmsMessageSender {
 }

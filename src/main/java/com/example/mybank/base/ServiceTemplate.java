@@ -1,8 +1,5 @@
-package com.example.mybank.service;
+package com.example.mybank.base;
 
-import com.example.mybank.EmailMessageSender;
-import com.example.mybank.JmsMessageSender;
-import com.example.mybank.WebServiceInvoker;
 import lombok.Getter;
 import lombok.Setter;
 

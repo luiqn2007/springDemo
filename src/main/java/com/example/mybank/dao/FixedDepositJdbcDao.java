@@ -1,15 +1,14 @@
 package com.example.mybank.dao;
 
-import com.example.mybank.DatabaseInfo;
-import com.example.mybank.beans.FixedDepositDetails;
+import com.example.mybank.beans.DatabaseInfo;
+import com.example.mybank.domain.FixedDepositDetails;
+import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import lombok.Setter;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class FixedDepositJdbcDao extends FixedDepositDao {
 
-    private final Map<Long, FixedDepositDetails> fixedDeposits = new HashMap<>();
+    private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
 
     @Setter
     private DatabaseInfo databaseInfo;

@@ -1,6 +1,6 @@
 package com.example.mybank.controller;
 
-import com.example.mybank.beans.FixedDepositDetails;
+import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.service.FixedDepositService;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,14 +19,18 @@ public class FixedDepositControllerImpl implements FixedDepositController {
         LOGGER.info("initializing");
     }
 
-    @Override
-    public boolean submit() {
-        FixedDepositDetails fdd = new FixedDepositDetails(1, 10000, 365, "someemail@something.com");
-        return fixedDepositService.createFixedDeposit(fdd);
+    public void setFixedDepositService(FixedDepositService fixedDepositService) {
+        LOGGER.info("Setting fixedDepositService property");
+        this.fixedDepositService = fixedDepositService;
     }
 
     @Override
     public FixedDepositDetails get() {
         return fixedDepositService.getFixedDepositDetails(1L);
+    }
+
+    @Override
+    public boolean submit(FixedDepositDetails fixedDepositDetails) {
+        return fixedDepositService.createFixedDeposit(fixedDepositDetails);
     }
 }

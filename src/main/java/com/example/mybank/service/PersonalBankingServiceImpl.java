@@ -1,9 +1,10 @@
 package com.example.mybank.service;
 
-import com.example.mybank.beans.BankStatement;
-import com.example.mybank.EmailMessageSender;
-import com.example.mybank.JmsMessageSender;
-import com.example.mybank.WebServiceInvoker;
+import com.example.mybank.base.ServiceTemplate;
+import com.example.mybank.domain.BankStatement;
+import com.example.mybank.base.EmailMessageSender;
+import com.example.mybank.base.JmsMessageSender;
+import com.example.mybank.base.WebServiceInvoker;
 import com.example.mybank.dao.PersonalBankingDao;
 import lombok.Getter;
 

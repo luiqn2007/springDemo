@@ -1,6 +1,6 @@
 package com.example.mybank;
 
-import com.example.mybank.beans.FixedDepositDetails;
+import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.controller.FixedDepositController;
 import com.example.mybank.dao.FixedDepositDao;
 import org.junit.jupiter.api.BeforeAll;

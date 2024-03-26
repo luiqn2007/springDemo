@@ -23,4 +23,7 @@
     <util:property-path id="dataType" path="listType.class" />
 
     <util:constant id="bool_true" static-field="java.lang.Boolean.TRUE" />
+
+    <bean id="example-factory" class="com.example.mybank.bean.ExampleFactoryBean" />
+
 </beans>
