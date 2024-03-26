@@ -2,7 +2,6 @@ package com.example.mybank.controller;
 
 import com.example.mybank.base.ServiceTemplate;
 import com.example.mybank.domain.Request;
-import lombok.Getter;
 import lombok.Setter;
 
 public class UserRequestControllerImpl implements UserRequestController {

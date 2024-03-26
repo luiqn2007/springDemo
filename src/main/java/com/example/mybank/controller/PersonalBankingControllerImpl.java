@@ -2,7 +2,6 @@ package com.example.mybank.controller;
 
 import com.example.mybank.domain.BankStatement;
 import com.example.mybank.service.PersonalBankingService;
-import lombok.Getter;
 import lombok.Setter;
 
 @Setter

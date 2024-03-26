@@ -1,6 +1,5 @@
 package com.example.mybank.service;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.beans.ConstructorProperties;

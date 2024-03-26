@@ -13,7 +13,7 @@ import java.beans.ConstructorProperties;
 @Getter
 public class PersonalBankingServiceImpl extends ServiceTemplate implements PersonalBankingService {
 
-    private PersonalBankingDao personalBankingDao;
+    private final PersonalBankingDao personalBankingDao;
 
     @ConstructorProperties({"jmsMessageSender", "emailMessageSender", "webServiceInvoker", "personalBankingDao"})
     public PersonalBankingServiceImpl(JmsMessageSender jmsMessageSender, EmailMessageSender emailMessageSender, WebServiceInvoker webServiceInvoker, PersonalBankingDao personalBankingDao) {

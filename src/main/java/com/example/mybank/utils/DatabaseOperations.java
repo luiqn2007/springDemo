@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class DatabaseOperations {
 
-    private static Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
+    private static final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
 
     public void saveFd(FixedDepositDetails fdd) {
         fixedDeposits.put(fdd.getId(), fdd);
