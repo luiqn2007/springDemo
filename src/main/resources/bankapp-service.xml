@@ -33,13 +33,10 @@
     <bean id="eventSenderSelectorService" class="com.example.mybank.service.EventSenderSelectorServiceImpl"
           c:_0="META-INF/config/appConfig.properties" />
 
-<!--    <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl"-->
-<!--          c:customerRequestDao-ref="customerRequestDao" />-->
-
     <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl2"
           c:customerRequestDao-ref="customerRequestDao">
         <lookup-method bean="customerRequestDetails" name="getCustomerDetails" />
     </bean>
 
-    <bean id="customerRegistrationService" class="com.example.mybank.service.CustomerRegistrationServiceImpl" autowire="constructor" />
+    <bean id="customerRegistrationService" class="com.example.mybank.service.CustomerRegistrationServiceImpl" autowire="constructor"/>
 </beans>

@@ -9,7 +9,7 @@ public abstract class CustomerRequestServiceImpl2 implements CustomerRequestServ
 
     private final CustomerRequestDao customerRequestDao;
 
-    @ConstructorProperties("consumerRequestDao")
+    @ConstructorProperties("customerRequestDao")
     public CustomerRequestServiceImpl2(CustomerRequestDao customerRequestDao) {
         this.customerRequestDao = customerRequestDao;
     }
