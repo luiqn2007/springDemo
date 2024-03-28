@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="bankStatement" class="com.example.mybank.domain.BankStatement"
+          c:_0="30-01-2012"
+          c:_1="100000.00"
+          c:_2="Credit"
+          c:_3="1110202"/>
+
+    <bean id="bankDetails" class="com.example.mybank.beans.BankDetails"
+          p:bankName="My Person Bank"
+          p:bankPrimaryBusiness="Retail banking"
+          p:headOfficeAddress="Retail bank office"
+          p:privateBank="y"
+          p:primaryCurrency="INR"
+          p:dateOfInception="30-01-2012">
+        <property name="branchAddresses">
+            <util:properties location="config/database.properties" />
+        </property>
+    </bean>
+
+    <bean id="customerRequestDetails" class="com.example.mybank.domain.CustomerRequestDetails" scope="prototype" />
+
+    <bean id="customerRegistrationDetails" class="com.example.mybank.domain.CustomerRegistrationDetails" scope="prototype" />
+</beans>

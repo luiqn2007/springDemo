@@ -8,27 +8,45 @@ import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.dao.FixedDepositDao;
 import com.example.mybank.event.EventSender;
 import com.example.mybank.event.FixedDepositCreatedEvent;
+import com.example.mybank.utils.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.io.ClassPathResource;
 
 import java.beans.ConstructorProperties;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 
 @Getter
-@Setter
 public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    @Setter
     private FixedDepositDao fixedDepositDao;
     private EventSender eventSender;
 
-    @ConstructorProperties({"jmsMessageSender", "emailMessageSender", "webServiceInvoker"})
-    public FixedDepositServiceImpl(JmsMessageSender jmsMessageSender, EmailMessageSender emailMessageSender, WebServiceInvoker webServiceInvoker) {
+    @ConstructorProperties({"jmsMessageSender", "emailMessageSender", "webServiceInvoker", "appConfigFile"})
+    public FixedDepositServiceImpl(JmsMessageSender jmsMessageSender, EmailMessageSender emailMessageSender, WebServiceInvoker webServiceInvoker,
+                                   String appConfigFile) throws Exception {
         super(jmsMessageSender, emailMessageSender, webServiceInvoker);
-        LOGGER.info("initializing");
+
+        ClassPathResource resource = new ClassPathResource(appConfigFile);
+        if (resource.exists()) {
+            try (InputStream is = resource.getInputStream()) {
+                Properties properties = new Properties();
+                properties.load(is);
+                String eventSenderClassString = properties.getProperty(Constants.EVENT_SENDER_CLASS_PROPERTY);
+                if (eventSenderClassString != null) {
+                    Class<?> eventSenderClass = Class.forName(eventSenderClassString);
+                    eventSender = (EventSender) eventSenderClass.getDeclaredConstructor().newInstance();
+                }
+            }
+        }
     }
 
     @Override

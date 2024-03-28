@@ -7,29 +7,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/util  http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <import resource="bankapp-dao.xml"/>
-    <import resource="bankapp-service.xml"/>
-    <import resource="bankapp-controller.xml"/>
-
     <bean id="myPropertyEditorRegistrar" class="com.example.mybank.beans.MyPropertyEditorRegistrar"/>
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer"
           p:propertyEditorRegistrars-ref="myPropertyEditorRegistrar"/>
 
-    <bean id="bankStatement" class="com.example.mybank.domain.BankStatement"
-          c:_0="30-01-2012"
-          c:_1="100000.00"
-          c:_2="Credit"
-          c:_3="1110202"/>
-
-    <util:properties id="branchAddresses" location="config/database.properties" />
-
-    <bean id="bankDetails" class="com.example.mybank.beans.BankDetails"
-          p:bankName="My Person Bank"
-          p:bankPrimaryBusiness="Retail banking"
-          p:headOfficeAddress="Retail bank office"
-          p:privateBank="y"
-          p:primaryCurrency="INR"
-          p:dateOfInception="30-01-2012"
-          p:branchAddresses-ref="branchAddresses">
-    </bean>
+    <import resource="bankapp-dao.xml"/>
+    <import resource="bankapp-domain.xml"/>
+    <import resource="bankapp-service.xml"/>
+    <import resource="bankapp-controller.xml"/>
 </beans>

@@ -10,8 +10,6 @@ public interface FixedDepositService {
 
     FixedDepositDao getFixedDepositDao();
 
-    void setEventSender(EventSender eventSender);
-
     EventSender getEventSender();
 
     FixedDepositDetails getFixedDepositDetails(long id);

@@ -8,10 +8,17 @@
     <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations" />
     <bean id="daoTemplate" abstract="true" p:databaseOperations-ref="databaseOperations" />
 
-    <bean id="databaseInfo" class="com.example.mybank.beans.DatabaseInfo"/>
     <bean id="fixedDepositDaoFactory" class="com.example.mybank.dao.FixedDepositDaoFactory" />
     <bean id="fixedDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" scope="prototype"
-          c:_0="jdbc" p:databaseInfo-ref="databaseInfo"/>
+          c:_0="jdbc">
+        <property name="databaseInfo">
+            <bean class="com.example.mybank.beans.DatabaseInfo" />
+        </property>
+    </bean>
 
     <bean id="personalBankingDao" class="com.example.mybank.dao.PersonalBankingDaoImpl" />
+
+    <bean id="customerRequestDao" class="com.example.mybank.dao.CustomerRequestDaoImpl" />
+
+    <bean id="customerRegistrationDao" class="com.example.mybank.dao.CustomerRegistrationDaoImpl" />
 </beans>

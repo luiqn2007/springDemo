@@ -6,6 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <import resource="bankapp-dao.xml" />
+    <import resource="bankapp-domain.xml" />
 
     <bean id="emailMessageSender" class="com.example.mybank.base.EmailMessageSender"/>
     <bean id="jmsMessageSender" class="com.example.mybank.base.JmsMessageSender"/>
@@ -16,11 +17,9 @@
           c:emailMessageSender-ref="emailMessageSender"
           c:webServiceInvoker-ref="webServiceInvoker"/>
 
-    <bean id="eventSenderFactory" class="com.example.mybank.event.EventSenderFactoryBean"
-          p:databasePropertiesFile="META-INF/config/database.properties"/>
-
     <bean id="fixedDepositService" parent="serviceTemplate" class="com.example.mybank.service.FixedDepositServiceImpl"
-          p:fixedDepositDao-ref="fixedDepositDao" p:eventSender-ref="eventSenderFactory"/>
+          depends-on="eventSenderSelectorService"
+          p:fixedDepositDao-ref="fixedDepositDao" c:appConfigFile="META-INF/config/appConfig.properties"/>
 
     <bean id="personalBankingService" parent="serviceTemplate" class="com.example.mybank.service.PersonalBankingServiceImpl"
           c:personalBankingDao-ref="personalBankingDao"/>
@@ -30,4 +29,17 @@
           c:active="true"
           c:timeout="200"
           c:numberOfRetrialAttempts="5" />
+
+    <bean id="eventSenderSelectorService" class="com.example.mybank.service.EventSenderSelectorServiceImpl"
+          c:_0="META-INF/config/appConfig.properties" />
+
+<!--    <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl"-->
+<!--          c:customerRequestDao-ref="customerRequestDao" />-->
+
+    <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl2"
+          c:customerRequestDao-ref="customerRequestDao">
+        <lookup-method bean="customerRequestDetails" name="getCustomerDetails" />
+    </bean>
+
+    <bean id="customerRegistrationService" class="com.example.mybank.service.CustomerRegistrationServiceImpl" autowire="constructor" />
 </beans>
