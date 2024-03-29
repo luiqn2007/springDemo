@@ -63,4 +63,9 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
 
         return true;
     }
+
+    @Override
+    public void createFixedDeposit(long id, float depositAmount, int tenure, String email) {
+        fixedDepositDao.createFixedDetail(id, depositAmount, tenure, email);
+    }
 }

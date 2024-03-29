@@ -1,5 +1,7 @@
 package com.example.mybank.postprocessor;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeansException;
@@ -9,10 +11,15 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
+import org.springframework.core.Ordered;
 
-public class ApplicationConfigurer implements BeanFactoryPostProcessor {
+@Setter
+@Getter
+public class ApplicationConfigurer implements BeanFactoryPostProcessor, Ordered {
 
     private static final Logger LOGGER = LogManager.getLogger();
+
+    private int order;
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {

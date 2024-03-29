@@ -15,4 +15,6 @@ public interface FixedDepositService {
     FixedDepositDetails getFixedDepositDetails(long id);
 
     boolean createFixedDeposit(FixedDepositDetails fdd);
+
+    void createFixedDeposit(long id, float depositAmount, int tenure, String email) throws Exception;
 }

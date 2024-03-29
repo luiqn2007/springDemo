@@ -18,4 +18,17 @@ public class FixedDepositDefaultDao extends FixedDepositDao {
         fixedDeposits.put(fdd.getId(), fdd);
         return true;
     }
+
+    @Override
+    public boolean createFixedDetail(long id, float depositAmount, int tenure, String email) {
+        return createFixedDetail(new FixedDepositDetails(id, depositAmount, tenure, email));
+    }
+
+    @Override
+    public void initializeDbConnection() throws Exception {
+    }
+
+    @Override
+    public void releaseDbConnection() throws Exception {
+    }
 }

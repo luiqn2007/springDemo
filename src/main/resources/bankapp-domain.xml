@@ -21,11 +21,33 @@
           p:primaryCurrency="INR"
           p:dateOfInception="30-01-2012">
         <property name="branchAddresses">
-            <util:properties location="config/database.properties" />
+            <util:properties location="config/database-addresses.properties" />
         </property>
     </bean>
 
     <bean id="customerRequestDetails" class="com.example.mybank.domain.CustomerRequestDetails" scope="prototype" />
 
     <bean id="customerRegistrationDetails" class="com.example.mybank.domain.CustomerRegistrationDetails" scope="prototype" />
+
+    <bean id="datasource" class="com.example.mybank.domain.DataSource">
+        <property name="url" value="${database.url}" />
+        <property name="username" value="${database.username}" />
+        <property name="password" value="${database.password}" />
+        <property name="driverClass" value="${database.driverClass}" />
+    </bean>
+
+    <bean id="webServiceConfiguration" class="com.example.mybank.domain.WebServiceConfiguration">
+        <property name="url" value="${webservice.url}" />
+    </bean>
+
+    <bean id="datasource-override" class="com.example.mybank.domain.DataSource">
+        <property name="url" value="test url property" />
+        <property name="username" value="test username property" />
+        <property name="password" value="test password property" />
+        <property name="driverClass" value="test driverClass property" />
+    </bean>
+
+    <bean id="webServiceConfiguration-override" class="com.example.mybank.domain.WebServiceConfiguration">
+        <property name="url" value="test url property" />
+    </bean>
 </beans>

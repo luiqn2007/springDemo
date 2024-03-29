@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
-public class SpringDemoApplication {
+public class BankApp {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -27,11 +27,13 @@ public class SpringDemoApplication {
 
         context.getBean("eventSenderFactory");
         context.getBean("eventSenderFactory");
-        context.getBean("eventSenderFactory");
-        context.getBean("eventSenderFactory");
+        System.out.println(context.getBean("datasource"));
+        System.out.println(context.getBean("webServiceConfiguration"));
+        System.out.println(context.getBean("datasource-override"));
+        System.out.println(context.getBean("webServiceConfiguration-override"));
     }
 
     static void defaultApp(String[] args) {
-        SpringApplication.run(SpringDemoApplication.class, args);
+        SpringApplication.run(BankApp.class, args);
     }
 }

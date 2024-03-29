@@ -23,6 +23,7 @@ public class EventSenderFactoryBean implements FactoryBean<EventSender>, Initial
 
     @Override
     public EventSender getObject() throws Exception {
+        LOGGER.info("Create EventSenderFactoryBean");
         EventSender eventSender;
         eventSender = createEventSenderFromProperties(databasePropertiesFile, DatabaseEventSender::new);
         if (eventSender != null) return eventSender;

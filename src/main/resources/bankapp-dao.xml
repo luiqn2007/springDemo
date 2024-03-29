@@ -6,22 +6,26 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations"/>
-    <bean id="daoTemplate" abstract="true" p:databaseOperations-ref="databaseOperations"/>
+
+    <bean id="daoTemplate" abstract="true" class="com.example.mybank.dao.Dao"
+          p:databaseOperations-ref="databaseOperations"/>
 
     <bean id="fixedDepositDaoFactory" class="com.example.mybank.dao.FixedDepositDaoFactory"/>
-    <bean id="fixedDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="jdbc"
+    <bean id="fixedDepositDao" parent="daoTemplate" primary="true"
+          factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="jdbc"
           init-method="initializeDbConnection" destroy-method="releaseDbConnection">
         <property name="databaseInfo">
             <bean class="com.example.mybank.beans.DatabaseInfo"/>
         </property>
     </bean>
+    <bean parent="daoTemplate" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="ibatis"/>
+    <bean parent="daoTemplate" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="hibernate"/>
 
-    <bean id="fixedIbatisDepositDao" c:_0="ibatis"
-          factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao"/>
-
-    <bean id="personalBankingDao" class="com.example.mybank.dao.PersonalBankingDaoImpl"/>
+    <bean id="personalBankingDao" parent="daoTemplate" class="com.example.mybank.dao.PersonalBankingDaoImpl"/>
 
     <bean id="customerRequestDao" class="com.example.mybank.dao.CustomerRequestDaoImpl"/>
 
     <bean id="customerRegistrationDao" class="com.example.mybank.dao.CustomerRegistrationDaoImpl"/>
+
+    <bean id="accountStatementDao" class="com.example.mybank.dao.AccountStatementDaoImpl"/>
 </beans>

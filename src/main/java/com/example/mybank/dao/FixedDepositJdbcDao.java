@@ -1,6 +1,5 @@
 package com.example.mybank.dao;
 
-import com.example.mybank.DatabaseConnection;
 import com.example.mybank.beans.DatabaseInfo;
 import com.example.mybank.common.InstanceValidator;
 import com.example.mybank.domain.FixedDepositDetails;
@@ -12,9 +11,8 @@ public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceVali
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
     private DatabaseConnection connection;
-
     @Setter
-    private DatabaseInfo databaseInfo;
+    private FixedDepositDetails fixedDepositDetails;
 
     public void initializeDbConnection() {
         LOGGER.info("FixedDepositJdbcDao: Initializing database connection");
@@ -34,6 +32,16 @@ public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceVali
     @Override
     public boolean createFixedDetail(FixedDepositDetails fdd) {
         fixedDeposits.put(fdd.getId(), fdd);
+        return true;
+    }
+
+    @Override
+    public boolean createFixedDetail(long id, float depositAmount, int tenure, String email) {
+        fixedDepositDetails.setId(id);
+        fixedDepositDetails.setDepositAmount(depositAmount);
+        fixedDepositDetails.setTenure(tenure);
+        fixedDepositDetails.setEmail(email);
+        LOGGER.info("FixedDepositJdbcDao: Creating fixed deposit details");
         return true;
     }
 

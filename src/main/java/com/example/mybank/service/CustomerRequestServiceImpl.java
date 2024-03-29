@@ -22,8 +22,8 @@ public class CustomerRequestServiceImpl implements CustomerRequestService, Appli
     @Override
     public void submitRequest(String requestType, String requestDescription) {
         CustomerRequestDetails details = applicationContext.getBean(CustomerRequestDetails.class);
-        details.setRequestType(requestType);
-        details.setRequestDescription(requestDescription);
+        details.setType(requestType);
+        details.setDescription(requestDescription);
         customerRequestDao.submitRequest(details);
     }
 }

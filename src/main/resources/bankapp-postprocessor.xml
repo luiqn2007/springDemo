@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-override location="config/database-override.properties, config/web-service-override.properties"/>
+
+    <context:property-placeholder location="config/database.properties, config/web-service.properties"/>
+
+    <bean id="myApplicationContext" class="com.example.mybank.common.MyApplicationContext"/>
+
+    <bean class="com.example.mybank.postprocessor.ApplicationConfigurer" p:order="0"/>
+
+    <bean class="com.example.mybank.postprocessor.DependencyResolutionBeanPostProcessor"
+          p:order="1" p:context-ref="myApplicationContext"/>
+
+    <bean class="com.example.mybank.postprocessor.InstanceValidationBeanPostProcessor" p:order="2"/>
+
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+</beans>

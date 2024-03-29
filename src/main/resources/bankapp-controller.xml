@@ -9,7 +9,7 @@
 
     <bean id="controllerFactory" class="com.example.mybank.controller.ControllerFactory"/>
 
-    <bean id="controllerTemplate" factory-bean="controllerFactory" factory-method="getController" abstract="true"/>
+    <bean id="controllerTemplate" abstract="true" factory-bean="controllerFactory" factory-method="getController"/>
 
     <bean id="fixedDepositController" parent="controllerTemplate"
           c:_0="fixedDepositController" p:fixedDepositService-ref="fixedDepositService"/>

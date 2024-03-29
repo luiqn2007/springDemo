@@ -19,7 +19,7 @@
 
     <bean id="fixedDepositService" parent="serviceTemplate" class="com.example.mybank.service.FixedDepositServiceImpl"
           depends-on="eventSenderSelectorService"
-          p:fixedDepositDao-ref="fixedDepositDao" c:appConfigFile="META-INF/config/appConfig.properties"/>
+          p:fixedDepositDao-ref="fixedDepositDao" c:appConfigFile="config/appConfig.properties"/>
 
     <bean id="personalBankingService" parent="serviceTemplate" class="com.example.mybank.service.PersonalBankingServiceImpl"
           c:personalBankingDao-ref="personalBankingDao"/>
@@ -31,7 +31,7 @@
           c:numberOfRetrialAttempts="5" />
 
     <bean id="eventSenderSelectorService" class="com.example.mybank.service.EventSenderSelectorServiceImpl"
-          c:_0="META-INF/config/appConfig.properties" />
+          c:_0="config/appConfig.properties" />
 
     <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl2"
           c:customerRequestDao-ref="customerRequestDao">
@@ -39,4 +39,7 @@
     </bean>
 
     <bean id="customerRegistrationService" class="com.example.mybank.service.CustomerRegistrationServiceImpl" autowire="constructor"/>
+
+    <bean id="accountStatementService" class="com.example.mybank.service.AccountStatementServiceImpl"
+          p:accountStatementDao-ref="accountStatementDao"/>
 </beans>
