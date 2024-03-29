@@ -4,6 +4,7 @@ import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.util.Properties;
 import java.util.function.Function;
 
 @Setter
-public class EventSenderFactoryBean implements FactoryBean<EventSender> {
+public class EventSenderFactoryBean implements FactoryBean<EventSender>, InitializingBean {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
@@ -49,5 +50,15 @@ public class EventSenderFactoryBean implements FactoryBean<EventSender> {
     @Override
     public Class<?> getObjectType() {
         return EventSender.class;
+    }
+
+    @Override
+    public boolean isSingleton() {
+        return false;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        LOGGER.info("afterPropertiesSet");
     }
 }

@@ -30,6 +30,12 @@ dependencies {
 
     implementation 'it.unimi.dsi:fastutil:8.5.9'
 
+    // https://mvnrepository.com/artifact/javax.annotation/jsr250-api
+    implementation group: 'javax.annotation', name: 'jsr250-api', version: '1.0'
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-beans
+    implementation group: 'org.springframework', name: 'spring-beans', version: '6.1.5'
+
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor "org.projectlombok:lombok:${lombok_version}"
     compileOnly "org.projectlombok:lombok:${lombok_version}"

@@ -2,10 +2,10 @@ package com.example.mybank.service;
 
 import com.example.mybank.base.EmailMessageSender;
 import com.example.mybank.base.JmsMessageSender;
-import com.example.mybank.base.WebServiceInvoker;
 import com.example.mybank.base.ServiceTemplate;
-import com.example.mybank.domain.FixedDepositDetails;
+import com.example.mybank.base.WebServiceInvoker;
 import com.example.mybank.dao.FixedDepositDao;
+import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.event.EventSender;
 import com.example.mybank.event.FixedDepositCreatedEvent;
 import com.example.mybank.utils.Constants;
@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 
 import java.beans.ConstructorProperties;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;

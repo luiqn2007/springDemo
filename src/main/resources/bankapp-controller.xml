@@ -7,8 +7,6 @@
 
     <import resource="bankapp-service.xml" />
 
-    <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations"/>
-
     <bean id="controllerFactory" class="com.example.mybank.controller.ControllerFactory"/>
 
     <bean id="controllerTemplate" factory-bean="controllerFactory" factory-method="getController" abstract="true"/>

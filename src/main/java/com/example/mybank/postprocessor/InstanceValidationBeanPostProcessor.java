@@ -21,7 +21,6 @@ public class InstanceValidationBeanPostProcessor implements BeanPostProcessor, O
     }
 
     public Object postProcessAfterInitialization(Object bean, String beanName) {
-        LOGGER.info("PostProcessing bean {}", beanName);
         if (bean instanceof InstanceValidator validator) {
             LOGGER.info("Validating instance of {}", beanName);
             validator.validateInstance();

@@ -5,24 +5,23 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations" />
-    <bean id="daoTemplate" abstract="true" p:databaseOperations-ref="databaseOperations" />
+    <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations"/>
+    <bean id="daoTemplate" abstract="true" p:databaseOperations-ref="databaseOperations"/>
 
-    <bean id="fixedDepositDaoFactory" class="com.example.mybank.dao.FixedDepositDaoFactory" />
+    <bean id="fixedDepositDaoFactory" class="com.example.mybank.dao.FixedDepositDaoFactory"/>
     <bean id="fixedDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="jdbc"
           init-method="initializeDbConnection" destroy-method="releaseDbConnection">
         <property name="databaseInfo">
-            <bean class="com.example.mybank.beans.DatabaseInfo" />
+            <bean class="com.example.mybank.beans.DatabaseInfo"/>
         </property>
     </bean>
 
-    <bean id="fixedIbatisDepositDao" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="ibatis">
+    <bean id="fixedIbatisDepositDao" c:_0="ibatis"
+          factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao"/>
 
-    </bean>
+    <bean id="personalBankingDao" class="com.example.mybank.dao.PersonalBankingDaoImpl"/>
 
-    <bean id="personalBankingDao" class="com.example.mybank.dao.PersonalBankingDaoImpl" />
+    <bean id="customerRequestDao" class="com.example.mybank.dao.CustomerRequestDaoImpl"/>
 
-    <bean id="customerRequestDao" class="com.example.mybank.dao.CustomerRequestDaoImpl" />
-
-    <bean id="customerRegistrationDao" class="com.example.mybank.dao.CustomerRegistrationDaoImpl" />
+    <bean id="customerRegistrationDao" class="com.example.mybank.dao.CustomerRegistrationDaoImpl"/>
 </beans>

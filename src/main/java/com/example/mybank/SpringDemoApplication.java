@@ -24,6 +24,11 @@ public class SpringDemoApplication {
                 .tenure(1)
                 .email("abc@qq.com")
                 .build());
+
+        context.getBean("eventSenderFactory");
+        context.getBean("eventSenderFactory");
+        context.getBean("eventSenderFactory");
+        context.getBean("eventSenderFactory");
     }
 
     static void defaultApp(String[] args) {
