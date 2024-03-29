@@ -11,6 +11,8 @@
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer"
           p:propertyEditorRegistrars-ref="myPropertyEditorRegistrar"/>
 
+    <bean class="com.example.mybank.postprocessor.InstanceValidationBeanPostProcessor" p:order="1" />
+
     <import resource="bankapp-dao.xml"/>
     <import resource="bankapp-domain.xml"/>
     <import resource="bankapp-service.xml"/>
