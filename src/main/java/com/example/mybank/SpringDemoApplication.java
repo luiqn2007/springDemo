@@ -1,5 +1,7 @@
 package com.example.mybank;
 
+import com.example.mybank.domain.FixedDepositDetails;
+import com.example.mybank.service.FixedDepositService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,15 @@ public class SpringDemoApplication {
 
     public static void main(String[] args) {
         var context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        context.registerShutdownHook();
+
+        FixedDepositService fixedDepositService = context.getBean("fixedDepositService", FixedDepositService.class);
+        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
+                .id(0)
+                .depositAmount(1000)
+                .tenure(1)
+                .email("abc@qq.com")
+                .build());
     }
 
     static void defaultApp(String[] args) {
