@@ -34,8 +34,6 @@
         <lookup-method bean="customerRequestDetails" name="getCustomerDetails" />
     </bean>
 
-    <bean id="customerRegistrationService" class="com.example.mybank.service.CustomerRegistrationServiceImpl" autowire="constructor"/>
-
     <bean id="accountStatementService" class="com.example.mybank.service.AccountStatementServiceImpl"
           p:accountStatementDao-ref="accountStatementDao"/>
 </beans>
