@@ -5,14 +5,15 @@ import com.example.mybank.domain.AccountStatement;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Setter
+@Component
 public class AccountStatementServiceImpl implements AccountStatementService {
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
+    @Autowired
     private AccountStatementDao accountStatementDao;
 
     @Override

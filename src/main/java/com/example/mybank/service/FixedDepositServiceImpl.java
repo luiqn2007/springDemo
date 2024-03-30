@@ -29,11 +29,7 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     private FixedDepositDao fixedDepositDao;
     private EventSender eventSender;
 
-    @ConstructorProperties({"jmsMessageSender", "emailMessageSender", "webServiceInvoker", "appConfigFile"})
-    public FixedDepositServiceImpl(JmsMessageSender jmsMessageSender, EmailMessageSender emailMessageSender, WebServiceInvoker webServiceInvoker,
-                                   String appConfigFile) throws Exception {
-        super(jmsMessageSender, emailMessageSender, webServiceInvoker);
-
+    public FixedDepositServiceImpl(String appConfigFile) throws Exception {
         ClassPathResource resource = new ClassPathResource(appConfigFile);
         if (resource.exists()) {
             try (InputStream is = resource.getInputStream()) {

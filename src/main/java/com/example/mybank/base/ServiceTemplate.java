@@ -1,22 +1,17 @@
 package com.example.mybank.base;
 
 import lombok.Getter;
-import lombok.Setter;
-
-import java.beans.ConstructorProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Getter
-@Setter
+@Component
 public class ServiceTemplate {
 
-    JmsMessageSender jmsMessageSender;
-    EmailMessageSender emailMessageSender;
-    WebServiceInvoker webServiceInvoker;
-
-    @ConstructorProperties({"jmsMessageSender", "emailMessageSender", "webServiceInvoker"})
-    public ServiceTemplate(JmsMessageSender jmsMessageSender, EmailMessageSender emailMessageSender, WebServiceInvoker webServiceInvoker) {
-        this.jmsMessageSender = jmsMessageSender;
-        this.emailMessageSender = emailMessageSender;
-        this.webServiceInvoker = webServiceInvoker;
-    }
+    @Autowired
+    protected JmsMessageSender jmsMessageSender;
+    @Autowired
+    protected EmailMessageSender emailMessageSender;
+    @Autowired
+    protected WebServiceInvoker webServiceInvoker;
 }

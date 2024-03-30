@@ -17,6 +17,4 @@
     </bean>
     <bean parent="daoTemplate" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="ibatis"/>
     <bean parent="daoTemplate" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="hibernate"/>
-
-    <bean id="personalBankingDao" parent="daoTemplate" class="com.example.mybank.dao.PersonalBankingDaoImpl"/>
 </beans>

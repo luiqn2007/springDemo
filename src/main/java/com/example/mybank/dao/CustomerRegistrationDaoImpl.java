@@ -3,9 +3,9 @@ package com.example.mybank.dao;
 import com.example.mybank.domain.CustomerRegistrationDetails;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component("customerRegistrationDao")
+@Repository("customerRegistrationDao")
 public class CustomerRegistrationDaoImpl implements CustomerRegistrationDao {
 
     private static final Logger LOGGER = LogManager.getLogger();

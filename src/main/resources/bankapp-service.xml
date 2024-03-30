@@ -8,17 +8,9 @@
     <import resource="bankapp-dao.xml" />
     <import resource="bankapp-domain.xml" />
 
-    <bean id="serviceTemplate" class="com.example.mybank.base.ServiceTemplate"
-          c:jmsMessageSender-ref="jmsMessageSender"
-          c:emailMessageSender-ref="emailMessageSender"
-          c:webServiceInvoker-ref="webServiceInvoker"/>
-
-    <bean id="fixedDepositService" parent="serviceTemplate" class="com.example.mybank.service.FixedDepositServiceImpl"
+    <bean id="fixedDepositService" class="com.example.mybank.service.FixedDepositServiceImpl"
           depends-on="eventSenderSelectorService"
-          p:fixedDepositDao-ref="fixedDepositDao" c:appConfigFile="config/appConfig.properties"/>
-
-    <bean id="personalBankingService" parent="serviceTemplate" class="com.example.mybank.service.PersonalBankingServiceImpl"
-          c:personalBankingDao-ref="personalBankingDao"/>
+          p:fixedDepositDao-ref="fixedDepositDao" c:_0="config/appConfig.properties"/>
 
     <bean id="transferFundsService" class="com.example.mybank.service.TransferFundsServiceImpl"
           c:webServiceUrl="http://someUrl.com/xyz"
@@ -33,7 +25,4 @@
           c:customerRequestDao-ref="customerRequestDao">
         <lookup-method bean="customerRequestDetails" name="getCustomerDetails" />
     </bean>
-
-    <bean id="accountStatementService" class="com.example.mybank.service.AccountStatementServiceImpl"
-          p:accountStatementDao-ref="accountStatementDao"/>
 </beans>

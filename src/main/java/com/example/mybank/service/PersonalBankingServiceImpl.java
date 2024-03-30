@@ -7,22 +7,19 @@ import com.example.mybank.base.JmsMessageSender;
 import com.example.mybank.base.WebServiceInvoker;
 import com.example.mybank.dao.PersonalBankingDao;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.beans.ConstructorProperties;
 
-@Getter
+@Component("personalBankingService")
 public class PersonalBankingServiceImpl extends ServiceTemplate implements PersonalBankingService {
 
-    private final PersonalBankingDao personalBankingDao;
-
-    @ConstructorProperties({"jmsMessageSender", "emailMessageSender", "webServiceInvoker", "personalBankingDao"})
-    public PersonalBankingServiceImpl(JmsMessageSender jmsMessageSender, EmailMessageSender emailMessageSender, WebServiceInvoker webServiceInvoker, PersonalBankingDao personalBankingDao) {
-        super(jmsMessageSender, emailMessageSender, webServiceInvoker);
-        this.personalBankingDao = personalBankingDao;
-    }
+    @Autowired
+    private PersonalBankingDao personalBankingDao;
 
     @Override
     public BankStatement getMiniStatement() {
-        return getPersonalBankingDao().getMiniStatement();
+        return personalBankingDao.getMiniStatement();
     }
 }
