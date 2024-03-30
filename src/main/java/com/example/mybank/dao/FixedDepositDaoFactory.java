@@ -1,7 +1,10 @@
 package com.example.mybank.dao;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Locale;
 
+@Component
 public class FixedDepositDaoFactory {
 
     public FixedDepositDao getFixedDepositDao(String type) {

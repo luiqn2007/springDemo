@@ -8,10 +8,6 @@
     <import resource="bankapp-dao.xml" />
     <import resource="bankapp-domain.xml" />
 
-    <bean id="emailMessageSender" class="com.example.mybank.base.EmailMessageSender"/>
-    <bean id="jmsMessageSender" class="com.example.mybank.base.JmsMessageSender"/>
-    <bean id="webServiceInvoker" class="com.example.mybank.base.WebServiceInvoker"/>
-
     <bean id="serviceTemplate" class="com.example.mybank.base.ServiceTemplate"
           c:jmsMessageSender-ref="jmsMessageSender"
           c:emailMessageSender-ref="emailMessageSender"

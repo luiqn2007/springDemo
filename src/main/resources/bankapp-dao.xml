@@ -5,12 +5,9 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="databaseOperations" class="com.example.mybank.utils.DatabaseOperations"/>
-
     <bean id="daoTemplate" abstract="true" class="com.example.mybank.dao.Dao"
           p:databaseOperations-ref="databaseOperations"/>
 
-    <bean id="fixedDepositDaoFactory" class="com.example.mybank.dao.FixedDepositDaoFactory"/>
     <bean id="fixedDepositDao" parent="daoTemplate" primary="true"
           factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="jdbc"
           init-method="initializeDbConnection" destroy-method="releaseDbConnection">
@@ -22,10 +19,4 @@
     <bean parent="daoTemplate" factory-bean="fixedDepositDaoFactory" factory-method="getFixedDepositDao" c:_0="hibernate"/>
 
     <bean id="personalBankingDao" parent="daoTemplate" class="com.example.mybank.dao.PersonalBankingDaoImpl"/>
-
-    <bean id="customerRequestDao" class="com.example.mybank.dao.CustomerRequestDaoImpl"/>
-
-    <bean id="customerRegistrationDao" class="com.example.mybank.dao.CustomerRegistrationDaoImpl"/>
-
-    <bean id="accountStatementDao" class="com.example.mybank.dao.AccountStatementDaoImpl"/>
 </beans>

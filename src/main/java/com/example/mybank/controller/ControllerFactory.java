@@ -1,5 +1,8 @@
 package com.example.mybank.controller;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ControllerFactory {
 
     public Object getController(String name) {

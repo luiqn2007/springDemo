@@ -4,12 +4,14 @@ import com.example.mybank.domain.BankStatement;
 import com.example.mybank.domain.FixedDepositDetails;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 /**
  * 数据库操作类
  */
+@Component
 public class DatabaseOperations {
 
     private static final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
