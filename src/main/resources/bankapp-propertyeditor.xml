@@ -5,7 +5,6 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="myPropertyEditorRegistrar" class="com.example.mybank.beans.MyPropertyEditorRegistrar"/>
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer"
           p:propertyEditorRegistrars-ref="myPropertyEditorRegistrar"/>
 

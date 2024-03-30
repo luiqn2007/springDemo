@@ -10,8 +10,6 @@
 
     <context:property-placeholder location="config/database.properties, config/web-service.properties"/>
 
-    <bean id="myApplicationContext" class="com.example.mybank.common.MyApplicationContext"/>
-
     <bean class="com.example.mybank.postprocessor.ApplicationConfigurer" p:order="0"/>
 
     <bean class="com.example.mybank.postprocessor.DependencyResolutionBeanPostProcessor"

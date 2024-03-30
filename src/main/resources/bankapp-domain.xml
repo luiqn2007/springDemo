@@ -25,10 +25,6 @@
         </property>
     </bean>
 
-    <bean id="customerRequestDetails" class="com.example.mybank.domain.CustomerRequestDetails" scope="prototype" />
-
-    <bean id="customerRegistrationDetails" class="com.example.mybank.domain.CustomerRegistrationDetails" scope="prototype" />
-
     <bean id="datasource" class="com.example.mybank.domain.DataSource">
         <property name="url" value="${database.url}" />
         <property name="username" value="${database.username}" />
