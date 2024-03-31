@@ -1,7 +1,9 @@
 package com.example.mybank.service;
 
-import org.springframework.stereotype.Service;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-@Service("txService")
+@Singleton
+@Named("txService")
 public class TxServiceImpl implements TxService {
 }

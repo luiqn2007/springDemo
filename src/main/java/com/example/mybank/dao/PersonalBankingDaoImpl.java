@@ -2,15 +2,17 @@ package com.example.mybank.dao;
 
 import com.example.mybank.domain.BankStatement;
 import com.example.mybank.utils.DatabaseOperations;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component("personalBankingDao")
 @Setter
+@Singleton
+@Named("personalBankingDao")
 public class PersonalBankingDaoImpl implements PersonalBankingDao {
 
-    @Autowired
+    @Inject
     private DatabaseOperations databaseOperations;
 
     @Override

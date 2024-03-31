@@ -1,12 +1,13 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.CustomerRequestDetails;
-import org.springframework.stereotype.Repository;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-@Repository("customerRequestDao")
+@Singleton
+@Named("customerRequestDao")
 public class CustomerRequestDaoImpl implements CustomerRequestDao {
     @Override
     public void submitRequest(CustomerRequestDetails crd) {
-
     }
 }

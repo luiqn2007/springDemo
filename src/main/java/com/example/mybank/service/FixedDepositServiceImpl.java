@@ -6,33 +6,34 @@ import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.event.EventSender;
 import com.example.mybank.event.FixedDepositCreatedEvent;
 import com.example.mybank.utils.Constants;
+import jakarta.annotation.Resource;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
 @Getter
-@Component("fixedDepositService")
+@Singleton
+@Named("fixedDepositService")
 @DependsOn("eventSenderSelectorService")
 public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Autowired
-    @Qualifier("fixedDepositDao")
+    @Resource(name = "fixedDepositDao")
     private FixedDepositDao fixedDepositDao;
     private EventSender eventSender;
 
-    @Autowired
+    @Inject
     public FixedDepositServiceImpl(@Value("#{T(com.example.mybank.utils.Constants).EVENT_SENDER_PROPERTY_FILE_PATH}") String appConfigFile) throws Exception {
         ClassPathResource resource = new ClassPathResource(appConfigFile);
         if (resource.exists()) {

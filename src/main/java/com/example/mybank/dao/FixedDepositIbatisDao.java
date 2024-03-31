@@ -3,11 +3,13 @@ package com.example.mybank.dao;
 import com.example.mybank.domain.FixedDepositDetails;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Component;
 
-@Component
+@Singleton
+@Named
 public class FixedDepositIbatisDao extends FixedDepositDao implements InitializingBean, DisposableBean {
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();

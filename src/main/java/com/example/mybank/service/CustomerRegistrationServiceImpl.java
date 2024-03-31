@@ -2,19 +2,17 @@ package com.example.mybank.service;
 
 import com.example.mybank.dao.CustomerRegistrationDao;
 import com.example.mybank.domain.CustomerRegistrationDetails;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-import java.beans.ConstructorProperties;
-
-@Component
+@Singleton
+@Named("customerRegistrationService")
 public class CustomerRegistrationServiceImpl implements CustomerRegistrationService {
 
-    @Autowired
+    @Inject
     private CustomerRegistrationDetails customerRegistrationDetails;
-    @Autowired
+    @Inject
     private CustomerRegistrationDao customerRegistrationDao;
 
     @Override

@@ -1,7 +1,9 @@
 package com.example.mybank.base;
 
-import org.springframework.stereotype.Component;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-@Component
+@Named
+@Singleton
 public class EmailMessageSender {
 }

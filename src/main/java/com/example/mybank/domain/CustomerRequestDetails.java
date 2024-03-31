@@ -1,17 +1,14 @@
 package com.example.mybank.domain;
 
+import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Setter
 @Getter
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Named
 public class CustomerRequestDetails {
 
     private String type, description, category, assignedDepartment, status, resolutionTimeInDays;

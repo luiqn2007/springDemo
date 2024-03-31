@@ -2,16 +2,15 @@ package com.example.mybank.controller;
 
 import com.example.mybank.base.ServiceTemplate;
 import com.example.mybank.domain.Request;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-@Component("userRequestController")
+@Singleton
+@Named("userRequestController")
 public class UserRequestControllerImpl implements UserRequestController {
 
-    @Autowired
-    @Qualifier("serviceTemplate")
+    @Inject
     private ServiceTemplate serviceTemplate;
 
     @Override

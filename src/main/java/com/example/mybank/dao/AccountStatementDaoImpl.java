@@ -1,13 +1,15 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.AccountStatement;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 
-@Repository("accountStatementDao")
+@Singleton
+@Named("accountStatementDao")
 public class AccountStatementDaoImpl implements AccountStatementDao {
 
     private static final Logger LOGGER = LogManager.getLogger();

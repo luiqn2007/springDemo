@@ -1,4 +1,4 @@
-package com.example.mybank.dao;
+package com.example.mybank.utils;
 
 public class DatabaseConnection {
 

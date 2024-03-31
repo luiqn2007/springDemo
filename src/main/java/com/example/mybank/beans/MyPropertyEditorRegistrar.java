@@ -1,14 +1,16 @@
 package com.example.mybank.beans;
 
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistry;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Component
+@Named
+@Singleton
 public class MyPropertyEditorRegistrar implements PropertyEditorRegistrar {
 
     @Override

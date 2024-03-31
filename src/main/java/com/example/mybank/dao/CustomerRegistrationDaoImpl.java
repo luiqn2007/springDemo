@@ -1,14 +1,12 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.CustomerRegistrationDetails;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Repository;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-@Repository("customerRegistrationDao")
+@Singleton
+@Named("customerRegistrationDao")
 public class CustomerRegistrationDaoImpl implements CustomerRegistrationDao {
-
-    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void registerCustomer(CustomerRegistrationDetails customerRegistrationDetails) {

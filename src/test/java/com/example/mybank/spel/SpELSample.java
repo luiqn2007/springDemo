@@ -1,8 +1,7 @@
 package com.example.mybank.spel;
 
+import jakarta.annotation.Resource;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +17,7 @@ public class SpELSample {
     @Value("#{testEnvironment}")
     private EnvironmentBean env;
 
-    @Autowired
-    @Qualifier("testEnvironment")
+    @Resource(name = "testEnvironment")
     private EnvironmentBean env2;
 
     @Value("#{testEnvironment.environment}")

@@ -2,17 +2,17 @@ package com.example.mybank.controller;
 
 import com.example.mybank.domain.BankStatement;
 import com.example.mybank.service.PersonalBankingService;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 @Setter
-@Component("personalBankingController")
+@Singleton
+@Named("personalBankingController")
 public class PersonalBankingControllerImpl implements PersonalBankingController {
 
-    @Autowired
-    @Qualifier("personalBankingService")
+    @Inject
     private PersonalBankingService personalBankingService;
 
     @Override

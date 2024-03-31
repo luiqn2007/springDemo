@@ -1,17 +1,19 @@
 package com.example.mybank.base;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Getter
-@Component
+@Named
+@Singleton
 public class ServiceTemplate {
 
-    @Autowired
+    @Inject
     protected JmsMessageSender jmsMessageSender;
-    @Autowired
+    @Inject
     protected EmailMessageSender emailMessageSender;
-    @Autowired
+    @Inject
     protected WebServiceInvoker webServiceInvoker;
 }

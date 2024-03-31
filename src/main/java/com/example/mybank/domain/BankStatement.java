@@ -1,19 +1,21 @@
 package com.example.mybank.domain;
 
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Getter
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 @NoArgsConstructor
-@Component
+@Singleton
+@Named
 public class BankStatement {
 
     @Value("30-01-2012")

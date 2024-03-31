@@ -1,15 +1,17 @@
 package com.example.mybank.domain;
 
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.Currency;
 import java.util.Date;
 import java.util.Properties;
 
 @Getter
-@Component
+@Singleton
+@Named
 public class BankDetails {
 
     @Value("My Person Bank")

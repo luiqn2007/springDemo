@@ -1,12 +1,14 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.Tx;
-import org.springframework.stereotype.Repository;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository("txDao")
+@Singleton
+@Named("txDao")
 public class TxDaoImpl implements TxDao {
 
     @Override

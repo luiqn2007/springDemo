@@ -2,17 +2,19 @@ package com.example.mybank.dao;
 
 import com.example.mybank.common.InstanceValidator;
 import com.example.mybank.domain.FixedDepositDetails;
+import com.example.mybank.utils.DatabaseConnection;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Setter;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
-@Component("fixedDepositDao")
 @Primary
+@Singleton
+@Named("fixedDepositDao")
 public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceValidator {
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();

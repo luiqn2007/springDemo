@@ -5,15 +5,16 @@ import com.example.mybank.common.MyApplicationContext;
 import com.example.mybank.domain.FixedDepositDetails;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 /**
  * todo
  */
-@Component
+@Singleton
+@Named
 public class FixedDepositHibernateDao extends FixedDepositDao implements DependencyResolver {
 
     private FixedDepositDao fixedDepositDao;

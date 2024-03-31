@@ -1,12 +1,14 @@
 package com.example.mybank.common;
 
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Setter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 
 @Setter
-@Component
+@Named
+@Singleton
 public class MyApplicationContext implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;

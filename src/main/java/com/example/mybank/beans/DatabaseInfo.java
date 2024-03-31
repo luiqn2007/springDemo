@@ -1,10 +1,7 @@
 package com.example.mybank.beans;
 
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import jakarta.inject.Named;
 
-@Component
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Named
 public class DatabaseInfo {
 }
