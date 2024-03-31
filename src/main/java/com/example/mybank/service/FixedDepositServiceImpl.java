@@ -1,35 +1,39 @@
 package com.example.mybank.service;
 
-import com.example.mybank.base.EmailMessageSender;
-import com.example.mybank.base.JmsMessageSender;
 import com.example.mybank.base.ServiceTemplate;
-import com.example.mybank.base.WebServiceInvoker;
 import com.example.mybank.dao.FixedDepositDao;
 import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.event.EventSender;
 import com.example.mybank.event.FixedDepositCreatedEvent;
 import com.example.mybank.utils.Constants;
 import lombok.Getter;
-import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 
-import java.beans.ConstructorProperties;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
 @Getter
+@Component("fixedDepositService")
+@DependsOn("eventSenderSelectorService")
 public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Setter
+    @Autowired
+    @Qualifier("fixedDepositDao")
     private FixedDepositDao fixedDepositDao;
     private EventSender eventSender;
 
-    public FixedDepositServiceImpl(String appConfigFile) throws Exception {
+    @Autowired
+    public FixedDepositServiceImpl(@Value("#{T(com.example.mybank.utils.Constants).EVENT_SENDER_PROPERTY_FILE_PATH}") String appConfigFile) throws Exception {
         ClassPathResource resource = new ClassPathResource(appConfigFile);
         if (resource.exists()) {
             try (InputStream is = resource.getInputStream()) {

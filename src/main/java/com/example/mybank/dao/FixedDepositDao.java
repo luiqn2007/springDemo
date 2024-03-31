@@ -7,15 +7,19 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 @Setter
 @Getter
-public abstract class FixedDepositDao implements Dao {
+public abstract class FixedDepositDao {
 
     protected static final Logger LOGGER = LogManager.getLogger();
 
     private String url, driveClass, username, password;
+    @Autowired
     private DatabaseOperations databaseOperations;
+    @Autowired
     private DatabaseInfo databaseInfo;
 
     public FixedDepositDao() {

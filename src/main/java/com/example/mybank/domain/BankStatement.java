@@ -3,17 +3,26 @@ package com.example.mybank.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Component
 public class BankStatement {
 
+    @Value("30-01-2012")
     private Date transactionDate;
+    @Value("100000.00")
     private double amount;
+    @Value("Credit")
     private String transactionType;
+    @Value("1110202")
     private String referenceNumber;
 
     public String toString() {

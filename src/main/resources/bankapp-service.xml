@@ -2,24 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:c="http://www.springframework.org/schema/c"
-       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="bankapp-dao.xml" />
     <import resource="bankapp-domain.xml" />
-
-    <bean id="fixedDepositService" class="com.example.mybank.service.FixedDepositServiceImpl"
-          depends-on="eventSenderSelectorService"
-          p:fixedDepositDao-ref="fixedDepositDao" c:_0="config/appConfig.properties"/>
-
-    <bean id="transferFundsService" class="com.example.mybank.service.TransferFundsServiceImpl"
-          c:webServiceUrl="http://someUrl.com/xyz"
-          c:active="true"
-          c:timeout="200"
-          c:numberOfRetrialAttempts="5" />
-
-    <bean id="eventSenderSelectorService" class="com.example.mybank.service.EventSenderSelectorServiceImpl"
-          c:_0="config/appConfig.properties" />
 
     <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl2"
           c:customerRequestDao-ref="customerRequestDao">

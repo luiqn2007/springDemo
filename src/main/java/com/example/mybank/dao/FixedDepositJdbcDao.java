@@ -1,12 +1,18 @@
 package com.example.mybank.dao;
 
-import com.example.mybank.beans.DatabaseInfo;
 import com.example.mybank.common.InstanceValidator;
 import com.example.mybank.domain.FixedDepositDetails;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import lombok.Setter;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
+@Component("fixedDepositDao")
+@Primary
 public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceValidator {
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
@@ -14,11 +20,13 @@ public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceVali
     @Setter
     private FixedDepositDetails fixedDepositDetails;
 
+    @PostConstruct
     public void initializeDbConnection() {
         LOGGER.info("FixedDepositJdbcDao: Initializing database connection");
         connection = DatabaseConnection.getInstance();
     }
 
+    @PreDestroy
     public void releaseDbConnection() {
         LOGGER.info("FixedDepositJdbcDao: Release database connection");
         connection.releaseConnection();

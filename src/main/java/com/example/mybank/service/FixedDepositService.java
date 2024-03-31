@@ -6,8 +6,6 @@ import com.example.mybank.event.EventSender;
 
 public interface FixedDepositService {
 
-    void setFixedDepositDao(FixedDepositDao fixedDepositDao);
-
     FixedDepositDao getFixedDepositDao();
 
     EventSender getEventSender();
