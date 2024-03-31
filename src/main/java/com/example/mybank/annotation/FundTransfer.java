@@ -1,6 +1,6 @@
 package com.example.mybank.annotation;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+import jakarta.inject.Qualifier;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
