@@ -4,6 +4,7 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 
 import java.util.Currency;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Properties;
 @Getter
 @Singleton
 @Named
+@DependsOn("bankBranchAddresses")
 public class BankDetails {
 
     @Value("My Person Bank")

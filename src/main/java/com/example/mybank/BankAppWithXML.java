@@ -11,13 +11,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Calendar;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-public class BankApp {
+public class BankAppWithXML {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -72,6 +71,6 @@ public class BankApp {
     }
 
     static void defaultApp(String[] args) {
-        SpringApplication.run(BankApp.class, args);
+        SpringApplication.run(BankAppWithXML.class, args);
     }
 }
