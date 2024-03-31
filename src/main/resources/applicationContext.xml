@@ -6,7 +6,10 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="eventSenderFactory" class="com.example.mybank.event.EventSenderFactoryBean"/>
+
     <import resource="bankapp-postprocessor.xml"/>
+
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
     <context:component-scan base-package="com.example.mybank"/>
 

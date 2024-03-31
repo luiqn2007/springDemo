@@ -26,4 +26,6 @@
             </set>
         </property>
     </bean>
+
+    <bean class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor" />
 </beans>

@@ -11,10 +11,12 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import lombok.Setter;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
 @Primary
 @Singleton
 @Named("fixedDepositDao")
+@Profile("jdbc")
 public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceValidator {
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
@@ -42,16 +44,6 @@ public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceVali
     @Override
     public boolean createFixedDetail(FixedDepositDetails fdd) {
         fixedDeposits.put(fdd.getId(), fdd);
-        return true;
-    }
-
-    @Override
-    public boolean createFixedDetail(long id, float depositAmount, int tenure, String email) {
-        fixedDepositDetails.setId(id);
-        fixedDepositDetails.setDepositAmount(depositAmount);
-        fixedDepositDetails.setTenure(tenure);
-        fixedDepositDetails.setEmail(email);
-        LOGGER.info("FixedDepositJdbcDao: Creating fixed deposit details");
         return true;
     }
 

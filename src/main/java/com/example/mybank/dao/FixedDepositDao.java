@@ -29,8 +29,6 @@ public abstract class FixedDepositDao {
 
     public abstract boolean createFixedDetail(FixedDepositDetails fdd);
 
-    public abstract boolean createFixedDetail(long id, float depositAmount, int tenure, String email);
-
     public abstract void initializeDbConnection() throws Exception;
 
     public abstract void releaseDbConnection() throws Exception;

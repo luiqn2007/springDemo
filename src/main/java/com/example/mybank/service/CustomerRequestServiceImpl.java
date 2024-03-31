@@ -2,28 +2,28 @@ package com.example.mybank.service;
 
 import com.example.mybank.dao.CustomerRequestDao;
 import com.example.mybank.domain.CustomerRequestDetails;
-import lombok.Setter;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import lombok.AllArgsConstructor;
 
 import java.beans.ConstructorProperties;
+import java.util.Calendar;
 
-public class CustomerRequestServiceImpl implements CustomerRequestService, ApplicationContextAware {
+@AllArgsConstructor(onConstructor_ = @ConstructorProperties({"customerRequestDao"}))
+public abstract class CustomerRequestServiceImpl implements CustomerRequestService {
 
     private final CustomerRequestDao customerRequestDao;
-    @Setter
-    private ApplicationContext applicationContext;
 
-    @ConstructorProperties("consumerRequestDao")
-    public CustomerRequestServiceImpl(CustomerRequestDao customerRequestDao) {
-        this.customerRequestDao = customerRequestDao;
-    }
+    public abstract CustomerRequestDetails getCustomerDetails();
 
     @Override
-    public void submitRequest(String requestType, String requestDescription) {
-        CustomerRequestDetails details = applicationContext.getBean(CustomerRequestDetails.class);
-        details.setType(requestType);
-        details.setDescription(requestDescription);
+    public Calendar submitRequest(String type, String description, Calendar accountSinceDate) {
+        CustomerRequestDetails details = getCustomerDetails();
+        details.setType(type);
+        details.setDescription(description);
+        details.setSubmissionDate(accountSinceDate.getTime());
         customerRequestDao.submitRequest(details);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MONTH, -1);
+        return cal;
     }
 }

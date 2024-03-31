@@ -10,6 +10,9 @@ import jakarta.annotation.Resource;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +23,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 @Getter
 @Singleton
@@ -32,6 +36,11 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     @Resource(name = "fixedDepositDao")
     private FixedDepositDao fixedDepositDao;
     private EventSender eventSender;
+
+//    @Inject
+//    private Validator validator;
+    @Inject
+    private ValidatorFactory validatorFactory;
 
     @Inject
     public FixedDepositServiceImpl(@Value("#{T(com.example.mybank.utils.Constants).EVENT_SENDER_PROPERTY_FILE_PATH}") String appConfigFile) throws Exception {
@@ -56,6 +65,20 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
 
     @Override
     public boolean createFixedDeposit(FixedDepositDetails fdd) {
+        //BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(fdd, "fixedDepositDetails");
+        //validator.validate(fdd, bindingResult);
+        //if (bindingResult.hasErrors()) {
+        //    LOGGER.error("Validation failed for FixedDepositDetails");
+        //    return false;
+        //}
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<FixedDepositDetails>> validations = validator.validate(fdd);
+        if (!validations.isEmpty()) {
+            LOGGER.error("Validation failed for FixedDepositDetails");
+            return false;
+        }
+
+        LOGGER.info("Create fixed deposit");
         fixedDepositDao.createFixedDetail(fdd);
 
         FixedDepositCreatedEvent event = new FixedDepositCreatedEvent();
@@ -63,10 +86,5 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
         eventSender.sendEvent(event);
 
         return true;
-    }
-
-    @Override
-    public void createFixedDeposit(long id, float depositAmount, int tenure, String email) {
-        fixedDepositDao.createFixedDetail(id, depositAmount, tenure, email);
     }
 }

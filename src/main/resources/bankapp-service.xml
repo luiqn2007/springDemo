@@ -4,9 +4,7 @@
        xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="bankapp-domain.xml" />
-
-    <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl2"
+    <bean id="customerRequestService" class="com.example.mybank.service.CustomerRequestServiceImpl"
           c:customerRequestDao-ref="customerRequestDao">
         <lookup-method bean="customerRequestDetails" name="getCustomerDetails" />
     </bean>

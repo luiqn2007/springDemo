@@ -9,12 +9,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import org.springframework.context.annotation.Profile;
 
 /**
  * todo
  */
 @Singleton
-@Named
+@Named("fixedDepositDao")
+@Profile("hibernate")
 public class FixedDepositHibernateDao extends FixedDepositDao implements DependencyResolver {
 
     private FixedDepositDao fixedDepositDao;
@@ -35,11 +37,6 @@ public class FixedDepositHibernateDao extends FixedDepositDao implements Depende
     public boolean createFixedDetail(FixedDepositDetails fdd) {
         fixedDeposits.put(fdd.getId(), fdd);
         return true;
-    }
-
-    @Override
-    public boolean createFixedDetail(long id, float depositAmount, int tenure, String email) {
-        return createFixedDetail(new FixedDepositDetails(id, depositAmount, tenure, email));
     }
 
     @Override

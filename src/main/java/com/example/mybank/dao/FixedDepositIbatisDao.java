@@ -7,9 +7,11 @@ import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Profile;
 
 @Singleton
-@Named
+@Named("fixedDepositDao")
+@Profile("ibatis")
 public class FixedDepositIbatisDao extends FixedDepositDao implements InitializingBean, DisposableBean {
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
@@ -33,11 +35,6 @@ public class FixedDepositIbatisDao extends FixedDepositDao implements Initializi
     public boolean createFixedDetail(FixedDepositDetails fdd) {
         fixedDeposits.put(fdd.getId(), fdd);
         return true;
-    }
-
-    @Override
-    public boolean createFixedDetail(long id, float depositAmount, int tenure, String email) {
-        return createFixedDetail(new FixedDepositDetails(id, depositAmount, tenure, email));
     }
 
     @Override
