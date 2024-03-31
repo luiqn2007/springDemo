@@ -3,11 +3,13 @@ package com.example.mybank.service;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @Singleton
 @Named("transferFundsService")
+@Qualifier("service")
 public class TransferFundsServiceImpl implements TransferFundsService {
 
     @Value("http://someUrl.com/xyz")

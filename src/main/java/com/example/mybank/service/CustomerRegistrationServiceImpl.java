@@ -4,10 +4,10 @@ import com.example.mybank.dao.CustomerRegistrationDao;
 import com.example.mybank.domain.CustomerRegistrationDetails;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.inject.Singleton;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-@Singleton
 @Named("customerRegistrationService")
+@Qualifier("service")
 public class CustomerRegistrationServiceImpl implements CustomerRegistrationService {
 
     @Inject

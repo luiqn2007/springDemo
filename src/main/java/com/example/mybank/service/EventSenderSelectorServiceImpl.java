@@ -4,6 +4,7 @@ import com.example.mybank.utils.Constants;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 
@@ -12,6 +13,7 @@ import java.util.Properties;
 
 @Singleton
 @Named("eventSenderSelectorService")
+@Qualifier("service")
 public class EventSenderSelectorServiceImpl implements EventSenderSelectorService {
 
     @Inject

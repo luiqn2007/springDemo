@@ -7,10 +7,12 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @Getter
 @Singleton
 @Named
+@Qualifier("service")
 public class FundTransferProcessor {
 
     @Inject

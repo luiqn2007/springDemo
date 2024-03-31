@@ -10,14 +10,12 @@ import jakarta.annotation.PreDestroy;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import lombok.Setter;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
-@Primary
 @Singleton
 @Named("fixedDepositDao")
-@Profile("jdbc")
-public class FixedDepositJdbcDao extends FixedDepositDao implements InstanceValidator {
+@Profile("mysql")
+public class FixedDepositMySQLDao extends FixedDepositDao implements InstanceValidator {
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
     private DatabaseConnection connection;

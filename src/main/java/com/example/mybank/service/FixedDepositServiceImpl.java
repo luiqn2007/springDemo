@@ -16,6 +16,7 @@ import jakarta.validation.ValidatorFactory;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
@@ -29,6 +30,7 @@ import java.util.Set;
 @Singleton
 @Named("fixedDepositService")
 @DependsOn("eventSenderSelectorService")
+@Qualifier("service")
 public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -37,8 +39,6 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     private FixedDepositDao fixedDepositDao;
     private EventSender eventSender;
 
-//    @Inject
-//    private Validator validator;
     @Inject
     private ValidatorFactory validatorFactory;
 
@@ -65,12 +65,6 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
 
     @Override
     public boolean createFixedDeposit(FixedDepositDetails fdd) {
-        //BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(fdd, "fixedDepositDetails");
-        //validator.validate(fdd, bindingResult);
-        //if (bindingResult.hasErrors()) {
-        //    LOGGER.error("Validation failed for FixedDepositDetails");
-        //    return false;
-        //}
         Validator validator = validatorFactory.getValidator();
         Set<ConstraintViolation<FixedDepositDetails>> validations = validator.validate(fdd);
         if (!validations.isEmpty()) {

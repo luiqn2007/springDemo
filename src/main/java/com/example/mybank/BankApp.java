@@ -1,8 +1,10 @@
 package com.example.mybank;
 
+import com.example.mybank.domain.Account;
 import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.service.CustomerRequestService;
 import com.example.mybank.service.FixedDepositService;
+import com.example.mybank.service.FundTransferProcessor;
 import jakarta.validation.ConstraintViolationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,16 +22,13 @@ public class BankApp {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
+        System.setProperty("spring.profiles.active", "dev, mysql");
+
         var context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         context.registerShutdownHook();
 
         FixedDepositService fixedDepositService = context.getBean("fixedDepositService", FixedDepositService.class);
-        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
-                .id(0)
-                .depositAmount(1000)
-                .tenure(1)
-                .email("abc@qq.com")
-                .build());
+        fixedDepositService.createFixedDeposit(new FixedDepositDetails(0, 100, 1, "abc@qq.com"));
 
         context.getBean("eventSenderFactory");
         context.getBean("eventSenderFactory");
@@ -40,6 +39,13 @@ public class BankApp {
 
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(1, 0, 12, "someemail@somedimain.com"));
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(1, 1000, 12, "someemail@somedimain.com"));
+
+        Account a = new Account(), b = new Account();
+        FundTransferProcessor fundTransferProcessor = context.getBean(FundTransferProcessor.class);
+        fundTransferProcessor.getDiffBankImmediateFundTransferService().transferFunds(a, b);
+        fundTransferProcessor.getSameBankImmediateFundTransferService().transferFunds(a, b);
+        fundTransferProcessor.getDiffBankNormalFundTransferService().transferFunds(a, b);
+        fundTransferProcessor.getSameBankNormalFundTransferService().transferFunds(a, b);
 
         CustomerRequestService customerRequestService = context.getBean(CustomerRequestService.class);
         try {
@@ -61,6 +67,8 @@ public class BankApp {
         } catch (ConstraintViolationException e) {
             System.out.println(e);
         }
+
+        System.out.println(context.getBean("dbProps"));
     }
 
     static void defaultApp(String[] args) {

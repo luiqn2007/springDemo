@@ -6,9 +6,11 @@ import com.example.mybank.domain.BankStatement;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @Singleton
 @Named("personalBankingService")
+@Qualifier("service")
 public class PersonalBankingServiceImpl extends ServiceTemplate implements PersonalBankingService {
 
     @Inject
