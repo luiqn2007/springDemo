@@ -32,6 +32,7 @@ public class BankAppPropConfig {
     public Properties dbProps() throws IOException {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
         factoryBean.setLocations(new ClassPathResource("config/mysqlDevDB.properties"));
+        factoryBean.afterPropertiesSet();
         return factoryBean.getObject();
     }
 }

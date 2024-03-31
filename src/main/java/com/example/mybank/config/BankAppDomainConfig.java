@@ -17,6 +17,7 @@ public class BankAppDomainConfig {
     public Properties bankBranchAddresses() throws IOException {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
         factoryBean.setLocations(new ClassPathResource("config/database-addresses.properties"));
+        factoryBean.afterPropertiesSet();
         return factoryBean.getObject();
     }
 
@@ -24,6 +25,7 @@ public class BankAppDomainConfig {
     public DataSource datasource() throws IOException {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
         factoryBean.setLocations(new ClassPathResource("config/database.properties"));
+        factoryBean.afterPropertiesSet();
         Properties datasourceProp = factoryBean.getObject();
 
         DataSource dataSource = new DataSource();
@@ -38,6 +40,7 @@ public class BankAppDomainConfig {
     public WebServiceConfiguration webServiceConfiguration() throws IOException {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
         factoryBean.setLocations(new ClassPathResource("config/web-service.properties"));
+        factoryBean.afterPropertiesSet();
         Properties datasourceProp = factoryBean.getObject();
 
         WebServiceConfiguration configuration = new WebServiceConfiguration();
@@ -49,6 +52,7 @@ public class BankAppDomainConfig {
     public DataSource datasourceOverride() throws IOException {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
         factoryBean.setLocations(new ClassPathResource("config/database-override.properties"));
+        factoryBean.afterPropertiesSet();
         Properties datasourceProp = factoryBean.getObject();
 
         DataSource dataSource = new DataSource();
@@ -63,6 +67,7 @@ public class BankAppDomainConfig {
     public WebServiceConfiguration webServiceConfigurationOverride() throws IOException {
         PropertiesFactoryBean factoryBean = new PropertiesFactoryBean();
         factoryBean.setLocations(new ClassPathResource("config/web-service-override.properties"));
+        factoryBean.afterPropertiesSet();
         Properties datasourceProp = factoryBean.getObject();
 
         WebServiceConfiguration configuration = new WebServiceConfiguration();
