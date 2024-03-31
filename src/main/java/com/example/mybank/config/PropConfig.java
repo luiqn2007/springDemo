@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = {"com.example.mybank"})
-public class BankAppPropConfig {
+public class PropConfig {
 
     @Bean
     public EventSender eventSenderFactory() throws Exception {

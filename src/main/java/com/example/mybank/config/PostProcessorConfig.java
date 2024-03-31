@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Set;
 
 @Configuration
-public class BankAppPostProcessorConfig {
+public class PostProcessorConfig {
 
     @Bean
     public static ApplicationConfigurer applicationConfigurer() {

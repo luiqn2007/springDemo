@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BankAppServiceConfig {
+public class ServiceConfig {
 
     @Bean
     public CustomerRequestService customerRequestService(CustomerRequestDao customerRequestDao) {
