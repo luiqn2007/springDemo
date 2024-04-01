@@ -28,8 +28,4 @@ public abstract class FixedDepositDao {
     public abstract FixedDepositDetails getFixedDeposit(long id);
 
     public abstract boolean createFixedDetail(FixedDepositDetails fdd);
-
-    public abstract void initializeDbConnection() throws Exception;
-
-    public abstract void releaseDbConnection() throws Exception;
 }

@@ -1,38 +1,30 @@
 package com.example.mybank.dao;
 
-import com.example.mybank.common.InstanceValidator;
 import com.example.mybank.domain.FixedDepositDetails;
-import com.example.mybank.utils.DatabaseConnection;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
-import jakarta.inject.Named;
-import jakarta.inject.Singleton;
-import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
-@Singleton
-@Named("fixedDepositDao")
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 @Profile("mysql")
-public class FixedDepositMySQLDao extends FixedDepositDao implements InstanceValidator {
+@Repository("fixedDepositDao")
+public class FixedDepositMySQLDao extends FixedDepositDao {
+
+    private static final String SQL_CREATE_FIXED_DETAIL = "";
 
     private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
-    private DatabaseConnection connection;
-    @Setter
-    private FixedDepositDetails fixedDepositDetails;
-
-    @PostConstruct
-    public void initializeDbConnection() {
-        LOGGER.info("FixedDepositJdbcDao: Initializing database connection");
-        connection = DatabaseConnection.getInstance();
-    }
-
-    @PreDestroy
-    public void releaseDbConnection() {
-        LOGGER.info("FixedDepositJdbcDao: Release database connection");
-        connection.releaseConnection();
-    }
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public FixedDepositDetails getFixedDeposit(long id) {
@@ -41,15 +33,16 @@ public class FixedDepositMySQLDao extends FixedDepositDao implements InstanceVal
 
     @Override
     public boolean createFixedDetail(FixedDepositDetails fdd) {
-        fixedDeposits.put(fdd.getId(), fdd);
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                PreparedStatement ps = con.prepareStatement(SQL_CREATE_FIXED_DETAIL, new String[]{"fixed_deposit_id"});
+                ps.setInt(1, (int) fdd.getId());
+                ps.setDate(2, new Date(fdd.get));
+                return null;
+            }
+        });
         return true;
-    }
-
-    @Override
-    public void validateInstance() {
-        LOGGER.info("FixedDepositJdbcDao: Validating instance");
-        if (connection == null) {
-            LOGGER.error("FixedDepositJdbcDao: Failed to obtain DatabaseConnection instance.");
-        }
     }
 }

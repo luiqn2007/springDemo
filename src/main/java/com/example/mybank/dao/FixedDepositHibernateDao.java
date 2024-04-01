@@ -5,8 +5,6 @@ import com.example.mybank.common.MyApplicationContext;
 import com.example.mybank.domain.FixedDepositDetails;
 import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import org.springframework.context.annotation.Profile;
@@ -37,17 +35,5 @@ public class FixedDepositHibernateDao extends FixedDepositDao implements Depende
     public boolean createFixedDetail(FixedDepositDetails fdd) {
         fixedDeposits.put(fdd.getId(), fdd);
         return true;
-    }
-
-    @Override
-    @PostConstruct
-    public void initializeDbConnection() throws Exception {
-        LOGGER.info("FixedDepositHibernateDao: Initializing");
-    }
-
-    @Override
-    @PreDestroy
-    public void releaseDbConnection() throws Exception {
-        LOGGER.info("FixedDepositHibernateDao: Destroyed");
     }
 }

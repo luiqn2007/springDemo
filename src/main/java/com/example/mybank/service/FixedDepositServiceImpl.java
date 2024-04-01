@@ -59,7 +59,7 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     }
 
     @Override
-    public FixedDepositDetails getFixedDepositDetails(long id) {
+    public FixedDepositDetails getFixedDepositDetails(int id) {
         return fixedDepositDao.getFixedDeposit(id);
     }
 

@@ -10,7 +10,7 @@ public interface FixedDepositService {
 
     EventSender getEventSender();
 
-    FixedDepositDetails getFixedDepositDetails(long id);
+    FixedDepositDetails getFixedDepositDetails(int id);
 
     boolean createFixedDeposit(FixedDepositDetails fdd);
 }

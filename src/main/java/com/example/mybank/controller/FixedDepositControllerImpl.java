@@ -30,7 +30,7 @@ public class FixedDepositControllerImpl implements FixedDepositController {
 
     @Override
     public FixedDepositDetails get() {
-        return fixedDepositService.getFixedDepositDetails(1L);
+        return fixedDepositService.getFixedDepositDetails(1);
     }
 
     @Override

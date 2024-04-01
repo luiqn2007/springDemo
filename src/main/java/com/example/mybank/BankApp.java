@@ -24,10 +24,6 @@ public class BankApp {
         FixedDepositService fixedDepositService = context.getBean("fixedDepositService", FixedDepositService.class);
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(0, 100, 1, "abc@qq.com"));
 
-        context.getBean("eventSenderFactory");
-        context.getBean("eventSenderFactory");
-        System.out.println(context.getBean("dataSource"));
-
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(1, 0, 12, "someemail@somedimain.com"));
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(1, 1000, 12, "someemail@somedimain.com"));
 
