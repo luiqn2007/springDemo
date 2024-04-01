@@ -1,5 +1,7 @@
 package com.example.mybank.event;
 
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,6 +15,8 @@ import java.util.Properties;
 import java.util.function.Function;
 
 @Setter
+@Named("eventSenderFactory")
+@Singleton
 public class EventSenderFactoryBean implements FactoryBean<EventSender>, InitializingBean {
 
     public static final Logger LOGGER = LogManager.getLogger();

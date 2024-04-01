@@ -26,9 +26,7 @@ public class BankApp {
 
         context.getBean("eventSenderFactory");
         context.getBean("eventSenderFactory");
-        System.out.println(context.getBean("datasource"));
         System.out.println(context.getBean("dataSource"));
-        System.out.println(context.getBean("webServiceConfiguration"));
 
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(1, 0, 12, "someemail@somedimain.com"));
         fixedDepositService.createFixedDeposit(new FixedDepositDetails(1, 1000, 12, "someemail@somedimain.com"));

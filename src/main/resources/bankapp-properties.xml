@@ -4,10 +4,4 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
-    <util:properties id="bankBranchAddresses" location="config/database-addresses.properties" />
-
-    <util:properties id="webServiceProperties" location="config/web-service.properties" />
-
-    <util:properties id="databaseProperties" location="config/database.properties" />
 </beans>

@@ -13,7 +13,6 @@ import java.util.Properties;
 @Getter
 @Singleton
 @Named
-@DependsOn("bankBranchAddresses")
 public class BankDetails {
 
     @Value("My Person Bank")
@@ -28,6 +27,4 @@ public class BankDetails {
     private Currency primaryCurrency;
     @Value("30-01-2012")
     private Date dateOfInception;
-    @Value("#{bankBranchAddresses}")
-    private Properties branchAddresses;
 }

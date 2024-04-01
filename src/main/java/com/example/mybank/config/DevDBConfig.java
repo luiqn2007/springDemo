@@ -6,23 +6,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@PropertySource("classpath:config/mysqlDevDB.properties")
+@PropertySource("classpath:config/mysqlPCDevDB.properties")
 @Profile("dev")
 public class DevDBConfig {
 
-    @Value("${url}")
+    @Value("${database.url}")
     private String url;
 
-    @Value("${driverClassName}")
+    @Value("${database.driverClass}")
     private String driverClass;
 
-    @Value("${username}")
+    @Value("${database.username}")
     private String username;
 
-    @Value("${password}")
+    @Value("${database.password}")
     private String password;
 
     @Bean
@@ -33,10 +32,5 @@ public class DevDBConfig {
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         return dataSource;
-    }
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
     }
 }
