@@ -34,7 +34,7 @@ public class FixedDepositControllerImpl implements FixedDepositController {
     }
 
     @Override
-    public boolean submit(FixedDepositDetails fixedDepositDetails) {
+    public int submit(FixedDepositDetails fixedDepositDetails) {
         return fixedDepositService.createFixedDeposit(fixedDepositDetails);
     }
 }

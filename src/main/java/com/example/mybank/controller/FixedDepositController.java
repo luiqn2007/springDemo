@@ -11,5 +11,5 @@ public interface FixedDepositController {
 
     FixedDepositDetails get();
 
-    boolean submit(FixedDepositDetails fixedDepositDetails);
+    int submit(FixedDepositDetails fixedDepositDetails);
 }

@@ -7,7 +7,7 @@
     <bean id="mapValue2" class="java.lang.Object"/>
     <bean id="mapValue3" class="java.lang.Object"/>
 
-    <bean id="myPropertyEditorRegistrar" class="com.example.mybank.beans.MyPropertyEditorRegistrar"/>
+    <bean id="myPropertyEditorRegistrar" class="com.example.mybank.common.MyPropertyEditorRegistrar"/>
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <property name="propertyEditorRegistrars" ref="myPropertyEditorRegistrar" />
     </bean>

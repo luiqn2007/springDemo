@@ -1,48 +1,48 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.FixedDepositDetails;
-import it.unimi.dsi.fastutil.longs.Long2ObjectArrayMap;
-import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import com.example.mybank.sql.FixedDepositDetailsMappingSqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
+import javax.sql.DataSource;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Profile("mysql")
 @Repository("fixedDepositDao")
-public class FixedDepositMySQLDao extends FixedDepositDao {
+public class FixedDepositMySQLDao implements FixedDepositDao {
 
-    private static final String SQL_CREATE_FIXED_DETAIL = "";
+    private SimpleJdbcInsert simpleJdbcInsert;
+    private MappingSqlQuery<FixedDepositDetails> mappingSqlQuery;
 
-    private final Long2ObjectMap<FixedDepositDetails> fixedDeposits = new Long2ObjectArrayMap<>();
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Override
-    public FixedDepositDetails getFixedDeposit(long id) {
-        return fixedDeposits.get(id);
+    private void setDataSource(DataSource dataSource) {
+        simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("fixed_deposit_details")
+                .usingGeneratedKeyColumns("FIXED_DEPOSIT_ID");
+        mappingSqlQuery = new FixedDepositDetailsMappingSqlQuery(dataSource);
     }
 
     @Override
-    public boolean createFixedDetail(FixedDepositDetails fdd) {
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-        jdbcTemplate.update(new PreparedStatementCreator() {
-            @Override
-            public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-                PreparedStatement ps = con.prepareStatement(SQL_CREATE_FIXED_DETAIL, new String[]{"fixed_deposit_id"});
-                ps.setInt(1, (int) fdd.getId());
-                ps.setDate(2, new Date(fdd.get));
-                return null;
-            }
-        });
-        return true;
+    public FixedDepositDetails getFixedDeposit(int id) {
+        return mappingSqlQuery.findObject(id);
+    }
+
+    @Override
+    public int createFixedDetail(FixedDepositDetails fixedDepositDetails) {
+        Map<String, Object> arguments = new HashMap<>();
+        arguments.put("ACCOUNT_ID", fixedDepositDetails.getBankAccountId());
+        arguments.put("FD_CREATION_DATE", new Date(fixedDepositDetails.getCreationDate().getTime()));
+        arguments.put("AMOUNT", fixedDepositDetails.getDepositAmount());
+        arguments.put("TENURE", fixedDepositDetails.getTenure());
+        arguments.put("ACTIVE", fixedDepositDetails.isActive() ? "Y" : "N");
+        int fixedDepositId = simpleJdbcInsert.executeAndReturnKey(arguments).intValue();
+        fixedDepositDetails.setId(fixedDepositId);
+        return fixedDepositId;
     }
 }

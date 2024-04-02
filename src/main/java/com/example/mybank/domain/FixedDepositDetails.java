@@ -1,10 +1,9 @@
 package com.example.mybank.domain;
 
-import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.PositiveOrZero;
+import lombok.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,21 +12,23 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Builder
 @AllArgsConstructor
 public class FixedDepositDetails {
 
     private static Logger LOGGER = LogManager.getLogger();
 
     @PositiveOrZero
-    private long id;
+    private int id;
+    @PositiveOrZero
+    private int bankAccountId;
+    private Date creationDate;
     @Min(1000)
     @Max(50000)
-    private float depositAmount;
+    private int depositAmount;
     @Min(6)
     private int tenure;
-    @NotBlank
-    @Size(min = 5, max = 100)
-    private String email;
+    boolean active;
 
     public FixedDepositDetails() {
         LOGGER.info("Created instance of FixedDepositDetails");

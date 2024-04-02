@@ -1,7 +1,7 @@
 package com.example.mybank.config;
 
 import com.example.mybank.annotation.FundTransfer;
-import com.example.mybank.beans.MyPropertyEditorRegistrar;
+import com.example.mybank.common.MyPropertyEditorRegistrar;
 import com.example.mybank.common.MyApplicationContext;
 import com.example.mybank.postprocessor.ApplicationConfigurer;
 import com.example.mybank.postprocessor.DependencyResolutionBeanPostProcessor;

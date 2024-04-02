@@ -1,4 +1,4 @@
-package com.example.mybank.beans;
+package com.example.mybank.common;
 
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
