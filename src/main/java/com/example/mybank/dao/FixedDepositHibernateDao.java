@@ -7,7 +7,10 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * todo
@@ -15,26 +18,21 @@ import org.springframework.context.annotation.Profile;
 @Singleton
 @Named("fixedDepositDao")
 @Profile("hibernate")
-public class FixedDepositHibernateDao implements FixedDepositDao, DependencyResolver {
+@Transactional
+public class FixedDepositHibernateDao implements FixedDepositDao {
 
-    private FixedDepositDao fixedDepositDao;
-
-    private final Int2ObjectMap<FixedDepositDetails> fixedDeposits = new Int2ObjectArrayMap<>();
-
-    @Override
-    public void resolveDependency(MyApplicationContext context) {
-        LOGGER.info("FixedDepositHibernateDao: Resolving dependency for FixedDepositHibernateDao");
-        fixedDepositDao = context.getBean(FixedDepositDao.class);
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public FixedDepositDetails getFixedDeposit(int id) {
-        return fixedDeposits.get(id);
+        String hql = "from FixedDepositDetails where FixedDepositDetails.id=" + id;
+        return sessionFactory.getCurrentSession().createQuery(hql, FixedDepositDetails.class).uniqueResult();
     }
 
     @Override
     public int createFixedDetail(FixedDepositDetails fixedDepositDetails) {
-        fixedDeposits.put(fixedDepositDetails.getId(), fixedDepositDetails);
-        return 1;
+        sessionFactory.getCurrentSession().persist(fixedDepositDetails);
+        return fixedDepositDetails.getId();
     }
 }
