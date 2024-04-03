@@ -29,6 +29,9 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
+    // https://mvnrepository.com/artifact/org.springframework/spring-orm
+    implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.5'
+
     // https://mvnrepository.com/artifact/org.springframework/spring-context-indexer
     annotationProcessor group: 'org.springframework', name: 'spring-context-indexer', version: '6.1.5'
 
@@ -39,6 +42,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
     implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.12.0'
+
+    // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
+    implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.4.4.Final'
 
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor "org.projectlombok:lombok:${lombok_version}"

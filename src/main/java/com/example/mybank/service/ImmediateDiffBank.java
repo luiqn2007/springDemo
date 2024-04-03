@@ -3,7 +3,7 @@ package com.example.mybank.service;
 import com.example.mybank.annotation.BankType;
 import com.example.mybank.annotation.FundTransfer;
 import com.example.mybank.annotation.TransformMode;
-import com.example.mybank.domain.Account;
+import com.example.mybank.domain.BankAccountDetails;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ public class ImmediateDiffBank implements FundTransferService {
     private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
-    public void transferFunds(Account sender, Account receiver) {
+    public void transferFunds(BankAccountDetails sender, BankAccountDetails receiver) {
         LOGGER.info("ImmediateDiffBank --> Transfering funds");
     }
 }

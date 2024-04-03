@@ -12,6 +12,11 @@
         <property name="driverClassName" value="${database.driverClass}" />
     </bean>
 
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan" value="com.example.mybank.domain" />
+    </bean>
+
     <beans profile="dev">
         <context:property-placeholder location="config/mysqlPCDevDB.properties" />
     </beans>

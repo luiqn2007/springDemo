@@ -1,8 +1,8 @@
 package com.example.mybank.service;
 
-import com.example.mybank.domain.Account;
+import com.example.mybank.domain.BankAccountDetails;
 
 public interface FundTransferService {
 
-    void transferFunds(Account sender, Account receiver);
+    void transferFunds(BankAccountDetails sender, BankAccountDetails receiver);
 }

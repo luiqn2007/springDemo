@@ -1,8 +1,8 @@
 package com.example.mybank;
 
-import com.example.mybank.domain.Account;
+import com.example.mybank.domain.BankAccountDetails;
 import com.example.mybank.domain.FixedDepositDetails;
-import com.example.mybank.service.AccountService;
+import com.example.mybank.service.BankAccountService;
 import com.example.mybank.service.FixedDepositService;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -22,23 +22,23 @@ public class BankApp {
         context.scan("com.example.mybank.config");
         context.refresh();
 
-        AccountService accountService = context.getBean(AccountService.class);
+        BankAccountService bankAccountService = context.getBean(BankAccountService.class);
         FixedDepositService fixedDepositService = context.getBean(FixedDepositService.class);
 
         int balanceAmount = random.nextInt(100000, 500000);
-        int accountId = accountService.createAccount(Account.builder()
+        BankAccountDetails accountDetails = BankAccountDetails.builder()
                 .balanceAmount(100000)
                 .lastTransactionDate(new Date())
-                .build());
-        System.out.println("AccountId=" + accountId);
-        System.out.println(accountService.getAccount(accountId));
+                .build();
+        bankAccountService.createAccount(accountDetails);
+        System.out.println(accountDetails);
 
         int fixedDepositId = fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
-                .bankAccountId(accountId)
+                .bankAccountId(accountDetails)
                 .creationDate(new Date())
                 .depositAmount(random.nextInt(1000, Math.min(50000, balanceAmount)))
                 .tenure(random.nextInt(6, 60))
-                .active(random.nextBoolean())
+                .active(random.nextBoolean() ? "Y" : "N")
                 .build());
         System.out.println("FixedDepositId=" + fixedDepositId);
         System.out.println(fixedDepositService.getFixedDepositDetails(fixedDepositId));
