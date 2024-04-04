@@ -2,26 +2,40 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="url" value="${database.url}" />
-        <property name="username" value="${database.username}" />
-        <property name="password" value="${database.password}" />
-        <property name="driverClassName" value="${database.driverClass}" />
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        <property name="driverClassName" value="${database.driverClass}"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.example.mybank.domain" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.example.mybank.domain"/>
     </bean>
 
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="txManager"/>
+        <property name="isolationLevelName" value="ISOLATION_READ_UNCOMMITTED"/>
+        <property name="propagationBehaviorName" value="PROPAGATION_REQUIRED"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="txManager" />
+
     <beans profile="dev">
-        <context:property-placeholder location="config/mysqlPCDevDB.properties" />
+        <context:property-placeholder location="config/mysqlPCDevDB.properties"/>
     </beans>
 
     <beans profile="production">
-        <context:property-placeholder location="config/mysqlPCDevDB.properties" />
+        <context:property-placeholder location="config/mysqlPCDevDB.properties"/>
     </beans>
 </beans>
