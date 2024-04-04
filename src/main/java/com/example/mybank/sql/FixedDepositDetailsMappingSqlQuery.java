@@ -13,7 +13,7 @@ public class FixedDepositDetailsMappingSqlQuery extends MappingSqlQuery<FixedDep
 
     public FixedDepositDetailsMappingSqlQuery(DataSource ds) {
         super(ds, "select * from fixed_deposit_details where FIXED_DEPOSIT_ID = ?");
-        setParameters(new SqlParameter("FIXED_DEPOSIT_ID", java.sql.Types.INTEGER));
+        setParameters(new SqlParameter("id", java.sql.Types.INTEGER));
     }
 
     @Override

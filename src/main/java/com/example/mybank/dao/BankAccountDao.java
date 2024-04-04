@@ -4,7 +4,7 @@ import com.example.mybank.domain.BankAccountDetails;
 
 public interface BankAccountDao {
 
-    int createBankAccount(BankAccountDetails bankAccountDetails);
+    void createBankAccount(BankAccountDetails bankAccountDetails);
 
     BankAccountDetails getBankAccount(int bankAccountId);
 

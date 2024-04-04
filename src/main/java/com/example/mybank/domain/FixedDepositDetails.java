@@ -12,12 +12,12 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ToString
 @Builder
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Entity
 @Table(name = "fixed_deposit_details")
-@Entity(name = "FixedDepositDetails")
 public class FixedDepositDetails {
 
     private static Logger LOGGER = LogManager.getLogger();

@@ -17,7 +17,7 @@ public class BankApp {
     private static final Random random = new Random(System.currentTimeMillis());
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "dev, mysql");
+        System.setProperty("spring.profiles.active", "dev, hibernate");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();
@@ -40,7 +40,6 @@ public class BankApp {
                 .tenure(random.nextInt(6, 60))
                 .active(random.nextBoolean() ? "Y" : "N")
                 .build());
-        System.out.println("FixedDepositId=" + fixedDepositId);
         System.out.println(fixedDepositService.getFixedDepositDetails(fixedDepositId));
     }
 }

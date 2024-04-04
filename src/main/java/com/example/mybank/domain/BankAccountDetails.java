@@ -10,8 +10,8 @@ import java.util.Date;
 @Builder
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-@Entity(name = "BankAccountDetails")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Entity
 @Table(name = "bank_account_details")
 public class BankAccountDetails {
 
@@ -25,4 +25,10 @@ public class BankAccountDetails {
 
     @Column(name = "LAST_TRANSACTION_TS")
     Date lastTransactionDate;
+
+    public BankAccountDetails(int accountId) {
+        this.accountId = accountId;
+        this.balanceAmount = 0;
+        this.lastTransactionDate = new Date();
+    }
 }

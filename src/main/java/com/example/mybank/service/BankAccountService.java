@@ -4,7 +4,7 @@ import com.example.mybank.domain.BankAccountDetails;
 
 public interface BankAccountService {
 
-    int createAccount(BankAccountDetails bankAccountDetails);
+    void createAccount(BankAccountDetails bankAccountDetails);
 
     BankAccountDetails getBankAccount(int id);
 

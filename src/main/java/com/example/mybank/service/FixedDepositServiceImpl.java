@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -53,11 +54,13 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     }
 
     @Override
+    @Transactional
     public FixedDepositDetails getFixedDepositDetails(int id) {
         return fixedDepositDao.getFixedDeposit(id);
     }
 
     @Override
+    @Transactional
     public int createFixedDeposit(FixedDepositDetails fixedDepositDetails) {
         Validator validator = validatorFactory.getValidator();
         Set<ConstraintViolation<FixedDepositDetails>> validations = validator.validate(fixedDepositDetails);

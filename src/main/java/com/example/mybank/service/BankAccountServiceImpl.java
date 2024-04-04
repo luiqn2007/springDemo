@@ -4,6 +4,7 @@ import com.example.mybank.dao.BankAccountDao;
 import com.example.mybank.domain.BankAccountDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("accountService")
 public class BankAccountServiceImpl implements BankAccountService {
@@ -12,16 +13,19 @@ public class BankAccountServiceImpl implements BankAccountService {
     private BankAccountDao bankAccountDao;
 
     @Override
-    public int createAccount(BankAccountDetails bankAccountDetails) {
-        return bankAccountDao.createBankAccount(bankAccountDetails);
+    @Transactional
+    public void createAccount(BankAccountDetails bankAccountDetails) {
+        bankAccountDao.createBankAccount(bankAccountDetails);
     }
 
     @Override
+    @Transactional
     public BankAccountDetails getBankAccount(int id) {
         return bankAccountDao.getBankAccount(id);
     }
 
     @Override
+    @Transactional
     public void subtractAmount(int bankAccountId, float amount) {
         bankAccountDao.subtractAmount(bankAccountId, amount);
     }

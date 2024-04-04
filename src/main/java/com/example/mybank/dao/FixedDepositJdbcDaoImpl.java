@@ -13,9 +13,9 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@Profile("mysql")
+@Profile("jdbc")
 @Repository("fixedDepositDao")
-public class FixedDepositMySQLDao implements FixedDepositDao {
+public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
 
     private SimpleJdbcInsert jdbcInsert;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQuery;
