@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Profile("jpa_data")
+@Profile({"jpa_data", "querydsl"})
 @EnableJpaRepositories(basePackages = "com.example.mybank.repository")
 public class JpaDataProfileConfig {
 

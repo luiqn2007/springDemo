@@ -1,6 +1,7 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.FixedDepositDetails;
+import com.example.mybank.sql.FixedDepositDetailsGreaterMappingSqlQuery;
 import com.example.mybank.sql.FixedDepositDetailsMappingSqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -18,19 +19,21 @@ import java.util.Map;
 public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
 
     private SimpleJdbcInsert jdbcInsert;
-    private MappingSqlQuery<FixedDepositDetails> mappingSqlQuery;
+    private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryById;
+    private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryGreater;
 
     @Autowired
     private void setDataSource(DataSource dataSource) {
         jdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("fixed_deposit_details")
                 .usingGeneratedKeyColumns("FIXED_DEPOSIT_ID");
-        mappingSqlQuery = new FixedDepositDetailsMappingSqlQuery(dataSource);
+        mappingSqlQueryById = new FixedDepositDetailsMappingSqlQuery(dataSource);
+        mappingSqlQueryGreater = new FixedDepositDetailsGreaterMappingSqlQuery(dataSource);
     }
 
     @Override
     public FixedDepositDetails getFixedDeposit(int id) {
-        return mappingSqlQuery.findObject(id);
+        return mappingSqlQueryById.findObject(id);
     }
 
     @Override
@@ -42,5 +45,10 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
         arguments.put("TENURE", fixedDepositDetails.getTenure());
         arguments.put("ACTIVE", fixedDepositDetails.getActive());
         return jdbcInsert.executeAndReturnKey(arguments).intValue();
+    }
+
+    @Override
+    public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
+        return mappingSqlQueryGreater.execute(minValue);
     }
 }

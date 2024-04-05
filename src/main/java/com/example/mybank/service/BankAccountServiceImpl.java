@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("accountService")
-@Profile("!jpa_data")
+@Profile({"hibernate", "jdbc"})
 public class BankAccountServiceImpl implements BankAccountService {
 
     @Autowired

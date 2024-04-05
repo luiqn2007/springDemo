@@ -27,7 +27,7 @@ import java.util.Set;
 
 @DependsOn("eventSenderSelectorService")
 @Service("fixedDepositService")
-@Profile("!jpa_data")
+@Profile({"jdbc", "hibernate"})
 public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -79,5 +79,10 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
         eventSender.sendEvent(event);
 
         return result;
+    }
+
+    @Override
+    public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
+        return fixedDepositDao.getHighValueFds(minValue);
     }
 }

@@ -26,4 +26,10 @@ public class FixedDepositServiceJpaDataImpl extends ServiceTemplate implements F
     public int createFixedDeposit(FixedDepositDetails fixedDepositDetails) {
         return fixedDepositRepository.save(fixedDepositDetails).getId();
     }
+
+    @Override
+    @Transactional
+    public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
+        return fixedDepositRepository.findAllByDepositAmountGreaterThanEqual(minValue);
+    }
 }

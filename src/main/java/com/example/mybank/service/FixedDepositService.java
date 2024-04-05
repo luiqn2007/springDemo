@@ -7,4 +7,6 @@ public interface FixedDepositService {
     FixedDepositDetails getFixedDepositDetails(int id);
 
     int createFixedDeposit(FixedDepositDetails fixedDepositDetails);
+
+    Iterable<FixedDepositDetails> getHighValueFds(int minValue);
 }

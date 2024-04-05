@@ -11,4 +11,6 @@ public interface FixedDepositDao {
     FixedDepositDetails getFixedDeposit(int id);
 
     int createFixedDetail(FixedDepositDetails fixedDepositDetails);
+
+    Iterable<FixedDepositDetails> getHighValueFds(int minValue);
 }
