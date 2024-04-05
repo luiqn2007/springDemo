@@ -41,5 +41,36 @@ public class BankApp {
                 .active(random.nextBoolean() ? "Y" : "N")
                 .build());
         System.out.println(fixedDepositService.getFixedDepositDetails(fixedDepositId));
+
+        System.out.println("getAllFds ---------------------------------------------------------------------------");
+        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
+                .bankAccountId(accountDetails)
+                .tenure(6)
+                .depositAmount(1000)
+                .active("Y")
+                .creationDate(new Date())
+                .build());
+        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
+                .bankAccountId(accountDetails)
+                .tenure(6)
+                .depositAmount(1000)
+                .active("Y")
+                .creationDate(new Date())
+                .build());
+        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
+                .bankAccountId(accountDetails)
+                .tenure(6)
+                .depositAmount(1000)
+                .active("Y")
+                .creationDate(new Date())
+                .build());
+        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
+                .bankAccountId(accountDetails)
+                .tenure(6)
+                .depositAmount(1000)
+                .active("Y")
+                .creationDate(new Date())
+                .build());
+        fixedDepositService.getAllFds(1000, 6).forEach(System.out::println);
     }
 }

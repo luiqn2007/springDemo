@@ -8,4 +8,6 @@ import java.util.List;
 public interface FixedDepositRepository extends JpaRepository<FixedDepositDetails, Integer> {
 
     List<FixedDepositDetails> findAllByDepositAmountGreaterThanEqual(int minValue);
+
+    List<FixedDepositDetails> findAllByDepositAmountAndTenure(int depositAmount, int tenure);
 }

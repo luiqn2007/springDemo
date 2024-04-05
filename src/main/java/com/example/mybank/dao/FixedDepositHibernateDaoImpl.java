@@ -35,4 +35,14 @@ public class FixedDepositHibernateDaoImpl implements FixedDepositDao {
                 .setParameter("minValue", minValue)
                 .getResultList();
     }
+
+    @Override
+    public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
+        String hql = "from FixedDepositDetails as fixedDepositDetails where fixedDepositDetails.depositAmount = :amount and fixedDepositDetails.tenure = :tenure";
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, FixedDepositDetails.class)
+                .setParameter("amount", amount)
+                .setParameter("tenure", tenure)
+                .getResultList();
+    }
 }

@@ -32,4 +32,9 @@ public class FixedDepositServiceJpaDataImpl extends ServiceTemplate implements F
     public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
         return fixedDepositRepository.findAllByDepositAmountGreaterThanEqual(minValue);
     }
+
+    @Override
+    public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
+        return fixedDepositRepository.findAllByDepositAmountAndTenure(amount, tenure);
+    }
 }

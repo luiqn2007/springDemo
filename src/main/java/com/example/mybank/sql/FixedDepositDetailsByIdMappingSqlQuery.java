@@ -9,11 +9,11 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class FixedDepositDetailsGreaterMappingSqlQuery extends MappingSqlQuery<FixedDepositDetails> {
+public class FixedDepositDetailsByIdMappingSqlQuery extends MappingSqlQuery<FixedDepositDetails> {
 
-    public FixedDepositDetailsGreaterMappingSqlQuery(DataSource ds) {
-        super(ds, "select * from fixed_deposit_details where AMOUNT >= ?1");
-        setParameters(new SqlParameter("maxValue", java.sql.Types.INTEGER));
+    public FixedDepositDetailsByIdMappingSqlQuery(DataSource ds) {
+        super(ds, "select * from fixed_deposit_details where FIXED_DEPOSIT_ID = ?");
+        setParameters(new SqlParameter("id", java.sql.Types.INTEGER));
     }
 
     @Override

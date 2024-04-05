@@ -1,7 +1,7 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.BankAccountDetails;
-import com.example.mybank.sql.BankAccountDetailsMappingSqlQuery;
+import com.example.mybank.sql.BankAccountDetailsByIdMappingSqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -32,7 +32,7 @@ public class BankAccountJdbcDaoImpl implements BankAccountDao {
         jdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("bank_account_details")
                 .usingGeneratedKeyColumns("ACCOUNT_ID");
-        mappingSqlQuery = new BankAccountDetailsMappingSqlQuery(dataSource);
+        mappingSqlQuery = new BankAccountDetailsByIdMappingSqlQuery(dataSource);
     }
 
     @Override

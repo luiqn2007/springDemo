@@ -82,7 +82,14 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     }
 
     @Override
+    @Transactional
     public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
         return fixedDepositDao.getHighValueFds(minValue);
+    }
+
+    @Override
+    @Transactional
+    public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
+        return fixedDepositDao.getAllFds(amount, tenure);
     }
 }

@@ -9,9 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class BankAccountDetailsMappingSqlQuery extends MappingSqlQuery<BankAccountDetails> {
+public class BankAccountDetailsByIdMappingSqlQuery extends MappingSqlQuery<BankAccountDetails> {
 
-    public BankAccountDetailsMappingSqlQuery(DataSource ds) {
+    public BankAccountDetailsByIdMappingSqlQuery(DataSource ds) {
         super(ds, "SELECT * FROM bank_account_details WHERE ACCOUNT_ID = ?");
         setParameters(new SqlParameter("id", Types.INTEGER));
     }

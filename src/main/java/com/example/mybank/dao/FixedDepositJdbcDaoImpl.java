@@ -1,8 +1,9 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.FixedDepositDetails;
-import com.example.mybank.sql.FixedDepositDetailsGreaterMappingSqlQuery;
-import com.example.mybank.sql.FixedDepositDetailsMappingSqlQuery;
+import com.example.mybank.sql.FixedDepositDetailsByAmountAndTenureMappingSqlQuery;
+import com.example.mybank.sql.FixedDepositDetailsByAmountMappingSqlQuery;
+import com.example.mybank.sql.FixedDepositDetailsByIdMappingSqlQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -20,15 +21,17 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
 
     private SimpleJdbcInsert jdbcInsert;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryById;
-    private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryGreater;
+    private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByAmount;
+    private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByAmountAndTenure;
 
     @Autowired
     private void setDataSource(DataSource dataSource) {
         jdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("fixed_deposit_details")
                 .usingGeneratedKeyColumns("FIXED_DEPOSIT_ID");
-        mappingSqlQueryById = new FixedDepositDetailsMappingSqlQuery(dataSource);
-        mappingSqlQueryGreater = new FixedDepositDetailsGreaterMappingSqlQuery(dataSource);
+        mappingSqlQueryById = new FixedDepositDetailsByIdMappingSqlQuery(dataSource);
+        mappingSqlQueryByAmount = new FixedDepositDetailsByAmountMappingSqlQuery(dataSource);
+        mappingSqlQueryByAmountAndTenure = new FixedDepositDetailsByAmountAndTenureMappingSqlQuery(dataSource);
     }
 
     @Override
@@ -49,6 +52,11 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
 
     @Override
     public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
-        return mappingSqlQueryGreater.execute(minValue);
+        return mappingSqlQueryByAmount.execute(minValue);
+    }
+
+    @Override
+    public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
+        return mappingSqlQueryByAmountAndTenure.execute(amount, tenure);
     }
 }
