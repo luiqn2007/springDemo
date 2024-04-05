@@ -17,7 +17,7 @@ public class BankApp {
     private static final Random random = new Random(System.currentTimeMillis());
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "dev, hibernate");
+        System.setProperty("spring.profiles.active", "dev, jpa_data");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();

@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,7 @@ import java.util.Set;
 
 @DependsOn("eventSenderSelectorService")
 @Service("fixedDepositService")
+@Profile("!jpa_data")
 public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
