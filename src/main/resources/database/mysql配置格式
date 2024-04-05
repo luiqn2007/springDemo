@@ -1,0 +1,4 @@
+url=jdbc:mysql://<数据库地址>:<端口>/<数据库名>
+username=<登录用户名>
+password=<登录密码>
+driverClassName=com.mysql.cj.jdbc.Driver

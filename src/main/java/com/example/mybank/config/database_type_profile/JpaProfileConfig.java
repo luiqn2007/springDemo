@@ -1,4 +1,4 @@
-package com.example.mybank.config.profile;
+package com.example.mybank.config.database_type_profile;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +15,9 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@Profile({"jpa_data", "querydsl"})
+@Profile({"jpa", "querydsl"})
 @EnableJpaRepositories(basePackages = "com.example.mybank.repository")
-public class JpaDataProfileConfig {
+public class JpaProfileConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {

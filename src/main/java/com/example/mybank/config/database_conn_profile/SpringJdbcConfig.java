@@ -1,4 +1,4 @@
-package com.example.mybank.config.profile;
+package com.example.mybank.config.database_conn_profile;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@Profile("jdbc")
+@Profile("spring-jdbc")
 @EnableTransactionManagement
-public class JdbcProfileConfig {
+public class SpringJdbcConfig {
 
     @Bean
     public PlatformTransactionManager transactionManager(DataSource dataSource) {

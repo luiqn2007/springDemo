@@ -17,7 +17,7 @@ public class BankApp {
     private static final Random random = new Random(System.currentTimeMillis());
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "dev, querydsl");
+        System.setProperty("spring.profiles.active", "dev, spring-data, mongodb");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("accountService")
-@Profile("jpa_data")
+@Profile("jpa")
 public class BankAccountServiceJpaDataImpl implements BankAccountService {
 
     @Autowired

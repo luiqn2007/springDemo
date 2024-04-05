@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("fixedDepositService")
-@Profile("jpa_data")
+@Profile("jpa")
 public class FixedDepositServiceJpaDataImpl extends ServiceTemplate implements FixedDepositService {
 
     @Autowired
