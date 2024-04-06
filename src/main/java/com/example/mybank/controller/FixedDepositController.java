@@ -5,8 +5,6 @@ import com.example.mybank.service.FixedDepositService;
 
 public interface FixedDepositController {
 
-    FixedDepositService getFixedDepositService();
-
     void setFixedDepositService(FixedDepositService fixedDepositService);
 
     FixedDepositDetails get();

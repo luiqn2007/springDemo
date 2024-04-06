@@ -9,10 +9,10 @@ import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Controller;
 
-@Getter
-@Singleton
-@Named("fixedDepositController")
+@Profile("!mongodb")
+@Controller("fixedDepositController")
 public class FixedDepositControllerImpl implements FixedDepositController {
 
     private static final Logger LOGGER = LogManager.getLogger();

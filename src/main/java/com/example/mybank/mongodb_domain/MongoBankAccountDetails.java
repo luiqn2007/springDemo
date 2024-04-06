@@ -1,7 +1,7 @@
 package com.example.mybank.mongodb_domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,7 +10,12 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "bank_accounts")
+@Entity
 public class MongoBankAccountDetails {
 
     @Id

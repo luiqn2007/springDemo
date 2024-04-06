@@ -1,14 +1,13 @@
 package com.example.mybank.service;
 
+import com.example.mybank.domain.QFixedDepositDetails;
 import com.example.mybank.mongodb_domain.MongoBankAccountDetails;
-import com.example.mybank.mongodb_domain.MongoFixedDepositDetails;
+import com.example.mybank.mongodb_domain.QMongoBankAccountDetails;
 import com.example.mybank.mongodb_repository.BankAccountRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
-import java.util.List;
 
 @Service("accountService")
 @Profile("mongodb")
@@ -29,7 +28,10 @@ public class BankAccountServiceMongoDBImpl {
         bankAccountRepository.subtractFromAccount(bankAccountId, amount);
     }
 
-    public List<MongoFixedDepositDetails> getHighValueFds(int minValue) {
-        return Collections.emptyList();
+    public Iterable<MongoBankAccountDetails> getHighValueFds(float minValue) {
+        BooleanExpression expression = QMongoBankAccountDetails.mongoBankAccountDetails.fixedDeposits.any().active.eq("Y")
+                .and(QFixedDepositDetails.fixedDepositDetails.depositAmount.goe(minValue))
+                .and(QFixedDepositDetails.fixedDepositDetails.tenure.between(6, 12));
+        return bankAccountRepository.findAll(expression);
     }
 }

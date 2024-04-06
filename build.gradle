@@ -34,6 +34,9 @@ dependencies {
     // https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync
     implementation group: 'org.mongodb', name: 'mongodb-driver-sync', version: '5.0.1'
 
+    // https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core
+    implementation group: 'org.mongodb', name: 'mongodb-driver-core', version: '5.0.1'
+
     // https://mvnrepository.com/artifact/org.springframework/spring-orm
     implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.5'
 
@@ -56,6 +59,9 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
     implementation group: 'com.querydsl', name: 'querydsl-apt', version: '5.1.0', classifier: 'jakarta'
+
+    // https://mvnrepository.com/artifact/com.querydsl/querydsl-mongodb
+    implementation group: 'com.querydsl', name: 'querydsl-mongodb', version: '5.1.0'
 
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor "org.projectlombok:lombok:${lombok_version}"
