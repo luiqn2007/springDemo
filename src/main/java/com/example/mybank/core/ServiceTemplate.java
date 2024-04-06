@@ -1,4 +1,4 @@
-package com.example.mybank.base;
+package com.example.mybank.core;
 
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

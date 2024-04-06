@@ -1,6 +1,6 @@
 package com.example.mybank.service;
 
-import com.example.mybank.base.ServiceTemplate;
+import com.example.mybank.core.ServiceTemplate;
 import com.example.mybank.dao.PersonalBankingDao;
 import com.example.mybank.domain.BankStatement;
 import jakarta.inject.Inject;

@@ -1,6 +1,6 @@
 package com.example.mybank.service;
 
-import com.example.mybank.base.ServiceTemplate;
+import com.example.mybank.core.ServiceTemplate;
 import com.example.mybank.dao.FixedDepositDao;
 import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.event.EventSender;

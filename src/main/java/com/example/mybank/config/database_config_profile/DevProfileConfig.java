@@ -17,7 +17,7 @@ public class DevProfileConfig {
     @Profile("!mongodb")
     public Properties mysqlProperties() throws IOException {
         Properties properties = new Properties();
-        ClassPathResource resource = new ClassPathResource("database/mysqlPCDevDB.properties");
+        ClassPathResource resource = new ClassPathResource("properties/mysqlPCDevDB.properties");
         properties.load(resource.getInputStream());
         return properties;
     }
@@ -26,7 +26,7 @@ public class DevProfileConfig {
     @Profile("mongodb")
     public Properties mongoProperties() throws IOException {
         Properties props = new Properties();
-        ClassPathResource resource = new ClassPathResource("database/mongodb.properties");
+        ClassPathResource resource = new ClassPathResource("properties/mongodb.properties");
         try (InputStream inputStream = resource.getInputStream()) {
             props.load(inputStream);
         }

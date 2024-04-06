@@ -27,7 +27,7 @@ public class MongoDBProfileConfig {
 
     @Bean
     public MongoDatabaseFactory mongoDbFactory(MongoClient mongoClient, @Qualifier("mongoProperties") Properties properties) {
-        return new SimpleMongoClientDatabaseFactory(mongoClient, properties.getProperty("database"));
+        return new SimpleMongoClientDatabaseFactory(mongoClient, properties.getProperty("properties"));
     }
 
     @Bean
