@@ -8,3 +8,5 @@ create table if not exists customer_registration_details
     ADDRESS        varchar(20) not null,
     CARD_NUMBER    varchar(10) not null
 );
+
+alter table fixed_deposit_details add column EMAIL varchar(20);

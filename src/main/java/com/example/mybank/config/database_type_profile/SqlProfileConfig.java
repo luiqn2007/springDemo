@@ -23,7 +23,7 @@ public class SqlProfileConfig {
     }
 
     @Bean
-    public TransactionTemplate transactionTemplate(PlatformTransactionManager platformTransactionManager) {
+    public TransactionTemplate transactionTemplate(@Qualifier("transactionManager") PlatformTransactionManager platformTransactionManager) {
         TransactionTemplate transactionTemplate = new TransactionTemplate();
         transactionTemplate.setTransactionManager(platformTransactionManager);
         transactionTemplate.setIsolationLevelName("ISOLATION_READ_COMMITTED");

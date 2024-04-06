@@ -8,6 +8,8 @@ import lombok.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -18,8 +20,10 @@ import java.util.Date;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "fixed_deposit_details")
-public class FixedDepositDetails {
+public class FixedDepositDetails implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
     private static Logger LOGGER = LogManager.getLogger();
 
     @PositiveOrZero
@@ -41,4 +45,6 @@ public class FixedDepositDetails {
     private int tenure;
     @Column(name = "ACTIVE")
     private String active;
+    @Column(name = "EMAIL")
+    private String email;
 }

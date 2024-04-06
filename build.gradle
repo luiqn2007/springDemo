@@ -63,6 +63,21 @@ dependencies {
     // https://mvnrepository.com/artifact/com.querydsl/querydsl-mongodb
     implementation group: 'com.querydsl', name: 'querydsl-mongodb', version: '5.1.0'
 
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-all
+    // implementation group: 'org.apache.activemq', name: 'activemq-all', version: '6.1.0'
+
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker
+    implementation group: 'org.apache.activemq', name: 'activemq-broker', version: '6.1.0'
+
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-client
+    implementation group: 'org.apache.activemq', name: 'activemq-client', version: '6.1.0'
+
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-spring
+    implementation group: 'org.apache.activemq', name: 'activemq-spring', version: '6.1.0'
+
+    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-kahadb-store
+    implementation group: 'org.apache.activemq', name: 'activemq-kahadb-store', version: '6.1.0'
+
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor "org.projectlombok:lombok:${lombok_version}"
     compileOnly "org.projectlombok:lombok:${lombok_version}"

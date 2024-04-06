@@ -1,7 +1,5 @@
 package com.example.mybank.domain;
 
-import jakarta.inject.Named;
-import jakarta.inject.Singleton;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +12,6 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 @NoArgsConstructor
-@Singleton
-@Named
 public class BankStatement {
 
     @Value("30-01-2012")

@@ -1,11 +1,10 @@
 package com.example.mybank.service;
 
-import com.example.mybank.core.ServiceTemplate;
+import com.example.mybank.Constants;
 import com.example.mybank.dao.FixedDepositDao;
 import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.event.EventSender;
 import com.example.mybank.event.FixedDepositCreatedEvent;
-import com.example.mybank.utils.PropertyConstants;
 import jakarta.annotation.Resource;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
@@ -28,7 +27,7 @@ import java.util.Set;
 @DependsOn("eventSenderSelectorService")
 @Service("fixedDepositService")
 @Profile({"jdbc", "hibernate"})
-public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDepositService {
+public class FixedDepositServiceImpl implements FixedDepositService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -40,13 +39,13 @@ public class FixedDepositServiceImpl extends ServiceTemplate implements FixedDep
     private ValidatorFactory validatorFactory;
 
     @Inject
-    public FixedDepositServiceImpl(@Value("#{T(com.example.mybank.utils.PropertyConstants).EVENT_SENDER_PROPERTY_FILE_PATH}") String appConfigFile) throws Exception {
+    public FixedDepositServiceImpl(@Value("#{T(com.example.mybank.Constants).EVENT_SENDER_PROPERTY_FILE_PATH}") String appConfigFile) throws Exception {
         ClassPathResource resource = new ClassPathResource(appConfigFile);
         if (resource.exists()) {
             try (InputStream is = resource.getInputStream()) {
                 Properties properties = new Properties();
                 properties.load(is);
-                String eventSenderClassString = properties.getProperty(PropertyConstants.EVENT_SENDER_CLASS_PROPERTY);
+                String eventSenderClassString = properties.getProperty(Constants.EVENT_SENDER_CLASS_PROPERTY);
                 if (eventSenderClassString != null) {
                     Class<?> eventSenderClass = Class.forName(eventSenderClassString);
                     eventSender = (EventSender) eventSenderClass.getDeclaredConstructor().newInstance();

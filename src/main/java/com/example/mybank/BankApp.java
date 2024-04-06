@@ -7,6 +7,8 @@ import com.example.mybank.mongodb_domain.MongoFixedDepositDetails;
 import com.example.mybank.service.BankAccountService;
 import com.example.mybank.service.BankAccountServiceMongoDBImpl;
 import com.example.mybank.service.FixedDepositService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,67 +22,49 @@ import java.util.stream.IntStream;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class BankApp {
 
-    private static final Random random = new Random(System.currentTimeMillis());
+    private static final Random RANDOM = new Random(System.currentTimeMillis());
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "dev, spring-data, mongodb");
+        System.setProperty("spring.profiles.active", "dev, spring-data, jpa");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();
-        runNoSql(context);
+        runSql(context);
     }
 
     private static void runSql(AnnotationConfigApplicationContext context) {
         BankAccountService bankAccountService = context.getBean(BankAccountService.class);
         FixedDepositService fixedDepositService = context.getBean(FixedDepositService.class);
 
-        int balanceAmount = random.nextInt(100000, 500000);
+        int balanceAmount = RANDOM.nextInt(100000, 500000);
         BankAccountDetails accountDetails = BankAccountDetails.builder()
                 .balanceAmount(100000)
                 .lastTransactionDate(new Date())
                 .build();
         bankAccountService.createAccount(accountDetails);
-        System.out.println(accountDetails);
+        LOGGER.info(accountDetails);
 
         int fixedDepositId = fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
                 .bankAccountId(accountDetails)
                 .creationDate(new Date())
-                .depositAmount(random.nextInt(1000, Math.min(50000, balanceAmount)))
-                .tenure(random.nextInt(6, 60))
-                .active(random.nextBoolean() ? "Y" : "N")
+                .depositAmount(RANDOM.nextInt(1000, Math.min(50000, balanceAmount)))
+                .tenure(RANDOM.nextInt(6, 60))
+                .active(RANDOM.nextBoolean() ? "Y" : "N")
+                .email("test@test.com")
                 .build());
-        System.out.println(fixedDepositService.getFixedDepositDetails(fixedDepositId));
+        LOGGER.info(fixedDepositService.getFixedDepositDetails(fixedDepositId));
 
-        System.out.println("getAllFds ---------------------------------------------------------------------------");
-        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
+        LOGGER.info("getAllFds ---------------------------------------------------------------------------");
+        IntStream.range(0, 10).forEach(i -> fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
                 .bankAccountId(accountDetails)
-                .tenure(6)
-                .depositAmount(1000)
+                .tenure(RANDOM.nextInt(6, 60))
+                .depositAmount(RANDOM.nextInt(1000, 10000))
                 .active("Y")
                 .creationDate(new Date())
-                .build());
-        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
-                .bankAccountId(accountDetails)
-                .tenure(6)
-                .depositAmount(1000)
-                .active("Y")
-                .creationDate(new Date())
-                .build());
-        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
-                .bankAccountId(accountDetails)
-                .tenure(6)
-                .depositAmount(1000)
-                .active("Y")
-                .creationDate(new Date())
-                .build());
-        fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
-                .bankAccountId(accountDetails)
-                .tenure(6)
-                .depositAmount(1000)
-                .active("Y")
-                .creationDate(new Date())
-                .build());
-        fixedDepositService.getAllFds(1000, 6).forEach(System.out::println);
+                .email("test_" + i + "@test.com")
+                .build()));
+        fixedDepositService.getAllFds(5000, 30).forEach(System.out::println);
     }
 
     private static void runNoSql(AnnotationConfigApplicationContext context) {
@@ -100,7 +84,7 @@ public class BankApp {
                 .lastTransactionTimestamp(new Date())
                 .build();
         bankAccountService.createAccount(bankAccountDetails);
-        System.out.println(bankAccountService.getBankAccount(bankAccountDetails.getAccountId()));
-        bankAccountService.getHighValueFds(10000).forEach(System.out::println);
+        LOGGER.info(bankAccountService.getBankAccount(bankAccountDetails.getAccountId()));
+        bankAccountService.getHighValueFds(10000).forEach(LOGGER::info);
     }
 }
