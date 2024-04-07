@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
+import java.util.Properties;
 import java.util.Random;
 import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
@@ -25,11 +26,15 @@ public class BankApp {
     private static final Random RANDOM = new Random(System.currentTimeMillis());
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private static Properties testProperties;
+
     public static void main(String[] args) {
         System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker, email");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();
+        testProperties = context.getBean("testProperties", Properties.class);
+
         runSql(context);
     }
 
@@ -63,7 +68,7 @@ public class BankApp {
                 .depositAmount(RANDOM.nextInt(1000, 10000))
                 .active("Y")
                 .creationDate(new Date())
-                .email("wuhzezvufd@cobmk.com") // 10min 邮箱 https://10minutemail.one/zh
+                .email(testProperties.getProperty("test_email_receiver"))
                 .build()));
         fixedDepositService.getAllFds(5000, 30).forEach(System.out::println);
     }

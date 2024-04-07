@@ -21,13 +21,13 @@ import java.util.Properties;
 public class MongoDBProfileConfig {
 
     @Bean
-    public MongoClient mongoClient(@Qualifier("mongoProperties") Properties properties) {
-        return MongoClients.create(properties.getProperty("url"));
+    public MongoClient mongoClient(@Qualifier("configProperties") Properties properties) {
+        return MongoClients.create(properties.getProperty("mongodb.url"));
     }
 
     @Bean
-    public MongoDatabaseFactory mongoDbFactory(MongoClient mongoClient, @Qualifier("mongoProperties") Properties properties) {
-        return new SimpleMongoClientDatabaseFactory(mongoClient, properties.getProperty("properties"));
+    public MongoDatabaseFactory mongoDbFactory(MongoClient mongoClient, @Qualifier("configProperties") Properties properties) {
+        return new SimpleMongoClientDatabaseFactory(mongoClient, properties.getProperty("mongodb.database"));
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package com.example.mybank.config.database_type_profile;
 
+import com.mysema.commons.lang.Pair;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +19,27 @@ import java.util.Properties;
 public class SqlProfileConfig {
 
     @Bean(destroyMethod = "")
-    public DataSource dataSource(@Qualifier("mysqlProperties") Properties properties) throws SQLException {
-        return BasicDataSourceFactory.createDataSource(properties);
+    @Profile("dev")
+    @Qualifier("dataSource")
+    public DataSource dataSourceDev(@Qualifier("configProperties") Properties properties) throws SQLException {
+        Properties properties1 = new Properties();
+        properties1.setProperty("url", properties.getProperty("mysql.dev.url"));
+        properties1.setProperty("username", properties.getProperty("mysql.dev.username"));
+        properties1.setProperty("password", properties.getProperty("mysql.dev.password"));
+        properties1.setProperty("driverClassName", properties.getProperty("mysql.dev.driverClassName"));
+        return BasicDataSourceFactory.createDataSource(properties1);
+    }
+
+    @Bean(destroyMethod = "")
+    @Profile("production")
+    @Qualifier("dataSource")
+    public DataSource dataSourceProduction(@Qualifier("configProperties") Properties properties) throws SQLException {
+        Properties properties1 = new Properties();
+        properties1.setProperty("url", properties.getProperty("mysql.production.url"));
+        properties1.setProperty("username", properties.getProperty("mysql.production.username"));
+        properties1.setProperty("password", properties.getProperty("mysql.production.password"));
+        properties1.setProperty("driverClassName", properties.getProperty("mysql.production.driverClassName"));
+        return BasicDataSourceFactory.createDataSource(properties1);
     }
 
     @Bean

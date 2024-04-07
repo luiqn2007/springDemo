@@ -1,0 +1,30 @@
+# mysql production
+mysql.production.url=jdbc:mysql://<url>:<port>/<database>
+mysql.production.username=<username>
+mysql.production.password=<password>
+mysql.production.driverClassName=<Driver>
+# mysql dev
+mysql.dev.url=jdbc:mysql://<url>:<port>/<database>
+mysql.dev.username=<username>
+mysql.dev.password=<password>
+mysql.dev.driverClassName=<Driver>
+# mongodb
+mongodb.url=<url>
+mongodb.database=<database>
+# activemq
+activemq.url=<url>
+activemq.trustedPackages=<array: packages>
+activemq.username=<username, 可选>
+activemq.password=<password, 可选>
+# email
+email.host=<host>
+email.port=<port>
+email.protocol=<protocol>
+email.username=<username>
+email.password=<password>
+# email template
+email.from=<sender email>
+email.received.subject=<received title>
+email.received.text=<received content>
+email.processed.subject=<processed title>
+email.processed.text=<processed content>

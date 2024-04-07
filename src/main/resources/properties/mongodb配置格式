@@ -1,4 +1,0 @@
-文件：resources/properties/mongodb.properties
-
-url=mongodb+srv://<用户名>:<密码>@<url及端口>/
-database=<数据库名>

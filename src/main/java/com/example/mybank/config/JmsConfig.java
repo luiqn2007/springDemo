@@ -35,14 +35,14 @@ public class JmsConfig {
 
     @Bean
     @DependsOn("activeMQBroker")
-    public ActiveMQConnectionFactory jmsFactory(@Qualifier("activemqProperties") Properties properties) {
+    public ActiveMQConnectionFactory jmsFactory(@Qualifier("configProperties") Properties properties) {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-        factory.setBrokerURL(properties.getProperty("url"));
-        factory.setTrustedPackages(Arrays.stream(properties.getProperty("trustedPackages").split(",")).toList());
-        if (properties.containsKey("username")) {
+        factory.setBrokerURL(properties.getProperty("activemq.url"));
+        factory.setTrustedPackages(Arrays.stream(properties.getProperty("activemq.trustedPackages").split(",")).toList());
+        if (properties.containsKey("activemq.username")) {
             factory.setUserName(properties.getProperty("username"));
         }
-        if (properties.containsKey("password")) {
+        if (properties.containsKey("activemq.password")) {
             factory.setPassword(properties.getProperty("password"));
         }
         return factory;

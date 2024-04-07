@@ -1,6 +1,0 @@
-文件：resources/properties/activemq.properties
-
-url=vm://localhost
-trustedPackages=com.example.mybank,java.util
-username=        # 可选
-password=        # 可选

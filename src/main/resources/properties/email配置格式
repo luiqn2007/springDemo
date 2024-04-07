@@ -1,7 +1,0 @@
-文件：resources/properties/email.properties
-
-host=smtp.163.com
-port=587
-protocol=smtp
-username=XXX@XXX
-password=XXX
