@@ -25,4 +25,14 @@ public class ProductionProfileConfig implements ProfileConfigExt {
     public Properties activemqProperties() throws IOException {
         return loadProperties("activemq");
     }
+
+    @Bean
+    public Properties emailProperties() throws IOException {
+        return loadProperties("email");
+    }
+
+    @Bean
+    public Properties emailTemplatesProperties() throws IOException {
+        return loadProperties("emailTemplates");
+    }
 }

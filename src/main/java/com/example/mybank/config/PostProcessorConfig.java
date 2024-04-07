@@ -1,8 +1,8 @@
 package com.example.mybank.config;
 
 import com.example.mybank.annotation.FundTransfer;
-import com.example.mybank.common.MyPropertyEditorRegistrar;
 import com.example.mybank.common.MyApplicationContext;
+import com.example.mybank.common.MyPropertyEditorRegistrar;
 import com.example.mybank.postprocessor.ApplicationConfigurer;
 import com.example.mybank.postprocessor.DependencyResolutionBeanPostProcessor;
 import com.example.mybank.postprocessor.InstanceValidationBeanPostProcessor;
@@ -11,17 +11,11 @@ import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 import java.util.Set;
 
 @Configuration
 public class PostProcessorConfig {
-
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
 
     @Bean
     public static ApplicationConfigurer applicationConfigurer() {

@@ -1,4 +1,4 @@
-package com.example.mybank.config.jms;
+package com.example.mybank.config;
 
 import org.apache.activemq.broker.TransportConnector;
 import org.apache.activemq.command.ActiveMQQueue;

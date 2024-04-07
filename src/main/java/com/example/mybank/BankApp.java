@@ -26,7 +26,7 @@ public class BankApp {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker");
+        System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker, email");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();
@@ -63,7 +63,7 @@ public class BankApp {
                 .depositAmount(RANDOM.nextInt(1000, 10000))
                 .active("Y")
                 .creationDate(new Date())
-                .email("test_" + i + "@test.com")
+                .email("wuhzezvufd@cobmk.com") // 10min 邮箱 https://10minutemail.one/zh
                 .build()));
         fixedDepositService.getAllFds(5000, 30).forEach(System.out::println);
     }

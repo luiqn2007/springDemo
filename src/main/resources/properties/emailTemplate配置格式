@@ -1,0 +1,7 @@
+文件：resources/properties/emailTemplates.properties
+
+from=发件人
+received.subject=received 主题
+received.text=received 正文
+processed.subject=processed 主题
+processed.text=processed 正文
