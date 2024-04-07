@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Named("customerRegistrationService")
 @Qualifier("service")
-@Profile("spring-jdbc")
+@Profile({"jdbc", "hibernate"})
 public class CustomerRegistrationServiceImpl implements CustomerRegistrationService {
 
     @Inject

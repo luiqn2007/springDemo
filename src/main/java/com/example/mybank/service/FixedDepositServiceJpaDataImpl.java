@@ -25,13 +25,13 @@ public class FixedDepositServiceJpaDataImpl implements FixedDepositService {
     private JmsTemplate jmsTemplate;
 
     @Override
-    @Transactional("jmsTxManager")
+    @Transactional
     public FixedDepositDetails getFixedDepositDetails(int id) {
         return fixedDepositRepository.findById(id).orElseThrow();
     }
 
     @Override
-    @Transactional("jmsTxManager")
+    @Transactional
     public int createFixedDeposit(FixedDepositDetails fixedDepositDetails) {
 
         jmsTemplate.send("emailQueueDestination", session -> {
@@ -54,13 +54,13 @@ public class FixedDepositServiceJpaDataImpl implements FixedDepositService {
     }
 
     @Override
-    @Transactional("jmsTxManager")
+    @Transactional
     public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
         return fixedDepositRepository.findAllByDepositAmountGreaterThanEqual(minValue);
     }
 
     @Override
-    @Transactional("jmsTxManager")
+    @Transactional
     public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
         return fixedDepositRepository.findAllByDepositAmountAndTenure(amount, tenure);
     }

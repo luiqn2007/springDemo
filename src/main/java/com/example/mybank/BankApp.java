@@ -26,7 +26,7 @@ public class BankApp {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active", "dev, spring-data, jpa");
+        System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();
@@ -44,6 +44,7 @@ public class BankApp {
                 .build();
         bankAccountService.createAccount(accountDetails);
         LOGGER.info(accountDetails);
+        LOGGER.info(bankAccountService.getBankAccount(accountDetails.getAccountId()));
 
         int fixedDepositId = fixedDepositService.createFixedDeposit(FixedDepositDetails.builder()
                 .bankAccountId(accountDetails)

@@ -13,7 +13,7 @@ import java.util.Map;
 
 @Singleton
 @Named("customerRegistrationDao")
-@Profile("spring-jdbc")
+@Profile({"jdbc", "hibernate"})
 public class CustomerRegistrationDaoImpl implements CustomerRegistrationDao {
 
     private static final String SQL_INSERT_CUSTOMER_REGISTRATION =

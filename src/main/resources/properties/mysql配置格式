@@ -1,3 +1,6 @@
+文件：resources/properties/mysqlDB.properties 对应 dev 配置
+文件：resources/properties/mysqlDevDB.properties 对应 production 配置
+
 url=jdbc:mysql://<数据库地址>:<端口>/<数据库名>
 username=<登录用户名>
 password=<登录密码>
