@@ -1,5 +1,6 @@
 package com.example.mybank.repository;
 
+import com.example.mybank.domain.BankAccountDetails;
 import com.example.mybank.domain.FixedDepositDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,6 @@ public interface FixedDepositRepository extends JpaRepository<FixedDepositDetail
     List<FixedDepositDetails> findAllByDepositAmountGreaterThanEqual(int minValue);
 
     List<FixedDepositDetails> findAllByDepositAmountAndTenure(int depositAmount, int tenure);
+
+    List<FixedDepositDetails> findFixedDepositsByBankAccountId(BankAccountDetails bankAccountId);
 }
