@@ -42,6 +42,7 @@ public class FixedDepositServiceJpaDataImpl implements FixedDepositService {
         });
 
         int id = fixedDepositRepository.save(fixedDepositDetails).getId();
+        fixedDepositRepository.addInactiveFixedDeposit(fixedDepositDetails);
 
         jmsTemplate.send("aQueueDestination", session -> {
             ObjectMessage message = session.createObjectMessage();

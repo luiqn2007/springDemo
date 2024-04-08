@@ -14,9 +14,10 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Builder
 @ToString
+@Builder
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"creationDate", "depositAmount", "tenure", "active", "email"})
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "fixed_deposit_details")

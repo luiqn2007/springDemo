@@ -1,10 +1,14 @@
 package com.example.mybank.dao;
 
 import com.example.mybank.domain.FixedDepositDetails;
+import lombok.Getter;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Profile("hibernate")
 @Repository("fixedDepositDao")
@@ -12,6 +16,9 @@ public class FixedDepositHibernateDaoImpl implements FixedDepositDao {
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Getter
+    private final List<FixedDepositDetails> inactiveFds = new ArrayList<>();
 
     @Override
     public FixedDepositDetails getFixedDeposit(int id) {

@@ -4,6 +4,7 @@ import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.sql.FixedDepositDetailsByAmountAndTenureMappingSqlQuery;
 import com.example.mybank.sql.FixedDepositDetailsByAmountMappingSqlQuery;
 import com.example.mybank.sql.FixedDepositDetailsByIdMappingSqlQuery;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Profile("jdbc")
@@ -23,6 +26,9 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryById;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByAmount;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByAmountAndTenure;
+
+    @Getter
+    private final List<FixedDepositDetails> inactiveFds = new ArrayList<>();
 
     @Autowired
     private void setDataSource(DataSource dataSource) {

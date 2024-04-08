@@ -1,7 +1,10 @@
 package com.example.mybank.listener;
 
 import com.example.mybank.domain.FixedDepositDetails;
-import jakarta.jms.*;
+import jakarta.jms.JMSConnectionFactory;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.ObjectMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Profile;
@@ -21,17 +24,6 @@ public class MyBankJmsListeners {
         try {
             FixedDepositDetails fdDetails = (FixedDepositDetails) objectMessage.getObject();
             LOGGER.warn("Received Fixed Deposit Details : {}", fdDetails);
-        } catch (JMSException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @JmsListener(id = "emailMessageLogListener", destination = "emailQueueDestination")
-    public void onReceiveMessage(Message message) {
-        TextMessage textMessage = (TextMessage) message;
-        try {
-            String email = textMessage.getText();
-            LOGGER.warn("Received Email: {}", email);
         } catch (JMSException e) {
             throw new RuntimeException(e);
         }
