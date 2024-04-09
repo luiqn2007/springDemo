@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -90,5 +91,10 @@ public class FixedDepositServiceImpl implements FixedDepositService {
     @Transactional
     public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
         return fixedDepositDao.getAllFds(amount, tenure);
+    }
+
+    @Override
+    public List<FixedDepositDetails> findFixedDepositsByBankAccount(int bankAccountId) {
+        return fixedDepositDao.findFixedDepositsByBankAccount(bankAccountId);
     }
 }

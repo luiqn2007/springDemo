@@ -3,6 +3,7 @@ package com.example.mybank.dao;
 import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.sql.FixedDepositDetailsByAmountAndTenureMappingSqlQuery;
 import com.example.mybank.sql.FixedDepositDetailsByAmountMappingSqlQuery;
+import com.example.mybank.sql.FixedDepositDetailsByBankAccountIdMappingSqlQuery;
 import com.example.mybank.sql.FixedDepositDetailsByIdMappingSqlQuery;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
 
     private SimpleJdbcInsert jdbcInsert;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryById;
+    private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByBankAccountId;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByAmount;
     private MappingSqlQuery<FixedDepositDetails> mappingSqlQueryByAmountAndTenure;
 
@@ -36,6 +38,7 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
                 .withTableName("fixed_deposit_details")
                 .usingGeneratedKeyColumns("FIXED_DEPOSIT_ID");
         mappingSqlQueryById = new FixedDepositDetailsByIdMappingSqlQuery(dataSource);
+        mappingSqlQueryByBankAccountId = new FixedDepositDetailsByBankAccountIdMappingSqlQuery(dataSource);
         mappingSqlQueryByAmount = new FixedDepositDetailsByAmountMappingSqlQuery(dataSource);
         mappingSqlQueryByAmountAndTenure = new FixedDepositDetailsByAmountAndTenureMappingSqlQuery(dataSource);
     }
@@ -64,5 +67,10 @@ public class FixedDepositJdbcDaoImpl implements FixedDepositDao {
     @Override
     public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
         return mappingSqlQueryByAmountAndTenure.execute(amount, tenure);
+    }
+
+    @Override
+    public List<FixedDepositDetails> findFixedDepositsByBankAccount(int bankAccountId) {
+        return mappingSqlQueryByBankAccountId.execute(bankAccountId);
     }
 }

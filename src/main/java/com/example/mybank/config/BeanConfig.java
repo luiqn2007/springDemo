@@ -12,7 +12,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {
         "com.example.mybank.common", "com.example.mybank.controller", "com.example.mybank.dao", "com.example.mybank.event",
-        "com.example.mybank.service", "com.example.mybank.listener", "com.example.mybank.job"})
+        "com.example.mybank.service", "com.example.mybank.listener", "com.example.mybank.job", "com.example.mybank.aspects"})
 public class BeanConfig {
 
     @Bean

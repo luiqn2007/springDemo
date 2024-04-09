@@ -31,4 +31,9 @@ public class BankAccountServiceImpl implements BankAccountService {
     public void subtractAmount(int bankAccountId, float amount) {
         bankAccountDao.subtractAmount(bankAccountId, amount);
     }
+
+    @Override
+    public boolean isDuplicateAccount(int accountId) {
+        return bankAccountDao.isDuplicateAccount(accountId);
+    }
 }

@@ -9,4 +9,6 @@ public interface BankAccountDao {
     BankAccountDetails getBankAccount(int bankAccountId);
 
     void subtractAmount(int bankAccountId, float amount);
+
+    boolean isDuplicateAccount(int bankAccountId);
 }

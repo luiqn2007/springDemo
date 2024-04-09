@@ -20,6 +20,8 @@ public class BankAccountJdbcDaoImpl implements BankAccountDao {
 
     private static final String SQL_SUBTRACT_AMOUNT =
             "UPDATE bank_account_details SET BALANCE_AMOUNT = BALANCE_AMOUNT - :amount WHERE ACCOUNT_ID = :accountId";
+    private static final String SQL_GET_ACCOUNT_COUNT =
+            "SELECT COUNT(*) FROM bank_account_details where ACCOUNT_ID = :accountId";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -55,6 +57,12 @@ public class BankAccountJdbcDaoImpl implements BankAccountDao {
         params.put("amount", amount);
         params.put("accountId", bankAccountId);
         jdbcTemplate.update(SQL_SUBTRACT_AMOUNT, params);
+    }
+
+    @Override
+    public boolean isDuplicateAccount(int bankAccountId) {
+        Map<String, Integer> params = Map.of("accountId", bankAccountId);
+        return jdbcTemplate.queryForObject(SQL_GET_ACCOUNT_COUNT, params, Integer.class) > 0;
     }
 }
 

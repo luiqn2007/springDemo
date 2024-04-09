@@ -33,4 +33,9 @@ public class BankAccountServiceQuerydslImpl implements BankAccountService {
         accountDetails.setBalanceAmount(accountDetails.getBalanceAmount() - amount);
         bankAccountRepository.save(accountDetails);
     }
+
+    @Override
+    public boolean isDuplicateAccount(int accountId) {
+        return bankAccountRepository.findById(accountId).isPresent();
+    }
 }

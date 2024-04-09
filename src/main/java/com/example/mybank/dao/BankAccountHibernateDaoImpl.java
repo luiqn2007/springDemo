@@ -35,4 +35,12 @@ public class BankAccountHibernateDaoImpl implements BankAccountDao {
         bankAccountDetails.setBalanceAmount(bankAccountDetails.getBalanceAmount() - amount);
         sessionFactory.getCurrentSession().merge(bankAccountDetails);
     }
+
+    @Override
+    public boolean isDuplicateAccount(int bankAccountId) {
+        String hql = "from BankAccountDetails where BankAccountDetails.accountId = " + bankAccountId;
+        return sessionFactory.getCurrentSession()
+                .createQuery(hql, BankAccountDetails.class)
+                .uniqueResult() != null;
+    }
 }

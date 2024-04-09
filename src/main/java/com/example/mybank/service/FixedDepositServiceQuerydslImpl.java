@@ -1,5 +1,6 @@
 package com.example.mybank.service;
 
+import com.example.mybank.domain.BankAccountDetails;
 import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.domain.QFixedDepositDetails;
 import com.example.mybank.repository.FixedDepositQuerydslRepository;
@@ -9,6 +10,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("fixedDepositService")
 @Profile("querydsl")
@@ -45,5 +48,10 @@ public class FixedDepositServiceQuerydslImpl implements FixedDepositService {
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("id");
         Example<FixedDepositDetails> fdExample = Example.of(example, matcher);
         return fixedDepositRepository.findAll(fdExample);
+    }
+
+    @Override
+    public List<FixedDepositDetails> findFixedDepositsByBankAccount(int bankAccountId) {
+        return fixedDepositRepository.findFixedDepositDetailsByBankAccountId(BankAccountDetails.builder().accountId(bankAccountId).build());
     }
 }
