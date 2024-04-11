@@ -11,7 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.web.servlet.context.XmlServletWebServerApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 import java.util.Properties;
@@ -21,6 +23,7 @@ import java.util.random.RandomGeneratorFactory;
 import java.util.stream.IntStream;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+
 public class BankApp {
 
     private static final Random RANDOM = new Random(System.currentTimeMillis());
@@ -29,16 +32,16 @@ public class BankApp {
     private static Properties testProperties;
 
     public static void main(String[] args) {
+        runWeb();
+    }
+
+    private static void runSql() {
         System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker, email");
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.scan("com.example.mybank.config");
         context.refresh();
         testProperties = context.getBean("testProperties", Properties.class);
 
-        runSql(context);
-    }
-
-    private static void runSql(AnnotationConfigApplicationContext context) {
         BankAccountService bankAccountService = context.getBean(BankAccountService.class);
         FixedDepositService fixedDepositService = context.getBean(FixedDepositService.class);
 
@@ -73,7 +76,13 @@ public class BankApp {
         fixedDepositService.getAllFds(5000, 30).forEach(System.out::println);
     }
 
-    private static void runNoSql(AnnotationConfigApplicationContext context) {
+    private static void runNoSql() {
+        System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker, email");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.scan("com.example.mybank.config");
+        context.refresh();
+        testProperties = context.getBean("testProperties", Properties.class);
+
         BankAccountServiceMongoDBImpl bankAccountService = context.getBean(BankAccountServiceMongoDBImpl.class);
 
         RandomGeneratorFactory<RandomGenerator> rf = RandomGeneratorFactory.of("L128X256MixRandom");
@@ -92,5 +101,10 @@ public class BankApp {
         bankAccountService.createAccount(bankAccountDetails);
         LOGGER.info(bankAccountService.getBankAccount(bankAccountDetails.getAccountId()));
         bankAccountService.getHighValueFds(10000).forEach(LOGGER::info);
+    }
+
+    private static void runWeb() {
+        WebApplicationContext context =
+                new XmlServletWebServerApplicationContext("../webapp/WEB-INF/spring/web.xml");
     }
 }
