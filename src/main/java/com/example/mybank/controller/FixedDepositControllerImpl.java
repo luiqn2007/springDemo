@@ -1,18 +1,21 @@
 package com.example.mybank.controller;
 
-import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.service.FixedDepositService;
 import jakarta.annotation.Resource;
-import jakarta.inject.Named;
-import jakarta.inject.Singleton;
-import lombok.Getter;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 @Profile("!mongodb")
-@Controller("fixedDepositController")
+@Controller("fixedDeposits")
+@RequestMapping("/fixedDeposit")
 public class FixedDepositControllerImpl implements FixedDepositController {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -20,22 +23,33 @@ public class FixedDepositControllerImpl implements FixedDepositController {
     @Resource(name = "fixedDepositService")
     private FixedDepositService fixedDepositService;
 
-    public FixedDepositControllerImpl() {
-        LOGGER.info("initializing");
-    }
-
-    public void setFixedDepositService(FixedDepositService fixedDepositService) {
-        LOGGER.info("Setting fixedDepositService property");
-        this.fixedDepositService = fixedDepositService;
+    @Override
+    public ModelAndView listFixedDeposits() {
+        return null;
     }
 
     @Override
-    public FixedDepositDetails get() {
-        return fixedDepositService.getFixedDepositDetails(1);
+    public ModelAndView showOpenFixedDepositForm() {
+        return null;
     }
 
     @Override
-    public int submit(FixedDepositDetails fixedDepositDetails) {
-        return fixedDepositService.createFixedDeposit(fixedDepositDetails);
+    public ModelAndView openFixedDeposit(Map<String, String> params) {
+        return null;
+    }
+
+    @Override
+    public ModelAndView editDeposit(MultiValueMap<String, String> params) {
+        return null;
+    }
+
+    @Override
+    public ModelAndView closeFixedDeposit(int fdId) {
+        return null;
+    }
+
+    @Override
+    public ModelAndView viewFixedDepositDetails(HttpServletRequest request) {
+        return null;
     }
 }

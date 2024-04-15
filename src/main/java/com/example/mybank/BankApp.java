@@ -105,6 +105,6 @@ public class BankApp {
 
     private static void runWeb() {
         WebApplicationContext context =
-                new XmlServletWebServerApplicationContext("../webapp/WEB-INF/spring/web.xml");
+                new XmlServletWebServerApplicationContext("webapp/WEB-INF/web.xml");
     }
 }

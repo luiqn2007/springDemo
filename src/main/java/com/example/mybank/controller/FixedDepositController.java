@@ -1,13 +1,22 @@
 package com.example.mybank.controller;
 
-import com.example.mybank.domain.FixedDepositDetails;
-import com.example.mybank.service.FixedDepositService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 public interface FixedDepositController {
 
-    void setFixedDepositService(FixedDepositService fixedDepositService);
+    ModelAndView listFixedDeposits();
 
-    FixedDepositDetails get();
+    ModelAndView showOpenFixedDepositForm();
 
-    int submit(FixedDepositDetails fixedDepositDetails);
+    ModelAndView openFixedDeposit(Map<String, String> params);
+
+    ModelAndView editDeposit(MultiValueMap<String, String> params);
+
+    ModelAndView closeFixedDeposit(int fdId);
+
+    ModelAndView viewFixedDepositDetails(HttpServletRequest request);
 }
