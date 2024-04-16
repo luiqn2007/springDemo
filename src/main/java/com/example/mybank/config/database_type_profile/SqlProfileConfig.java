@@ -1,6 +1,5 @@
 package com.example.mybank.config.database_type_profile;
 
-import com.mysema.commons.lang.Pair;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +42,7 @@ public class SqlProfileConfig {
     }
 
     @Bean
+    @Profile({"jdbc", "hibernate"})
     public TransactionTemplate transactionTemplate(@Qualifier("transactionManager") PlatformTransactionManager platformTransactionManager) {
         TransactionTemplate transactionTemplate = new TransactionTemplate();
         transactionTemplate.setTransactionManager(platformTransactionManager);

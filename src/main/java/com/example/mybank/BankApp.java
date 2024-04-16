@@ -9,11 +9,10 @@ import com.example.mybank.service.BankAccountServiceMongoDBImpl;
 import com.example.mybank.service.FixedDepositService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.web.servlet.context.XmlServletWebServerApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Date;
 import java.util.Properties;
@@ -22,8 +21,7 @@ import java.util.random.RandomGenerator;
 import java.util.random.RandomGeneratorFactory;
 import java.util.stream.IntStream;
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class, scanBasePackages = "com.example.mybank.config")
 public class BankApp {
 
     private static final Random RANDOM = new Random(System.currentTimeMillis());
@@ -104,7 +102,7 @@ public class BankApp {
     }
 
     private static void runWeb() {
-        WebApplicationContext context =
-                new XmlServletWebServerApplicationContext("webapp/WEB-INF/web.xml");
+        System.setProperty("spring.profiles.active", "dev, jpa, jms, activemq-broker, email");
+        SpringApplication.run(BankApp.class);
     }
 }
