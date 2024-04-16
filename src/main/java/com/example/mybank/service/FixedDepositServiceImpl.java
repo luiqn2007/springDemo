@@ -97,4 +97,9 @@ public class FixedDepositServiceImpl implements FixedDepositService {
     public List<FixedDepositDetails> findFixedDepositsByBankAccount(int bankAccountId) {
         return fixedDepositDao.findFixedDepositsByBankAccount(bankAccountId);
     }
+
+    @Override
+    public List<FixedDepositDetails> getFixedDeposits() {
+        return fixedDepositDao.getFixedDeposits();
+    }
 }

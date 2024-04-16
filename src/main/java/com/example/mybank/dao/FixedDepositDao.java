@@ -19,4 +19,6 @@ public interface FixedDepositDao {
     Iterable<FixedDepositDetails> getAllFds(int amount, int tenure);
 
     List<FixedDepositDetails> findFixedDepositsByBankAccount(int bankAccountId);
+
+    List<FixedDepositDetails> getFixedDeposits();
 }

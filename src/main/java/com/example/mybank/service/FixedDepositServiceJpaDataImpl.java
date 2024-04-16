@@ -81,6 +81,11 @@ public class FixedDepositServiceJpaDataImpl implements FixedDepositService {
                 .build());
     }
 
+    @Override
+    public List<FixedDepositDetails> getFixedDeposits() {
+        return fixedDepositRepository.findAll();
+    }
+
     @Cacheable(cacheNames = "fixedDeposit", key = "#fixedDepositDetailsId")
     public FixedDepositDetails getFixedDepositDetailsFromCache(int fixedDepositDetailsId) {
         return fixedDepositRepository.findById(fixedDepositDetailsId).orElseThrow();

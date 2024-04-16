@@ -54,4 +54,9 @@ public class FixedDepositServiceQuerydslImpl implements FixedDepositService {
     public List<FixedDepositDetails> findFixedDepositsByBankAccount(int bankAccountId) {
         return fixedDepositRepository.findFixedDepositDetailsByBankAccountId(BankAccountDetails.builder().accountId(bankAccountId).build());
     }
+
+    @Override
+    public List<FixedDepositDetails> getFixedDeposits() {
+        return fixedDepositRepository.findAll();
+    }
 }

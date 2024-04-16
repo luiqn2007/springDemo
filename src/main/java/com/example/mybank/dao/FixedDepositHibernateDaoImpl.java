@@ -60,4 +60,10 @@ public class FixedDepositHibernateDaoImpl implements FixedDepositDao {
                 .setParameter("bankAccountId", bankAccountId)
                 .getResultList();
     }
+
+    @Override
+    public List<FixedDepositDetails> getFixedDeposits() {
+        String hql = "from FixedDepositDetails";
+        return sessionFactory.getCurrentSession().createQuery(hql, FixedDepositDetails.class).getResultList();
+    }
 }

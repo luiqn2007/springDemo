@@ -16,7 +16,9 @@ public interface FixedDepositController {
 
     ModelAndView editDeposit(MultiValueMap<String, String> params);
 
-    ModelAndView closeFixedDeposit(int fdId);
+    String closeFixedDeposit(int fdId);
 
     ModelAndView viewFixedDepositDetails(HttpServletRequest request);
+
+    String handleException(Exception ex);
 }

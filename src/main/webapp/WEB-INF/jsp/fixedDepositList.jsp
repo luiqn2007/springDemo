@@ -22,7 +22,7 @@
     </style>
 </head>
 <body>
-<form name="fixedDepositList" method="post" action="${pageContext.request.contextPath}/fixedDeposit/list}">
+<form name="fixedDepositList" method="post" action="${pageContext.request.contextPath}/fixedDeposit?fdAction=createFDForm}">
     <table align="left" style="padding-left: 300px;">
         <tr>
             <td style="font-family: Arial, serif; font-size: 16px; font-weight: bold">Fixed deposit list</td>
