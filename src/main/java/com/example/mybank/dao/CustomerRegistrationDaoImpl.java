@@ -4,7 +4,6 @@ import com.example.mybank.domain.CustomerRegistrationDetails;
 import jakarta.inject.Named;
 import jakarta.inject.Singleton;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -13,7 +12,6 @@ import java.util.Map;
 
 @Singleton
 @Named("customerRegistrationDao")
-@Profile({"jdbc", "hibernate"})
 public class CustomerRegistrationDaoImpl implements CustomerRegistrationDao {
 
     private static final String SQL_INSERT_CUSTOMER_REGISTRATION =

@@ -5,11 +5,9 @@ import com.example.mybank.domain.CustomerRegistrationDetails;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Profile;
 
 @Named("customerRegistrationService")
 @Qualifier("service")
-@Profile({"jdbc", "hibernate"})
 public class CustomerRegistrationServiceImpl implements CustomerRegistrationService {
 
     @Inject

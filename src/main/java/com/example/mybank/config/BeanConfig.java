@@ -2,7 +2,6 @@ package com.example.mybank.config;
 
 import com.example.mybank.annotation.FundTransfer;
 import com.example.mybank.common.MyPropertyEditorRegistrar;
-import com.example.mybank.postprocessor.ApplicationConfigurer;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
@@ -38,13 +37,6 @@ public class BeanConfig {
             properties.load(inputStream);
         }
         return properties;
-    }
-
-    @Bean
-    public static ApplicationConfigurer applicationConfigurer() {
-        ApplicationConfigurer configurer = new ApplicationConfigurer();
-        configurer.setOrder(0);
-        return configurer;
     }
 
     @Bean
