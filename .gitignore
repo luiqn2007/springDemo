@@ -39,3 +39,4 @@ out/
 /ui/
 
 /activemq-data/
+/src/main/resources/private.properties
