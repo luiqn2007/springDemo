@@ -1,10 +1,10 @@
 package com.example.mybank.config;
 
 import com.example.mybank.annotation.FundTransfer;
-import com.example.mybank.common.MyPropertyEditorRegistrar;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +12,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Set;
 
@@ -47,8 +49,12 @@ public class BeanConfig {
     }
 
     @Bean
-    public static CustomEditorConfigurer customEditorConfigurer(MyPropertyEditorRegistrar registrar) {
+    public static CustomEditorConfigurer customEditorConfigurer() {
         CustomEditorConfigurer configurer = new CustomEditorConfigurer();
+        PropertyEditorRegistrar registrar = registry -> {
+            CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("dd-MM-yyyy"), false);
+            registry.registerCustomEditor(Date.class, dateEditor);
+        };
         configurer.setPropertyEditorRegistrars(new PropertyEditorRegistrar[]{registrar});
         return configurer;
     }
