@@ -1,14 +1,14 @@
 package com.example.mybank.config;
 
+import com.example.mybank.webapp.HelloWebConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 public class WebConfig {
-    
+
     @Bean
-    public InternalResourceViewResolver viewResolver() {
-        return new InternalResourceViewResolver("/jsp/", ".jsp");
+    public HelloWebConfigurer helloWebConfigurer() {
+        return new HelloWebConfigurer();
     }
 }

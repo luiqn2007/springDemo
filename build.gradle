@@ -82,14 +82,20 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.activemq/activemq-kahadb-store
     implementation group: 'org.apache.activemq', name: 'activemq-kahadb-store', version: '6.1.0'
 
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+
+    // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+    // https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
+
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor "org.projectlombok:lombok:${lombok_version}"
     compileOnly "org.projectlombok:lombok:${lombok_version}"
     testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
     testCompileOnly "org.projectlombok:lombok:${lombok_version}"
-
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    implementation 'org.apache.commons:commons-lang3:3.14.0'
 
     annotationProcessor group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.1.0'
     annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: '5.1.0', classifier: 'jakarta'
