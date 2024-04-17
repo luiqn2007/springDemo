@@ -1,11 +1,9 @@
 package com.example.mybank.controller;
 
 import com.example.mybank.domain.Request;
-import jakarta.inject.Named;
-import jakarta.inject.Singleton;
+import org.springframework.stereotype.Controller;
 
-@Singleton
-@Named("userRequestController")
+@Controller("userRequestController")
 public class UserRequestControllerImpl implements UserRequestController {
 
     @Override

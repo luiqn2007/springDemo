@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Profile("!mongodb")
 @Controller("fixedDeposits")
 @RequestMapping("/fixedDeposit")
 public class FixedDepositControllerImpl implements FixedDepositController {

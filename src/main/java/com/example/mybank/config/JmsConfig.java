@@ -20,11 +20,9 @@ import java.util.Properties;
 
 @Configuration
 @EnableJms
-@Profile("jms")
 public class JmsConfig {
 
     @Bean
-    @Profile("activemq-broker")
     public XBeanBrokerService activeMQBroker() throws Exception {
         XBeanBrokerService broker = new XBeanBrokerService();
         TransportConnector connector = new TransportConnector();
@@ -34,7 +32,6 @@ public class JmsConfig {
     }
 
     @Bean
-    @DependsOn("activeMQBroker")
     public ActiveMQConnectionFactory jmsFactory(@Qualifier("configProperties") Properties properties) {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
         factory.setBrokerURL(properties.getProperty("activemq.url"));

@@ -15,6 +15,12 @@ public class BankAccountRepositoryImpl implements BankAccountRepositoryCustom {
         if (bankAccount.getBalanceAmount() < amount)
             throw new IllegalArgumentException("Not enough money on account");
         bankAccount.setBalanceAmount(bankAccount.getBalanceAmount() - amount);
-        entityManager.merge(bankAccount);
+        entityManager.persist(bankAccount);
+    }
+
+    @Override
+    public boolean isDuplicateAccount(int bankAccountId) {
+        String hql = "select count(*) from BankAccountDetails where BankAccountDetails.accountId = " + bankAccountId;
+        return (Integer) entityManager.createQuery(hql).getSingleResult() > 0;
     }
 }

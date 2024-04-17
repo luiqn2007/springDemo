@@ -26,8 +26,8 @@ public class FixedDepositProcessorJob {
 
     @Scheduled(fixedRate = 1000)
     public void onSendProcessedEmail() {
-        System.out.println("onSendProcessedEmail");
         for (FixedDepositDetails inactiveFd : fixedDepositRepository.getInactiveFds()) {
+            System.out.println("Send email to " + inactiveFd.getEmail());
             mailSender.send(mimeMessage -> {
                 mimeMessage.setFrom(processedMailMessage.getFrom());
                 mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(inactiveFd.getEmail()));

@@ -1,7 +1,8 @@
 package com.example.mybank.repository;
 
 import com.example.mybank.domain.FixedDepositDetails;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +11,8 @@ public class FixedDepositRepositoryImpl implements FixedDepositRepositoryCustom 
 
     private final List<FixedDepositDetails> inactiveFds = new ArrayList<>();
 
-    @Autowired
-    private FixedDepositRepository fixedDepositRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public synchronized List<FixedDepositDetails> getInactiveFds() {
@@ -26,7 +27,7 @@ public class FixedDepositRepositoryImpl implements FixedDepositRepositoryCustom 
     @Override
     public synchronized void setFixedDepositAsActive(FixedDepositDetails fd) {
         fd.setActive("Y");
-        fixedDepositRepository.save(fd);
+        entityManager.persist(fd);
         inactiveFds.remove(fd);
     }
 }
