@@ -1,0 +1,10 @@
+# email
+spring.mail.host=smtp.163.com
+spring.mail.port=465
+spring.mail.protocol=stmps
+spring.mail.username=用户名
+spring.mail.password=授权码
+
+# mongodb
+spring.data.mongodb.uri=MongoDB 连接地址
+spring.data.mongodb.database=MongoDB 数据库
