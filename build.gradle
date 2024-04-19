@@ -87,12 +87,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation 'org.apache.commons:commons-lang3:3.14.0'
 
-    // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-
-    // https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
-    implementation group: 'jakarta.servlet.jsp.jstl', name: 'jakarta.servlet.jsp.jstl-api', version: '3.0.0'
-
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     annotationProcessor "org.projectlombok:lombok:${lombok_version}"
     compileOnly "org.projectlombok:lombok:${lombok_version}"
