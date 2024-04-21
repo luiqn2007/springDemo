@@ -23,29 +23,6 @@ import java.util.Properties;
 public class JmsConfig {
 
     @Bean
-    public XBeanBrokerService activeMQBroker() throws Exception {
-        XBeanBrokerService broker = new XBeanBrokerService();
-        TransportConnector connector = new TransportConnector();
-        connector.setUri(URI.create("tcp://localhost:61617"));
-        broker.setTransportConnectors(List.of(connector));
-        return broker;
-    }
-
-    @Bean
-    public ActiveMQConnectionFactory jmsFactory(@Qualifier("configProperties") Properties properties) {
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-        factory.setBrokerURL(properties.getProperty("activemq.url"));
-        factory.setTrustedPackages(Arrays.stream(properties.getProperty("activemq.trustedPackages").split(",")).toList());
-        if (properties.containsKey("activemq.username")) {
-            factory.setUserName(properties.getProperty("username"));
-        }
-        if (properties.containsKey("activemq.password")) {
-            factory.setPassword(properties.getProperty("password"));
-        }
-        return factory;
-    }
-
-    @Bean
     public CachingConnectionFactory cachingConnectionFactory(ActiveMQConnectionFactory connectionFactory) {
         return new CachingConnectionFactory(connectionFactory);
     }

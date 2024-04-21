@@ -5,12 +5,13 @@ import com.example.thymeleaf.domain.Product;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
 public class ProductRepository {
 
-    private final Product[] prod = new Product[31];
+    private final Product[] prod = new Product[30];
 
     public ProductRepository() {
         prod[0] = new Product(0, "Fresh Sweet Basil", true, new BigDecimal("4.99"));
@@ -68,7 +69,7 @@ public class ProductRepository {
     }
 
     public List<Product> findAll() {
-        return List.of(prod);
+        return Arrays.asList(prod);
     }
 
     public Product findById(int id) {

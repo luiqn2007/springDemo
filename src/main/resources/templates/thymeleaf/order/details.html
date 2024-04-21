@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../../static/thymeleaf/thymeleaf.css"
+          data-th-href="@{/thymeleaf/thymeleaf.css}"/>
+</head>
+<body>
+<h1>Order details</h1>
+<div>
+    <p><b>Code:</b> <span th:text="${order.id()}">99</span></p>
+    <p><b>Date:</b> <span th:text="${#calendars.format(order.date(),'dd MMM yyyy')}">13 jan 2011</span></p>
+</div>
+<h2>Customer</h2>
+<div>
+    <p><b>Name:</b> <span th:text="${order.customer().name()}">Frederic Tomato</span></p>
+    <p><b>Since:</b> <span th:text="${#calendars.format(order.customer().customerSince(),'dd MMM yyyy')}">13 jan 2011</span></p>
+</div>
+<h2>Products</h2>
+<table>
+    <tr>
+        <th>PRODUCT</th>
+        <th>AMOUNT</th>
+        <th>PURCHASE PRICE</th>
+    </tr>
+    <tr th:each="ol,row : ${order.orderLines()}" th:class="${row.odd}? 'odd'">
+        <td th:text="${ol.product().name()}">Strawberries</td>
+        <td th:text="${ol.amount()}" class="number">3</td>
+        <td th:text="${ol.purchasePrice()}" class="number">23.32</td>
+    </tr>
+</table>
+<div><b>TOTAL:</b> <span th:text="${#aggregates.sum(order.orderLines().![purchasePrice() * amount()])}">35.23</span></div>
+<p><a href="list.html" th:href="@{/thymeleaf/order/list}">Return to order list</a></p>
+</body>
+</html>

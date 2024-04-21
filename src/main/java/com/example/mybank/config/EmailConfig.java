@@ -13,23 +13,7 @@ import java.util.Properties;
 public class EmailConfig {
 
     @Bean
-    public JavaMailSender mailSender(@Qualifier("configProperties") Properties properties) {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost(properties.getProperty("email.host"));
-        mailSender.setProtocol(properties.getProperty("email.protocol"));
-        mailSender.setPort(Integer.parseInt(properties.getProperty("email.port")));
-        mailSender.setUsername(properties.getProperty("email.username"));
-        mailSender.setPassword(properties.getProperty("email.password"));
-
-        Properties javaMailProperties = new Properties();
-        javaMailProperties.setProperty("mail.smtp.auth", "true");
-        javaMailProperties.setProperty("mail.smtp.starttls.enable", "true");
-        mailSender.setJavaMailProperties(javaMailProperties);
-        return mailSender;
-    }
-
-    @Bean
-    public SimpleMailMessage requestReceivedTemplate(@Qualifier("configProperties") Properties properties) {
+    public SimpleMailMessage requestReceivedTemplate(@Qualifier("testProperties") Properties properties) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(properties.getProperty("email.from"));
         message.setSubject(properties.getProperty("email.received.subject"));
@@ -38,7 +22,7 @@ public class EmailConfig {
     }
 
     @Bean
-    public SimpleMailMessage processedReceivedTemplate(@Qualifier("configProperties") Properties properties) {
+    public SimpleMailMessage processedReceivedTemplate(@Qualifier("testProperties") Properties properties) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(properties.getProperty("email.from"));
         message.setSubject(properties.getProperty("email.processed.subject"));

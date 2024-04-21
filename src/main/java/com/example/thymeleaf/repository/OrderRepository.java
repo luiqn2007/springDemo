@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.thymeleaf.util.DateUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -55,7 +56,7 @@ public class OrderRepository {
     }
 
     public List<Order> findAll() {
-        return List.of(byId);
+        return Arrays.asList(byId);
     }
 
     public Order findById(int id) {

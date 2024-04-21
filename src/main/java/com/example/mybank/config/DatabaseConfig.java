@@ -23,16 +23,6 @@ import java.util.Properties;
 @EnableJpaRepositories("com.example.mybank.repository")
 public class DatabaseConfig {
 
-    @Bean(destroyMethod = "")
-    public DataSource dataSource(@Qualifier("configProperties") Properties properties) throws SQLException {
-        Properties properties1 = new Properties();
-        properties1.setProperty("url", properties.getProperty("mysql.url"));
-        properties1.setProperty("username", properties.getProperty("mysql.username"));
-        properties1.setProperty("password", properties.getProperty("mysql.password"));
-        properties1.setProperty("driverClassName", properties.getProperty("mysql.driverClassName"));
-        return BasicDataSourceFactory.createDataSource(properties1);
-    }
-
     // jdbc
     @Bean
     public NamedParameterJdbcTemplate namedJdbcTemplate(DataSource dataSource) {

@@ -22,16 +22,6 @@ import java.util.Set;
 public class BeanConfig {
 
     @Bean
-    public Properties configProperties() throws IOException {
-        Properties properties = new Properties();
-        ClassPathResource resource = new ClassPathResource("properties/config.properties");
-        try (InputStream inputStream = resource.getInputStream()) {
-            properties.load(inputStream);
-        }
-        return properties;
-    }
-
-    @Bean
     public Properties testProperties() throws IOException {
         Properties properties = new Properties();
         ClassPathResource resource = new ClassPathResource("properties/test.properties");

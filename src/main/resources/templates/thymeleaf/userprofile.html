@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../../static/thymeleaf/thymeleaf.css"
+          data-th-href="@{/thymeleaf/thymeleaf.css}"/>
+    <title>Good Thymes Virtual Grocery</title>
+</head>
+<body>
+<h1>User profile</h1>
+<div th:object="${session.user}">
+    <p>Name: <span th:text="*{firstName}">Sebastian</span>.</p>
+    <p>Surname: <span th:text="*{lastName}">Pepper</span>.</p>
+    <p>Nationality: <span th:text="*{nationality}">Saturn</span>.</p>
+    <p>Age: <span th:text="*{age}?: '(no age specified)'">27</span>.</p>
+</div>
+<p><a href="home.html" th:href="@{/thymeleaf/}">Return to home</a></p>
+<div th:replace="~{fragments::footer}"></div>
+</body>
+</html>
+

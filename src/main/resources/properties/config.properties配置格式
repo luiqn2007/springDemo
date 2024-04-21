@@ -1,25 +1,17 @@
 # mysql
-mysql.url=jdbc:mysql://<url>:<port>/<database>
-mysql.username=<username>
-mysql.password=<password>
-mysql.driverClassName=<Driver>
+spring.datasource.url=jdbc:mysql://<url>:<port>/<database>
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+spring.datasource.driverClassName=<Driver>
 # mongodb
-mongodb.url=<url>
-mongodb.database=<database>
+spring.data.mongodb.uri=mongodb://<username>:<password>@<host>:<port>/<database>
+spring.data.mongodb.database=<database>
 # activemq
-activemq.url=<url>
-activemq.trustedPackages=<array: packages>
-activemq.username=<username, 可选>
-activemq.password=<password, 可选>
+spring.activemq.broker-url=<url>
+spring.activemq.packages.trusted=<array: packages>
 # email
-email.host=<host>
-email.port=<port>
-email.protocol=<protocol>
-email.username=<username>
-email.password=<password>
-# email template
-email.from=<sender email>
-email.received.subject=<received title>
-email.received.text=<received content>
-email.processed.subject=<processed title>
-email.processed.text=<processed content>
+spring.mail.host=<host>
+spring.mail.port=<port>
+spring.mail.protocol=<protocol>
+spring.mail.username=<username>
+spring.mail.password=<password>
