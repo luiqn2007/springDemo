@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fixed Deposit List</title>
+    <link rel="stylesheet" href="../static/fixedDepositList.css" data-th-href="@{/fixedDepositList.css}">
+</head>
+<body>
+<form name="fixedDepositList" method="post" action="/fixedDeposit?fdAction=createFDForm">
+    <table class="outer">
+        <tr>
+            <td class="title">Fixed deposit list</td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <table class="border">
+                    <tr>
+                        <td class="td">ID</td>
+                        <td class="td">Amount</td>
+                        <td class="td">Tenure</td>
+                        <td class="td">Email</td>
+                        <td class="td">Action</td>
+                    </tr>
+                    <th:block data-th-each="fixedDeposit : ${fdList}">
+                        <tr class="border">
+                            <td class="td" data-th-text="${fixedDeposit.id}">0</td>
+                            <td class="td" data-th-text="${fixedDeposit.depositAmount}">10000</td>
+                            <td class="td" data-th-text="${fixedDeposit.tenure}">6</td>
+                            <td class="td" data-th-text="${fixedDeposit.email}">example@email.com</td>
+                        </tr>
+                    </th:block>
+                    <tr>
+                        <td><input type="submit" value="Create new Fixed Deposit"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

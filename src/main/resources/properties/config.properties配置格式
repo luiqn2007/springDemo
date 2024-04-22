@@ -1,17 +1,8 @@
 # mysql
-spring.datasource.url=jdbc:mysql://<url>:<port>/<database>
 spring.datasource.username=<username>
 spring.datasource.password=<password>
-spring.datasource.driverClassName=<Driver>
-# mongodb
-spring.data.mongodb.uri=mongodb://<username>:<password>@<host>:<port>/<database>
-spring.data.mongodb.database=<database>
 # activemq
 spring.activemq.broker-url=<url>
-spring.activemq.packages.trusted=<array: packages>
 # email
-spring.mail.host=<host>
-spring.mail.port=<port>
-spring.mail.protocol=<protocol>
 spring.mail.username=<username>
 spring.mail.password=<password>

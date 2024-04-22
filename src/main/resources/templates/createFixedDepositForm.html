@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Fixed Deposit</title>
+    <link rel="stylesheet" href="../static/createFixedDepositForm.css" data-th-href="@{/createFixedDepositForm.css}">
+</head>
+<body>
+<form name="createFixedDepositForm" method="post" action="/fixedDeposit?fdAction=create">
+    <table>
+        <tr>
+            <td>Open fixed deposit</td>
+        </tr>
+        <tr>
+            <td>
+                <table class="border">
+                    <tr>
+                        <td class="td"><b>Amount (in USD):</b></td>
+                        <td class="td">
+                            <input type="text" name="depositAmount" value="100000"
+                                   data-th-value="${error.depositAmount} ?: ${fixedDepositDetails.depositAmount}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td"><b>Tenure (in months):</b></td>
+                        <td class="td">
+                            <input type="text" name="tenure" value="6"
+                                   data-th-value="${error.tenure} ?: ${fixedDepositDetails.tenure}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td"><b>Email:</b></td>
+                        <td class="td">
+                            <input type="text" name="email" value="example@email.com"
+                                   data-th-value="${error.email} ?: ${fixedDepositDetails.email}">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="submit" value="Save">
+                            <a href="fixedDepositList.html" data-th-href="@{/fixedDeposit/list}"><b>Go Back</b></a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

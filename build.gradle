@@ -26,19 +26,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     runtimeOnly 'com.mysql:mysql-connector-j'
-
-    // https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync
-    implementation group: 'org.mongodb', name: 'mongodb-driver-sync', version: '5.0.1'
-
-    // https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core
-    implementation group: 'org.mongodb', name: 'mongodb-driver-core', version: '5.0.1'
 
     // https://mvnrepository.com/artifact/org.springframework/spring-orm
     implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.5'
@@ -65,9 +58,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
     implementation group: 'com.querydsl', name: 'querydsl-apt', version: '5.1.0', classifier: 'jakarta'
-
-    // https://mvnrepository.com/artifact/com.querydsl/querydsl-mongodb
-    implementation group: 'com.querydsl', name: 'querydsl-mongodb', version: '5.1.0'
 
     // https://mvnrepository.com/artifact/org.apache.activemq/activemq-all
     // implementation group: 'org.apache.activemq', name: 'activemq-all', version: '6.1.0'

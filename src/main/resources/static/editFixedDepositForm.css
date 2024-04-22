@@ -1,0 +1,47 @@
+.td {
+    font-family: Arial, serif;
+    font-size: 12px;
+    vertical-align: top;
+}
+
+table.outer {
+    text-align: left;
+    padding-left: 300px;
+}
+
+table.outer > tr {
+    text-align: left;
+}
+
+table.outer > tr:first-child td {
+    font-family: Arial, serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.border {
+    border-collapse: collapse;
+}
+
+table.border > tr > td {
+    padding: 10px;
+    color: #C11B17;
+}
+
+table.border > tr:first-child > td,
+table.border > tr > td:first-child {
+    color: #000000;
+}
+
+table.outer tr:last-child table {
+    padding-left: 100px;
+}
+
+table.outer tr:last-child table tr {
+    text-align: center;
+}
+
+a {
+    color: green;
+}
