@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/saySomething")
+@RequestMapping("/sayHello")
 public class HelloWorldController {
 
-    @RequestMapping("/sayHello")
+    @RequestMapping("/")
     public ModelAndView handleRequest() {
         Map<String, String> modelData = new HashMap<>();
         modelData.put("message", "Hello World!");
-        return new ModelAndView("helloworld", modelData);
+        return new ModelAndView("hello", modelData);
     }
 }

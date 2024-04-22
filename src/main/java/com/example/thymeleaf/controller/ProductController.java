@@ -21,12 +21,12 @@ public class ProductController {
     public String list(Model model) {
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
-        return "product/list";
+        return "themeleaf/product/list";
     }
 
     @RequestMapping(value = "/comments", params = "productId")
     public String comments(Model model, @Param("productId") int productId) {
         model.addAttribute(productRepository.findById(productId));
-        return "product/comments";
+        return "themeleaf/product/comments";
     }
 }

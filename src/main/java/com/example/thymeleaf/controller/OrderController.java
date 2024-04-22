@@ -21,12 +21,12 @@ public class OrderController {
     public String list(Model model) {
         List<Order> orders = orderRepository.findAll();
         model.addAttribute("orders", orders);
-        return "order/list";
+        return "themeleaf/order/list";
     }
 
     @RequestMapping(value = "/details", params = "orderId")
     public String details(Model model, @Param("orderId") int orderId) {
         model.addAttribute(orderRepository.findById(orderId));
-        return "order/details";
+        return "themeleaf/order/details";
     }
 }

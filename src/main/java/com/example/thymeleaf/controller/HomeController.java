@@ -19,12 +19,12 @@ public class HomeController {
     public String home(Model model, @Param("subscribe")Optional<String> subscribe) {
         model.addAttribute("today", Calendar.getInstance());
         subscribe.ifPresent(s -> model.addAttribute("subscribe", s));
-        return "home";
+        return "themeleaf/home";
     }
 
     @RequestMapping(value = "subscribe", method = RequestMethod.GET)
     public String subscribe() {
-        return "subscribe";
+        return "themeleaf/subscribe";
     }
 
     @RequestMapping(value = "subscribe", method = RequestMethod.POST)
@@ -35,6 +35,6 @@ public class HomeController {
     @RequestMapping(value = "userprofile")
     public String userProfile(HttpSession session) {
         session.setAttribute("user", new User("John", "Doe", "Unknown", 99));
-        return "userprofile";
+        return "themeleaf/userprofile";
     }
 }

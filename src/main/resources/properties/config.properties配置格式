@@ -1,8 +1,6 @@
 # mysql
 spring.datasource.username=<username>
 spring.datasource.password=<password>
-# activemq
-spring.activemq.broker-url=<url>
 # email
 spring.mail.username=<username>
 spring.mail.password=<password>
