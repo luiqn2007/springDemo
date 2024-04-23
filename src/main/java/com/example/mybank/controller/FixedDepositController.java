@@ -6,6 +6,8 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Controller;
@@ -24,14 +26,15 @@ import java.util.Map;
 @RequestMapping("/fixedDeposit")
 public class FixedDepositController {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     @Autowired
     private FixedDepositService fixedDepositService;
 
     @GetMapping(path = "/list")
-    public ModelAndView listFixedDeposits() {
-        Map<String, List<FixedDepositDetails>> modelData = new HashMap<>();
-        modelData.put("fdList", fixedDepositService.getFixedDeposits());
-        return new ModelAndView("fixedDepositList", modelData);
+    @ModelAttribute("fdList")
+    public List<FixedDepositDetails> listFixedDeposits() {
+        return fixedDepositService.getFixedDeposits();
     }
 
     @GetMapping(params = "fdAction=delete")
@@ -42,13 +45,18 @@ public class FixedDepositController {
 
     @PostMapping(params = "fdAction=createFDForm")
     public ModelAndView showOpenFixedDepositForm() {
+        ModelMap modelData = new ModelMap();
+        modelData.addAttribute("errors", Map.of());
+        return new ModelAndView("createFixedDepositForm", modelData);
+    }
+
+    @ModelAttribute("newFixedDepositDetails")
+    public FixedDepositDetails getFixedDepositDetails() {
         FixedDepositDetails fixedDepositDetails = FixedDepositDetails.builder()
                 .email("You must enter a valid email")
                 .build();
-        ModelMap modelData = new ModelMap();
-        modelData.addAttribute("errors", Map.of());
-        modelData.addAttribute(fixedDepositDetails);
-        return new ModelAndView("createFixedDepositForm", modelData);
+        LOGGER.info("getFixedDepositDetails() called, return a new instance of FixedDepositDetails");
+        return fixedDepositDetails;
     }
 
     @PostMapping(params = "fdAction=create")
