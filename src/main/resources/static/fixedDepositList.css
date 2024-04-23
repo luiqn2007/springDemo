@@ -17,11 +17,9 @@ table.border > tr:last-child {
 
 .td, .th {
     border: 1px solid;
-    font-family: Arial, serif;
-    font-size: 12px;
 }
 
-.a {
+.td, .th, .a {
     font-family: Arial, serif;
     font-size: 12px;
 }

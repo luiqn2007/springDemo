@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MultiValueMap;
@@ -22,7 +23,7 @@ import java.util.Map;
 @RequestMapping("/fixedDeposit")
 public class FixedDepositController {
 
-    @Resource(name = "fixedDepositService")
+    @Autowired
     private FixedDepositService fixedDepositService;
 
     @GetMapping(path = "/list")

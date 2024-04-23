@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="../static/fixedDepositList.css" data-th-href="@{/fixedDepositList.css}">
 </head>
 <body>
-<form name="fixedDepositList" method="post" action="/fixedDeposit?fdAction=createFDForm">
+<form name="fixedDepositList" method="post"
+      data-th-action="@{/fixedDeposit(fdAction='createFDForm')}">
     <table class="outer">
         <tr>
             <td class="title">Fixed deposit list</td>
