@@ -30,6 +30,11 @@ public class FixedDepositServiceImpl implements FixedDepositService {
     }
 
     @Override
+    public void deleteFixedDeposit(int id) {
+        fixedDepositRepository.deleteById(id);
+    }
+
+    @Override
     public Iterable<FixedDepositDetails> getHighValueFds(int minValue) {
         Predicate predicate = QFixedDepositDetails.fixedDepositDetails.active.eq("Y")
                 .and(QFixedDepositDetails.fixedDepositDetails.depositAmount.goe(minValue));

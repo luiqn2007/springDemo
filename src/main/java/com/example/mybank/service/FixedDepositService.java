@@ -10,6 +10,8 @@ public interface FixedDepositService {
 
     int createFixedDeposit(FixedDepositDetails fixedDepositDetails);
 
+    void deleteFixedDeposit(int id);
+
     Iterable<FixedDepositDetails> getHighValueFds(int minValue);
 
     Iterable<FixedDepositDetails> getAllFds(int amount, int tenure);

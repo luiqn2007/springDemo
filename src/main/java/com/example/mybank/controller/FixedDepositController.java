@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.MultiValueMap;
@@ -33,12 +34,19 @@ public class FixedDepositController {
         return new ModelAndView("fixedDepositList", modelData);
     }
 
+    @GetMapping(params = "fdAction=delete")
+    public String deleteFixedDeposit(@RequestParam int depositId) {
+        fixedDepositService.deleteFixedDeposit(depositId);
+        return "redirect:/fixedDeposit/list";
+    }
+
     @PostMapping(params = "fdAction=createFDForm")
     public ModelAndView showOpenFixedDepositForm() {
         FixedDepositDetails fixedDepositDetails = FixedDepositDetails.builder()
                 .email("You must enter a valid email")
                 .build();
         ModelMap modelData = new ModelMap();
+        modelData.addAttribute("errors", Map.of());
         modelData.addAttribute(fixedDepositDetails);
         return new ModelAndView("createFixedDepositForm", modelData);
     }
@@ -49,14 +57,15 @@ public class FixedDepositController {
         String tenure = params.get("tenure");
         String email = params.get("email");
 
+        Map<String, String> errorMessage = new HashMap<>();
         Map<String, Object> modelData = new HashMap<>();
-        int depositAmountValue = checkAndGetInteger("depositAmount", depositAmount, 1000, modelData);
-        int tenureValue = checkAndGetInteger("tenure", tenure, 12, modelData);
+        int depositAmountValue = checkAndGetInteger("depositAmount", depositAmount, 1000, errorMessage);
+        int tenureValue = checkAndGetInteger("tenure", tenure, 12, errorMessage);
 
         if (StringUtils.isBlank(email)) {
-            modelData.put("error.email", "must not be blank");
+            errorMessage.put("email", "must not be blank");
         } else if (!email.contains("@")) {
-            modelData.put("error.email", "not a well-formed email address");
+            errorMessage.put("email", "not a well-formed email address");
         }
 
         FixedDepositDetails fixedDepositDetails = FixedDepositDetails.builder()
@@ -64,10 +73,11 @@ public class FixedDepositController {
                 .tenure(tenureValue)
                 .email(email)
                 .build();
-        if (modelData.isEmpty()) {
+        if (errorMessage.isEmpty()) {
             fixedDepositService.createFixedDeposit(fixedDepositDetails);
             return new ModelAndView("redirect:/fixedDeposit/list");
         } else {
+            modelData.put("errors", errorMessage);
             modelData.put("fixedDepositDetails", fixedDepositDetails);
             return new ModelAndView("createFixedDepositForm", modelData);
         }
@@ -80,14 +90,15 @@ public class FixedDepositController {
         String email = params.get("email").get(0);
         String id = params.get("id").get(0);
 
+        Map<String, String> errorMessage = new HashMap<>();
         Map<String, Object> modelData = new HashMap<>();
-        int depositAmountValue = checkAndGetInteger("depositAmount", depositAmount, 1000, modelData);
-        int tenureValue = checkAndGetInteger("tenure", tenure, 12, modelData);
+        int depositAmountValue = checkAndGetInteger("depositAmount", depositAmount, 1000, errorMessage);
+        int tenureValue = checkAndGetInteger("tenure", tenure, 12, errorMessage);
 
         if (email == null || "".equalsIgnoreCase(email)) {
-            modelData.put("error.email", "must not be blank");
+            errorMessage.put("email", "must not be blank");
         } else if (!email.contains("@")) {
-            modelData.put("error.email", "not a well-formed email address");
+            errorMessage.put("email", "not a well-formed email address");
         }
 
         FixedDepositDetails fixedDepositDetails = FixedDepositDetails.builder()
@@ -95,22 +106,25 @@ public class FixedDepositController {
                 .tenure(tenureValue)
                 .email(email)
                 .build();
-        if (modelData.isEmpty()) {
+        if (errorMessage.isEmpty()) {
             fixedDepositService.createFixedDeposit(fixedDepositDetails);
             return new ModelAndView("redirect:/fixedDeposit/list");
         } else {
             modelData.put("fixedDepositDetails", fixedDepositDetails);
-            return new ModelAndView("createFixedDepositForm", modelData);
+            modelData.put("errors", errorMessage);
+            return new ModelAndView("editFixedDepositForm", modelData);
         }
     }
 
-    private int checkAndGetInteger(String name, String value, int min, Map<String, Object> modelData) {
+    private int checkAndGetInteger(String name, String value, int min, Map<String, String> errorMessage) {
         if (!NumberUtils.isCreatable(value)) {
-            modelData.put("error." + name, "enter a valid number");
+            errorMessage.put(name, "enter a valid number");
+            return min;
         }
         int i = NumberUtils.toInt(value);
         if (i < min) {
-            modelData.put("error." + value, "must be greater than or equal to " + min);
+            errorMessage.put(value, "must be greater than or equal to " + min);
+            return min;
         }
         return i;
     }
