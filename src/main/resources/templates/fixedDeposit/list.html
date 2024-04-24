@@ -34,7 +34,8 @@
                             <td class="td" data-th-text="${fixedDeposit.tenure}">6</td>
                             <td class="td" data-th-text="${fixedDeposit.email}">example@email.com</td>
                             <td class="td">
-                                <a data-th-href="@{/fixedDeposit(fdAction='delete', depositId=${fixedDeposit.id})}">Delete</a>
+                                <a data-th-href="@{/fixedDeposit(fdAction='edit', fixedDepositId=${fixedDeposit.id})}">Edit</a>
+                                <a data-th-href="@{/fixedDeposit(fdAction='delete', fixedDepositId=${fixedDeposit.id})}">Delete</a>
                             </td>
                         </tr>
                     </th:block>

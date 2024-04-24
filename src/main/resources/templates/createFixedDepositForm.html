@@ -13,28 +13,28 @@
             <tr>
                 <td><label for="account"><b>Account:</b></label></td>
                 <td><input type="text" id="account" name="account" value="1" readonly
-                           data-th-value="${fixedDepositDetails.bankAccountId.accountId}"></td>
+                           data-th-value="${newFixedDepositDetails.bankAccountId.accountId}"></td>
             </tr>
             <tr>
                 <td><label for="amount"><b>Amount (in USD):</b></label></td>
                 <td><input type="text" id="amount" name="depositAmount" required
                            value="1000" pattern="\d+" placeholder="≥1000"
                            data-th-class="${errors.containsKey('depositAmount')} ? 'error'"
-                           data-th-value="${errors['depositAmount']} ?: ${fixedDepositDetails.depositAmount}"></td>
+                           data-th-value="${errors['depositAmount']} ?: ${newFixedDepositDetails.depositAmount}"></td>
             </tr>
             <tr>
                 <td><label for="tenure"><b>Tenure (in months):</b></label></td>
                 <td><input type="text" id="tenure" name="tenure" required
                            value="12" pattern="\d+" placeholder="≥12"
                            data-th-class="${errors.containsKey('tenure')} ? 'error'"
-                           data-th-value="${errors['tenure']} ?: ${fixedDepositDetails.tenure}"></td>
+                           data-th-value="${errors['tenure']} ?: ${newFixedDepositDetails.tenure}"></td>
             </tr>
             <tr>
                 <td><label for="email"><b>Email:</b></label></td>
                 <td><input type="text" id="email" name="email" required
                            value="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                            data-th-class="${errors.containsKey('email')} ? 'error'"
-                           data-th-value="${errors['email']} ?: ${fixedDepositDetails.email}"></td>
+                           data-th-value="${errors['email']} ?: ${newFixedDepositDetails.email}"></td>
             </tr>
             <tr>
                 <td colspan="2">

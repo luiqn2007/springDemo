@@ -13,25 +13,25 @@
             <tr>
                 <td><label for="id"><b>Id:</b></label></td>
                 <td><input type="text" id="id" name="id" value="0"
-                           data-th-value="${fixedDepositDetails.id}" readonly></td>
+                           data-th-value="${editableFixedDepositDetails.id}" readonly></td>
             </tr>
             <tr>
                 <td><label for="amount"><b>Amount (in USD):</b></label></td>
                 <td><input type="text" id="amount" name="depositAmount" value="100000"
                            data-th-class="${errors.containsKey('depositAmount')} ? 'error'"
-                           data-th-value="${errors['depositAmount']} ?: ${fixedDepositDetails.depositAmount}"></td>
+                           data-th-value="${errors['depositAmount']} ?: ${editableFixedDepositDetails.depositAmount}"></td>
             </tr>
             <tr>
                 <td><label for="tenure"><b>Tenure (in months):</b></label></td>
                 <td><input type="text" id="tenure" name="tenure" value="6"
                            data-th-class="${errors.containsKey('tenure')} ? 'error'"
-                           data-th-value="${errors['tenure']} ?: ${fixedDepositDetails.tenure}"></td>
+                           data-th-value="${errors['tenure']} ?: ${editableFixedDepositDetails.tenure}"></td>
             </tr>
             <tr>
                 <td><label for="email"><b>Email:</b></label></td>
                 <td><input type="text" id="email" name="email" value="example@email.com"
                            data-th-class="${errors.containsKey('email')} ? 'error'"
-                           data-th-value="${errors['email']} ?: ${fixedDepositDetails.email}"></td>
+                           data-th-value="${errors['email']} ?: ${editableFixedDepositDetails.email}"></td>
             </tr>
             <tr>
                 <td colspan="2">
