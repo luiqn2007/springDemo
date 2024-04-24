@@ -27,7 +27,6 @@ public class FixedDepositDetails implements Serializable {
     private static final long serialVersionUID = 1L;
     private static Logger LOGGER = LogManager.getLogger();
 
-    @PositiveOrZero
     @Id
     @Column(name = "FIXED_DEPOSIT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,7 @@ public class FixedDepositDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ACCOUNT_ID", referencedColumnName = "ACCOUNT_ID", nullable = false)
     private BankAccountDetails bankAccountId;
-    @Column(name = "FD_CREATION_DATE")
+    @Column(name = "FD_CREATION_DATE", insertable = false, updatable = false)
     private Date creationDate;
     @Min(1000)
     @Max(50000)
@@ -44,7 +43,7 @@ public class FixedDepositDetails implements Serializable {
     @Min(6)
     @Column(name = "TENURE")
     private int tenure;
-    @Column(name = "ACTIVE")
+    @Column(name = "ACTIVE", insertable = false)
     private String active;
     @Column(name = "EMAIL")
     private String email;
