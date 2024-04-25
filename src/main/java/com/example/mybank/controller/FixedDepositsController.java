@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/fixedDeposits")
 public class FixedDepositsController {
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Autowired
     private FixedDepositService fixedDepositService;
