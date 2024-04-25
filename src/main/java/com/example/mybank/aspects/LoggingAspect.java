@@ -31,16 +31,16 @@ public class LoggingAspect {
     }
 
     @Around("execution(* com.example.mybank.service.*Service.*(..))")
-    public Object logInvokeTime(ProceedingJoinPoint joinPoint) {
-        Object returnObj = null;
+    public Object logInvokeTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        Object returnObj;
         StopWatch stopWatch = new StopWatch();
         stopWatch.start(joinPoint.getSignature().getName());
         try {
             returnObj = joinPoint.proceed();
-        } catch (Throwable ignored) {
+        } finally {
+            stopWatch.stop();
+            logger.info(stopWatch.prettyPrint());
         }
-        stopWatch.stop();
-        logger.info(stopWatch.prettyPrint());
         return returnObj;
     }
 }

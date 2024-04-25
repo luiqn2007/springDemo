@@ -95,5 +95,4 @@ public class BeanConfig {
     public ActiveMQQueue emailMessageDestination() {
         return new ActiveMQQueue("emailQueueDestination");
     }
-
 }

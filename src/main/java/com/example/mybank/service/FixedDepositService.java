@@ -8,7 +8,7 @@ public interface FixedDepositService {
 
     FixedDepositDetails getFixedDepositDetails(int id);
 
-    int createFixedDeposit(FixedDepositDetails fixedDepositDetails);
+    void createFixedDeposit(FixedDepositDetails fixedDepositDetails);
 
     void deleteFixedDeposit(int id);
 

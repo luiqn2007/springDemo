@@ -5,6 +5,8 @@ import com.example.mybank.domain.FixedDepositDetails;
 import com.example.mybank.domain.QFixedDepositDetails;
 import com.example.mybank.repository.FixedDepositRepository;
 import com.querydsl.core.types.Predicate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -14,6 +16,8 @@ import java.util.List;
 
 @Service("fixedDepositService")
 public class FixedDepositServiceImpl implements FixedDepositService {
+
+    private final static Logger LOGGER = LogManager.getLogger();
 
     @Autowired
     private FixedDepositRepository fixedDepositRepository;
@@ -25,8 +29,9 @@ public class FixedDepositServiceImpl implements FixedDepositService {
     }
 
     @Override
-    public int createFixedDeposit(FixedDepositDetails fixedDepositDetails) {
-        return fixedDepositRepository.save(fixedDepositDetails).getId();
+    public void createFixedDeposit(FixedDepositDetails fixedDepositDetails) {
+        FixedDepositDetails details = fixedDepositRepository.save(fixedDepositDetails);
+        LOGGER.info("Saved info {}", details);
     }
 
     @Override

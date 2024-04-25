@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `fixed_deposit_details`
     `FIXED_DEPOSIT_ID` int(10)     NOT NULL AUTO_INCREMENT,
     `ACCOUNT_ID`       int(10)     NOT NULL,
     `FD_CREATION_DATE` date        NOT NULL DEFAULT (CURDATE()),
+    `FD_MATURITY_DATE` date        NOT NULL,
     `AMOUNT`           int(10)     NOT NULL,
     `TENURE`           int(10)     NOT NULL,
     `ACTIVE`           char(1)     NOT NULL DEFAULT 'N',
@@ -44,5 +45,5 @@ CREATE TABLE IF NOT EXISTS customer_registration_details
 
 
 INSERT INTO bank_account_details(BALANCE_AMOUNT, LAST_TRANSACTION_TS) VALUE (99999, now());
-INSERT INTO fixed_deposit_details(ACCOUNT_ID, FD_CREATION_DATE, AMOUNT, TENURE, ACTIVE, EMAIL)
-    VALUE (last_insert_id(), now(), 10000, 12, 'Y', 'test_account@email.com');
+INSERT INTO fixed_deposit_details(ACCOUNT_ID, FD_MATURITY_DATE, AMOUNT, TENURE, ACTIVE, EMAIL)
+    VALUE (last_insert_id(), date_add(now(), interval 12 month), 10000, 12, 'Y', 'test_account@email.com');

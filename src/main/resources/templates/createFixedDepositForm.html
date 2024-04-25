@@ -11,30 +11,46 @@
     <form name="createFixedDepositForm" method="post" action="/fixedDeposit?fdAction=create">
         <table>
             <tr>
-                <td><label for="account"><b>Account:</b></label></td>
-                <td><input type="text" id="account" name="account" value="1" readonly
+                <td><label for="bankAccountId"><b>Account:</b></label></td>
+                <td><input type="text" id="bankAccountId" name="bankAccountId" value="1" readonly
                            data-th-value="${newFixedDepositDetails.bankAccountId.accountId}"></td>
             </tr>
             <tr>
-                <td><label for="amount"><b>Amount (in USD):</b></label></td>
-                <td><input type="text" id="amount" name="depositAmount" required
+                <td><label for="depositAmount"><b>Amount (in USD):</b></label></td>
+                <td><input type="text" id="depositAmount" name="depositAmount" required
                            value="1000" pattern="\d+" placeholder="≥1000"
-                           data-th-class="${errors.containsKey('depositAmount')} ? 'error'"
-                           data-th-value="${errors['depositAmount']} ?: ${newFixedDepositDetails.depositAmount}"></td>
+                           data-th-class="${errors.hasFieldErrors('depositAmount')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('depositAmount')}
+                                                  ? ${T(com.example.mybank.Utils).formatErrors(errors, 'depositAmount')}
+                                                  : ${newFixedDepositDetails.depositAmount}"></td>
             </tr>
             <tr>
                 <td><label for="tenure"><b>Tenure (in months):</b></label></td>
                 <td><input type="text" id="tenure" name="tenure" required
                            value="12" pattern="\d+" placeholder="≥12"
-                           data-th-class="${errors.containsKey('tenure')} ? 'error'"
-                           data-th-value="${errors['tenure']} ?: ${newFixedDepositDetails.tenure}"></td>
+                           data-th-class="${errors.hasFieldErrors('tenure')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('tenure')}
+                                                  ? ${T(com.example.mybank.Utils).formatErrors(errors, 'tenure')}
+                                                  : ${newFixedDepositDetails.tenure}"></td>
+            </tr>
+            <tr>
+                <td><label for="maturityDate"><b>Maturity Date:</b></label></td>
+                <!--pattern="\d{2}-\d{2}-\d{4}"-->
+                <td><input type="text" id="maturityDate" name="maturityDate" required
+                           value="04-25-2024" placeholder="MM-dd-yyyy"
+                           data-th-class="${errors.hasFieldErrors('maturityDate')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('maturityDate')}
+                                                  ? ${T(com.example.mybank.Utils).formatErrors(errors, 'maturityDate')}
+                                                  : ${T(com.example.mybank.Utils).formatDate(newFixedDepositDetails.maturityDate)}"></td>
             </tr>
             <tr>
                 <td><label for="email"><b>Email:</b></label></td>
                 <td><input type="text" id="email" name="email" required
                            value="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                           data-th-class="${errors.containsKey('email')} ? 'error'"
-                           data-th-value="${errors['email']} ?: ${newFixedDepositDetails.email}"></td>
+                           data-th-class="${errors.hasFieldErrors('email')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('email')}
+                                                  ? ${T(com.example.mybank.Utils).formatErrors(errors, 'email')}
+                                                  : ${newFixedDepositDetails.email}"></td>
             </tr>
             <tr>
                 <td colspan="2">
