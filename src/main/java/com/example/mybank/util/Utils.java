@@ -1,4 +1,4 @@
-package com.example.mybank;
+package com.example.mybank.util;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;

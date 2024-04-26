@@ -36,6 +36,7 @@ public class FixedDepositController {
     @Autowired
     private FixedDepositService fixedDepositService;
 
+
     // private FixedDepositValidator validator = new FixedDepositValidator();
 
     @GetMapping(path = "/list")
@@ -144,4 +145,5 @@ public class FixedDepositController {
         ex.printStackTrace(pw);
         return new ModelAndView("error", "error", sw.toString());
     }
+
 }
