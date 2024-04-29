@@ -1,5 +1,6 @@
 package com.example.mybank.domain;
 
+import com.example.mybank.annotation.MoneyFormatter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
@@ -10,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Getter
@@ -23,8 +25,8 @@ import java.util.Date;
 @Table(name = "fixed_deposit_details")
 public class FixedDepositDetails implements Serializable {
 
-    public static final int MIN_DEPOSIT_AMOUNT = 1000;
-    public static final int MAX_DEPOSIT_AMOUNT = 50000;
+    public static final long MIN_DEPOSIT_AMOUNT = 1000L;
+    public static final long MAX_DEPOSIT_AMOUNT = 50000L;
     public static final int MIN_TENURE = 6;
 
     @Serial
@@ -45,7 +47,8 @@ public class FixedDepositDetails implements Serializable {
     @Min(MIN_DEPOSIT_AMOUNT)
     @Max(MAX_DEPOSIT_AMOUNT)
     @Column(name = "AMOUNT")
-    private int depositAmount;
+    @MoneyFormatter
+    private Long depositAmount;
     @Min(MIN_TENURE)
     @Column(name = "TENURE")
     private int tenure;

@@ -18,13 +18,13 @@ public class FixedDepositValidator implements Validator {
     public void validate(Object target, Errors errors) {
         FixedDepositDetails fixedDepositDetails = (FixedDepositDetails) target;
 
-        if (fixedDepositDetails.getDepositAmount() < MIN_DEPOSIT_AMOUNT) {
-            errors.rejectValue("depositAmount", "error.depositAmount.less", "must be greater than or equal to " + MIN_DEPOSIT_AMOUNT);
-        }
+//        if (fixedDepositDetails.getDepositAmount() < MIN_DEPOSIT_AMOUNT) {
+//            errors.rejectValue("depositAmount", "error.depositAmount.less", "must be greater than or equal to " + MIN_DEPOSIT_AMOUNT);
+//        }
 
-        if (fixedDepositDetails.getDepositAmount() > MAX_DEPOSIT_AMOUNT) {
-            errors.rejectValue("depositAmount", "error.depositAmount.less", "must be smaller than or equal to " + MAX_DEPOSIT_AMOUNT);
-        }
+//        if (fixedDepositDetails.getDepositAmount() > MAX_DEPOSIT_AMOUNT) {
+//            errors.rejectValue("depositAmount", "error.depositAmount.less", "must be smaller than or equal to " + MAX_DEPOSIT_AMOUNT);
+//        }
 
         if (fixedDepositDetails.getTenure() < MIN_TENURE) {
             errors.rejectValue("tenure", "error.tenure.less", "must be greater than or equal to " + MIN_TENURE);

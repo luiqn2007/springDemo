@@ -8,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,12 +35,6 @@ public class FixedDepositController {
 
     @Autowired
     private FixedDepositService fixedDepositService;
-
-    @Autowired
-    private ConversionService conversionService;
-
-
-    // private FixedDepositValidator validator = new FixedDepositValidator();
 
     @GetMapping(path = "/list")
     @ModelAttribute("fdList")
@@ -117,11 +110,11 @@ public class FixedDepositController {
     }
 
     @GetMapping(params = "fdAction=view")
-    public ModelAndView viewFixedDepositDetails(@RequestParam int fixedDepositId) {
+    public ModelAndView viewFixedDepositDetails(@RequestParam FixedDepositDetails fixedDepositId) {
 //        FixedDepositDetails fixedDepositDetails = fixedDepositService.getFixedDepositDetails(fixedDepositId);
-        FixedDepositDetails fixedDepositDetails = conversionService.convert(fixedDepositId, FixedDepositDetails.class);
         Map<String, Object> modelMap = new HashMap<>();
-        modelMap.put("fixedDepositDetails", fixedDepositDetails);
+        modelMap.put("editableFixedDepositDetails", fixedDepositId);
+        modelMap.put("errors", new SimpleErrors(fixedDepositId));
         LOGGER.info("viewFixedDepositDetails() method: Fixed deposit details loaded from data store. Showing form for editing the loaded fixed deposit.");
         return new ModelAndView("editFixedDepositForm", modelMap);
     }
@@ -131,8 +124,6 @@ public class FixedDepositController {
         // fixedDepositService.closeFixedDeposit(fdId);
         return "redirect:/fixedDeposit/list";
     }
-
-    // REST
 
     // Config
 

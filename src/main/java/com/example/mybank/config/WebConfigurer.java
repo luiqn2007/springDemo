@@ -1,17 +1,22 @@
 package com.example.mybank.config;
 
+import com.example.mybank.converter.MoneyLongFormatterFactory;
+import com.example.mybank.converter.MoneyLongValueFormatter;
 import com.example.mybank.converter.IdToFixedDepositDetailsConverter;
 import com.example.mybank.interceptor.MyRequestHandlerInterceptor;
 import com.example.mybank.service.FixedDepositService;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.format.support.FormattingConversionService;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+
+import java.util.Locale;
 
 @Setter
 @Configuration
@@ -21,14 +26,28 @@ public class WebConfigurer implements WebMvcConfigurer, ApplicationContextAware 
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+
         registry.addInterceptor(new MyRequestHandlerInterceptor());
+        registry.addInterceptor(localeChangeInterceptor);
     }
 
-    @Autowired
-    public void formattingConversionService(FormattingConversionService conversionService) {
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
         IdToFixedDepositDetailsConverter fddConverter = new IdToFixedDepositDetailsConverter();
         fddConverter.setFixedDepositService(applicationContext.getBean(FixedDepositService.class));
-        conversionService.addConverter(fddConverter);
+        MoneyLongFormatterFactory moneyLongFormatterFactory = new MoneyLongFormatterFactory();
+
+        registry.addConverter(fddConverter);
+        registry.addFormatterForFieldAnnotation(moneyLongFormatterFactory);
+    }
+
+    @Bean
+    public CookieLocaleResolver localeResolver() {
+        CookieLocaleResolver resolver = new CookieLocaleResolver();
+        resolver.setDefaultLocale(Locale.ENGLISH);
+        return resolver;
     }
 }
 

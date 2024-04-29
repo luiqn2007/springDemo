@@ -8,7 +8,7 @@
 <body>
 <form name="fixedDepositList" method="post"
       data-th-action="@{/fixedDeposit(fdAction='createFDForm')}">
-    <table class="outer">
+    <table>
         <tr>
             <td class="title">Fixed deposit list</td>
         </tr>
@@ -30,7 +30,7 @@
                         <tr class="border">
                             <td class="td" data-th-text="${fixedDeposit.id}">0</td>
                             <td class="td" data-th-text="${fixedDeposit.bankAccountId.accountId}">0</td>
-                            <td class="td" data-th-text="${fixedDeposit.depositAmount}">10000</td>
+                            <td class="td" data-th-text="${fixedDeposit.depositAmount}">10000 USD</td>
                             <td class="td" data-th-text="${fixedDeposit.tenure}">6</td>
                             <td class="td" data-th-text="${fixedDeposit.email}">example@email.com</td>
                             <td class="td">
@@ -47,5 +47,10 @@
         </tr>
     </table>
 </form>
+<p>Language:
+    <span><a data-th-href="@{/fixedDeposit/list(lang='en_US')}" href="#">English</a></span> |
+    <span><a data-th-href="@{/fixedDeposit/list(lang='de_DE')}" href="#">German</a></span> |
+    <span><a data-th-href="@{/fixedDeposit/list(lang=${#locale.getDefault()})}" href="#">Default</a></span></p>
+<p>Local: <span data-th-text="${#locale}">en_US</span></p>
 </body>
 </html>

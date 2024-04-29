@@ -50,7 +50,7 @@ public class FixedDepositServiceImpl implements FixedDepositService {
     public Iterable<FixedDepositDetails> getAllFds(int amount, int tenure) {
         FixedDepositDetails example = FixedDepositDetails.builder()
                 .active("Y")
-                .depositAmount(amount)
+                .depositAmount((long) amount)
                 .tenure(tenure)
                 .build();
         ExampleMatcher matcher = ExampleMatcher.matching().withIgnorePaths("id");

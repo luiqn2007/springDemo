@@ -24,12 +24,12 @@ table.border > tr:last-child {
     font-size: 12px;
 }
 
-table.outer {
+p, form > table {
     margin-left: 0;
     padding-left: 300px;
 }
 
-table.outer > tr:first-child td {
+form > table > tr:first-child td {
     font-family: Arial, serif;
     font-size: 16px;
     font-weight: bold;
