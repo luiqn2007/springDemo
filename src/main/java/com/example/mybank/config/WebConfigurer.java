@@ -1,7 +1,6 @@
 package com.example.mybank.config;
 
 import com.example.mybank.converter.MoneyLongFormatterFactory;
-import com.example.mybank.converter.MoneyLongValueFormatter;
 import com.example.mybank.converter.IdToFixedDepositDetailsConverter;
 import com.example.mybank.interceptor.MyRequestHandlerInterceptor;
 import com.example.mybank.service.FixedDepositService;
@@ -11,6 +10,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -43,11 +43,17 @@ public class WebConfigurer implements WebMvcConfigurer, ApplicationContextAware 
         registry.addFormatterForFieldAnnotation(moneyLongFormatterFactory);
     }
 
+
     @Bean
     public CookieLocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
         resolver.setDefaultLocale(Locale.ENGLISH);
         return resolver;
+    }
+
+    @Bean
+    public StandardServletMultipartResolver standardServletMultipartResolver() {
+        return new StandardServletMultipartResolver();
     }
 }
 

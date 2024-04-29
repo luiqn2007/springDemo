@@ -16,8 +16,10 @@ import org.springframework.validation.SimpleErrors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
@@ -123,6 +125,21 @@ public class FixedDepositController {
     public String closeFixedDeposit(@RequestParam int fixedDepositId) {
         // fixedDepositService.closeFixedDeposit(fdId);
         return "redirect:/fixedDeposit/list";
+    }
+
+    @GetMapping(params = "fdAction=upload")
+    public String upload(@RequestParam Optional<String> message, Model model) {
+        model.addAttribute("uploadMessage", message.orElse("Please upload a file: "));
+        return "upload";
+    }
+
+    @PostMapping("/upload")
+    public String receiveUploadedFile(@RequestParam MultipartFile myFileField) throws IOException {
+        // do something
+        byte[] bytes = myFileField.getBytes();
+        String values = new String(bytes);
+        System.out.println(values);
+        return "redirect:/fixedDeposit?fdAction=upload";
     }
 
     // Config

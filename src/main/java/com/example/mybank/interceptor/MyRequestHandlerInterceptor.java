@@ -15,7 +15,7 @@ public class MyRequestHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        LOGGER.info("HTTP method --> {}", request.getMethod());
+        LOGGER.info("HTTP --> {}({})", request.getMethod(), request.getRequestURI());
         Enumeration<String> requestName = request.getParameterNames();
         while (requestName.hasMoreElements()) {
             String name = requestName.nextElement();
