@@ -1,5 +1,6 @@
 package com.example.mybank.converter;
 
+import jakarta.jms.MessageFormatException;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,6 @@ public class MoneyLongValueFormatter implements Formatter<Long> {
         if (Objects.equals(locale.getLanguage(), new Locale("zh").getLanguage())) {
             return String.format(locale, "%d RMB", object);
         }
-        return String.format(locale, "%d", object);
+        throw new RuntimeException(new MessageFormatException("Unsupported locale " + locale));
     }
 }

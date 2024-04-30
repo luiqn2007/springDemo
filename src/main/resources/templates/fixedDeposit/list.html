@@ -30,7 +30,7 @@
                         <tr class="border">
                             <td class="td" data-th-text="${fixedDeposit.id}">0</td>
                             <td class="td" data-th-text="${fixedDeposit.bankAccountId.accountId}">0</td>
-                            <td class="td" data-th-text="${fixedDeposit.depositAmount}">10000 USD</td>
+                            <td class="td" data-th-text="${T(com.example.mybank.util.Utils).INSTANCE.formatMoney(fixedDeposit.depositAmount, #locale)}">10000 USD</td>
                             <td class="td" data-th-text="${fixedDeposit.tenure}">6</td>
                             <td class="td" data-th-text="${fixedDeposit.email}">example@email.com</td>
                             <td class="td">

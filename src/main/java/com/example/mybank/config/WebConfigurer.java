@@ -1,12 +1,9 @@
 package com.example.mybank.config;
 
-import com.example.mybank.converter.MoneyLongFormatterFactory;
 import com.example.mybank.converter.IdToFixedDepositDetailsConverter;
+import com.example.mybank.converter.MoneyLongFormatterFactory;
 import com.example.mybank.interceptor.MyRequestHandlerInterceptor;
-import com.example.mybank.service.FixedDepositService;
-import lombok.Setter;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
@@ -18,11 +15,19 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
 
-@Setter
 @Configuration
-public class WebConfigurer implements WebMvcConfigurer, ApplicationContextAware {
+public class WebConfigurer implements WebMvcConfigurer {
 
-    private ApplicationContext applicationContext;
+    @Autowired
+    private IdToFixedDepositDetailsConverter idToFixedDepositDetailsConverter;
+    @Autowired
+    private MoneyLongFormatterFactory moneyLongFormatterFactory;
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(idToFixedDepositDetailsConverter);
+        registry.addFormatterForFieldAnnotation(moneyLongFormatterFactory);
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -31,16 +36,6 @@ public class WebConfigurer implements WebMvcConfigurer, ApplicationContextAware 
 
         registry.addInterceptor(new MyRequestHandlerInterceptor());
         registry.addInterceptor(localeChangeInterceptor);
-    }
-
-    @Override
-    public void addFormatters(FormatterRegistry registry) {
-        IdToFixedDepositDetailsConverter fddConverter = new IdToFixedDepositDetailsConverter();
-        fddConverter.setFixedDepositService(applicationContext.getBean(FixedDepositService.class));
-        MoneyLongFormatterFactory moneyLongFormatterFactory = new MoneyLongFormatterFactory();
-
-        registry.addConverter(fddConverter);
-        registry.addFormatterForFieldAnnotation(moneyLongFormatterFactory);
     }
 
 

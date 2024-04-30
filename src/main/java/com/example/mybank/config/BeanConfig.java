@@ -1,9 +1,8 @@
 package com.example.mybank.config;
 
 import com.example.mybank.annotation.FundTransfer;
+import com.example.mybank.handler.MyErrorHandler;
 import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,20 +13,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.util.StreamUtils;
-import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
@@ -109,19 +103,5 @@ public class BeanConfig {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setErrorHandler(new MyErrorHandler());
         return restTemplate;
-    }
-}
-
-class MyErrorHandler extends DefaultResponseErrorHandler {
-
-    private static Logger LOGGER = LogManager.getLogger();
-
-    @Override
-    protected void handleError(ClientHttpResponse response,
-                               HttpStatusCode statusCode) throws IOException {
-        LOGGER.warn("Status code received from service: {}", statusCode);
-        String body = StreamUtils.copyToString(response.getBody(), StandardCharsets.UTF_8);
-        LOGGER.warn("Response body: {}", body);
-        super.handleError(response, statusCode);
     }
 }

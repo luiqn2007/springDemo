@@ -48,7 +48,7 @@ public class FixedDepositDetails implements Serializable {
     @Max(MAX_DEPOSIT_AMOUNT)
     @Column(name = "AMOUNT")
     @MoneyFormatter
-    private Long depositAmount;
+    private long depositAmount;
     @Min(MIN_TENURE)
     @Column(name = "TENURE")
     private int tenure;

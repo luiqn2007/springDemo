@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `fixed_deposit_details`
     `ACCOUNT_ID`       int(10)     NOT NULL,
     `FD_CREATION_DATE` date        NOT NULL DEFAULT (CURDATE()),
     `FD_MATURITY_DATE` date        NOT NULL,
-    `AMOUNT`           int(10)     NOT NULL,
+    `AMOUNT`           long        NOT NULL,
     `TENURE`           int(10)     NOT NULL,
     `ACTIVE`           char(1)     NOT NULL DEFAULT 'N',
     `EMAIL`            varchar(50) NOT NULL,

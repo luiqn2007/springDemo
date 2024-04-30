@@ -21,7 +21,7 @@
                            value="1000" pattern="\d+" placeholder="≥1000"
                            data-th-class="${errors.hasFieldErrors('depositAmount')} ? 'error'"
                            data-th-value="${errors.hasFieldErrors('depositAmount')}
-                                                  ? ${T(com.example.mybank.util.Utils).formatErrors(errors, 'depositAmount')}
+                                                  ? ${T(com.example.mybank.util.Utils).INSTANCE.formatErrors(errors, 'depositAmount')}
                                                   : ${newFixedDepositDetails.depositAmount}"></td>
             </tr>
             <tr>
@@ -30,7 +30,7 @@
                            value="12" pattern="\d+" placeholder="≥12"
                            data-th-class="${errors.hasFieldErrors('tenure')} ? 'error'"
                            data-th-value="${errors.hasFieldErrors('tenure')}
-                                                  ? ${T(com.example.mybank.util.Utils).formatErrors(errors, 'tenure')}
+                                                  ? ${T(com.example.mybank.util.Utils).INSTANCE.formatErrors(errors, 'tenure')}
                                                   : ${newFixedDepositDetails.tenure}"></td>
             </tr>
             <tr>
@@ -40,8 +40,8 @@
                            value="04-25-2024" placeholder="MM-dd-yyyy"
                            data-th-class="${errors.hasFieldErrors('maturityDate')} ? 'error'"
                            data-th-value="${errors.hasFieldErrors('maturityDate')}
-                                                  ? ${T(com.example.mybank.util.Utils).formatErrors(errors, 'maturityDate')}
-                                                  : ${T(com.example.mybank.util.Utils).formatDate(newFixedDepositDetails.maturityDate)}"></td>
+                                                  ? ${T(com.example.mybank.util.Utils).INSTANCE.formatErrors(errors, 'maturityDate')}
+                                                  : ${T(com.example.mybank.util.Utils).INSTANCE.formatDate(newFixedDepositDetails.maturityDate)}"></td>
             </tr>
             <tr>
                 <td><label for="email"><b>Email:</b></label></td>
@@ -49,7 +49,7 @@
                            value="example@email.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                            data-th-class="${errors.hasFieldErrors('email')} ? 'error'"
                            data-th-value="${errors.hasFieldErrors('email')}
-                                                  ? ${T(com.example.mybank.util.Utils).formatErrors(errors, 'email')}
+                                                  ? ${T(com.example.mybank.util.Utils).INSTANCE.formatErrors(errors, 'email')}
                                                   : ${newFixedDepositDetails.email}"></td>
             </tr>
             <tr>
