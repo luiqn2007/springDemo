@@ -5,36 +5,37 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Calendar;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/thymeleaf")
+@RequestMapping
 public class HomeController {
 
     @RequestMapping("/")
-    public String home(Model model, @Param("subscribe")Optional<String> subscribe) {
+    public String home(Model model, @Param("subscribe") Optional<String> subscribe) {
         model.addAttribute("today", Calendar.getInstance());
         subscribe.ifPresent(s -> model.addAttribute("subscribe", s));
-        return "themeleaf/home";
+        return "home";
     }
 
-    @RequestMapping(value = "subscribe", method = RequestMethod.GET)
+    @GetMapping("subscribe")
     public String subscribe() {
-        return "themeleaf/subscribe";
+        return "subscribe";
     }
 
-    @RequestMapping(value = "subscribe", method = RequestMethod.POST)
+    @PostMapping("subscribe")
     public String subscribeAction(@Param("email") String email) {
-        return "redirect:/thymeleaf/?subscribe=" + email;
+        return "redirect:/?subscribe=" + email;
     }
 
-    @RequestMapping(value = "userprofile")
+    @GetMapping("userprofile")
     public String userProfile(HttpSession session) {
         session.setAttribute("user", new User("John", "Doe", "Unknown", 99));
-        return "themeleaf/userprofile";
+        return "userprofile";
     }
 }

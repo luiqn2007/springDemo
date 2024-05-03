@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Good Thymes Virtual Grocery</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../../static/thymeleaf/thymeleaf.css"
+          data-th-href="@{/thymeleaf.css}"/>
+</head>
+<body>
+<h1>Comments for product: <span th:text="${product.name()}">Hot Garlic</span></h1>
+<table>
+    <tr th:each="comment : ${product.comments()}" th:class="${commentStat.odd}? 'odd'">
+        <td th:text="${comment.text()}">Garlic is just fantastic!</td>
+    </tr>
+</table>
+<p><a href="list.html" th:href="@{/product/list}">Return to product list</a></p>
+</body>
+</html>

@@ -11,13 +11,6 @@ java {
     sourceCompatibility = '17'
 }
 
-repositories {
-    maven {
-        url "https://maven.aliyun.com/repository/public"
-    }
-    mavenCentral()
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
