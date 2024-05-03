@@ -38,7 +38,6 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor);
     }
 
-
     @Bean
     public CookieLocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();

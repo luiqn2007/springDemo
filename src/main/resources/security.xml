@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+    
+    <security:http>
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_CUSTOMER', 'ROLE_ADMIN')"/>
+        <security:form-login />
+        <security:logout />
+        <security:remember-me />
+        <security:headers>
+            <security:cache-control />
+            <security:xss-protection />
+        </security:headers>
+    </security:http>
+
+    <security:authentication-manager>
+        <!-- 这里只注册了一个使用 Bcrypt 加密保存密码的 Provider -->
+        <security:authentication-provider>
+            <security:password-encoder hash="bcrypt" />
+            <security:user-service>
+                <security:user name="admin" authorities="ROLE_ADMIN" password="{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzQvVCp5pe5WM2tDA.u" />
+                <security:user name="user1" authorities="ROLE_CUSTOM" password="{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzQvVCp5pe5WM2tDA.u" />
+                <security:user name="user2" authorities="ROLE_CUSTOM" password="{bcrypt}$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzQvVCp5pe5WM2tDA.u" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+</beans>
