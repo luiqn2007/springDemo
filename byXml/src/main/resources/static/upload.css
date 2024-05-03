@@ -1,0 +1,7 @@
+table {
+    padding-left: 20px;
+}
+
+table tr:last-child td {
+    text-align: center;
+}

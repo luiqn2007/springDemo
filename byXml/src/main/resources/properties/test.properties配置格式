@@ -1,0 +1,8 @@
+test_email_receiver=<用于测试的 email 地址 (临时邮箱 https://mail.cx/zh/)>
+
+# email template
+email.from=<sender email>
+email.received.subject=<received title>
+email.received.text=<received content>
+email.processed.subject=<processed title>
+email.processed.text=<processed content>

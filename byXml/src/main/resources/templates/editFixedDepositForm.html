@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit a fixed deposit</title>
+    <link rel="stylesheet" href="../static/editFixedDepositForm.css" data-th-href="@{/editFixedDepositForm.css}">
+</head>
+<body>
+<div>
+    <h1>Edit a fixed deposit</h1>
+    <form name="editFixedDepositForm" method="post" action="/fixedDeposit?fdAction=edit">
+        <table>
+            <tr>
+                <td><label for="id"><b>Id:</b></label></td>
+                <td><input type="text" id="id" name="id" value="1" readonly
+                           data-th-value="${editableFixedDepositDetails.id}"></td>
+            </tr>
+            <tr>
+                <td><label for="bankAccountId"><b>Account Id:</b></label></td>
+                <td><input type="text" id="bankAccountId" name="bankAccountId" value="1" readonly
+                           data-th-value="${editableFixedDepositDetails.bankAccountId.accountId}"></td>
+            </tr>
+            <tr>
+                <td><label for="depositAmount"><b>Amount (in USD):</b></label></td>
+                <td><input type="text" id="depositAmount" name="depositAmount" value="100000" readonly
+                           data-th-class="${errors.hasFieldErrors('depositAmount')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('depositAmount')} ? ${errors.getFieldError('depositAmount')} : ${editableFixedDepositDetails.depositAmount}"></td>
+            </tr>
+            <tr>
+                <td><label for="tenure"><b>Tenure (in months):</b></label></td>
+                <td><input type="text" id="tenure" name="tenure" value="6" readonly
+                           data-th-class="${errors.hasFieldErrors('tenure')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('tenure')} ? ${errors.getFieldError('tenure')} : ${editableFixedDepositDetails.tenure}"></td>
+            </tr>
+            <tr>
+                <td><label for="maturityDate"><b>Maturity Date:</b></label></td>
+                <td><input type="text" id="maturityDate" name="maturityDate" value="6" readonly
+                           data-th-class="${errors.hasFieldErrors('maturityDate')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('maturityDate')} ? ${errors.getFieldError('maturityDate')} : ${editableFixedDepositDetails.tenure}"></td>
+            </tr>
+            <tr>
+                <td><label for="email"><b>Email:</b></label></td>
+                <td><input type="text" id="email" name="email" value="example@email.com" readonly
+                           data-th-class="${errors.hasFieldErrors('email')} ? 'error'"
+                           data-th-value="${errors.hasFieldErrors('email')} ? ${errors.getFieldError('email')} : ${editableFixedDepositDetails.email}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save">
+                    <a href="/fixedDeposit/list"><b>Go Back</b></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

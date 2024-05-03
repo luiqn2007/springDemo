@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="config-database.xml" />
+
+    <bean id="accountStatementDao" class="com.example.mybank_xml.dao.AccountStatementDaoImpl"/>
+
+    <bean id="customerRegistrationDao" class="com.example.mybank_xml.dao.CustomerRegistrationDaoImpl">
+        <property name="jdbcTemplate" ref="namedJdbcTemplate" />
+        <property name="transactionTemplate" ref="transactionTemplate" />
+    </bean>
+
+    <bean id="customerRequestDao" class="com.example.mybank_xml.dao.CustomerRequestDaoImpl"/>
+
+    <bean id="personalBankingDao" class="com.example.mybank_xml.dao.PersonalBankingDaoImpl"/>
+
+    <bean id="txDao" class="com.example.mybank_xml.dao.TxDaoImpl"/>
+</beans>

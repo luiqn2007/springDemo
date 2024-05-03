@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="../static/upload.css" data-th-href="@{/upload.css}">
+</head>
+<body>
+<form method="post" data-th-action="@{/fixedDeposit/upload}" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td colspan="2" data-th-text="${uploadMessage}"></td>
+        </tr>
+        <tr>
+            <td><b>Select the file to upload: &nbsp;</b></td>
+            <td><input type="file" name="myFileField"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" value="Upload file" onclick="document.forms[0].submit()"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

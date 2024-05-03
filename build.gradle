@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.3'
-    id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.example'
@@ -12,77 +10,8 @@ java {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-activemq'
-    implementation 'org.springframework.boot:spring-boot-starter-cache'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-mail'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testImplementation 'io.projectreactor:reactor-test'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
-    // https://mvnrepository.com/artifact/org.springframework/spring-orm
-    implementation group: 'org.springframework', name: 'spring-orm', version: '6.1.5'
-
-    // https://mvnrepository.com/artifact/org.springframework/spring-context-indexer
-    annotationProcessor group: 'org.springframework', name: 'spring-context-indexer', version: '6.1.5'
-
-    implementation 'it.unimi.dsi:fastutil:8.5.9'
-
-    // https://mvnrepository.com/artifact/jakarta.inject/jakarta.inject-api
-    implementation group: 'jakarta.inject', name: 'jakarta.inject-api', version: '2.0.1'
-
-    // https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api
-    implementation group: 'jakarta.mail', name: 'jakarta.mail-api', version: '2.1.3'
-
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
-    implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.12.0'
-
-    // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
-    implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.4.4.Final'
-
-    // https://mvnrepository.com/artifact/com.querydsl/querydsl-jpa
-    implementation group: 'com.querydsl', name: 'querydsl-jpa', version: '5.1.0', classifier: 'jakarta'
-
-    // https://mvnrepository.com/artifact/com.querydsl/querydsl-apt
-    implementation group: 'com.querydsl', name: 'querydsl-apt', version: '5.1.0', classifier: 'jakarta'
-
-    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-all
-    // implementation group: 'org.apache.activemq', name: 'activemq-all', version: '6.1.0'
-
-    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-broker
-    implementation group: 'org.apache.activemq', name: 'activemq-broker', version: '6.1.0'
-
-    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-client
-    implementation group: 'org.apache.activemq', name: 'activemq-client', version: '6.1.0'
-
-    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-spring
-    implementation group: 'org.apache.activemq', name: 'activemq-spring', version: '6.1.0'
-
-    // https://mvnrepository.com/artifact/org.apache.activemq/activemq-kahadb-store
-    implementation group: 'org.apache.activemq', name: 'activemq-kahadb-store', version: '6.1.0'
-
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-    implementation 'org.apache.commons:commons-lang3:3.14.0'
-
-    // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
-
-    // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    annotationProcessor "org.projectlombok:lombok:${lombok_version}"
-    compileOnly "org.projectlombok:lombok:${lombok_version}"
-    testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
-    testCompileOnly "org.projectlombok:lombok:${lombok_version}"
-
-    annotationProcessor group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.1.0'
-    annotationProcessor group: 'com.querydsl', name: 'querydsl-apt', version: '5.1.0', classifier: 'jakarta'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 tasks.named('test') {
