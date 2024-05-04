@@ -1,15 +1,13 @@
-package com.example.mybank.controller;
+package com.example.mybank_xml.controller;
 
-import com.example.mybank.domain.FixedDepositDetails;
-import com.example.mybank.service.FixedDepositService;
-import com.example.mybank.util.ResultContext;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.mybank_xml.domain.FixedDepositDetails;
+import com.example.mybank_xml.service.FixedDepositService;
+import com.example.mybank_xml.util.ResultContext;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,13 +18,11 @@ import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-@Controller
-@RequestMapping("/fixedDepositAsync")
+@Setter
 public class FixedDepositControllerAsync {
 
     private static final String LIST_METHOD = "getFixedDepositList";
 
-    @Autowired
     private FixedDepositService fixedDepositService;
 
     private final Queue<ResultContext<?>> deferredResultQueue = new ConcurrentLinkedQueue<>();

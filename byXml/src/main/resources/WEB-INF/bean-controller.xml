@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="bean-service.xml" />
+
+    <bean class="com.example.mybank_xml.controller.FixedDepositController" id="fixedDepositController">
+        <property name="fixedDepositService" ref="fixedDepositService" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.controller.FixedDepositControllerAsync" id="fixedDepositControllerAsync">
+        <property name="fixedDepositService" ref="fixedDepositService" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.controller.FixedDepositControllerRest" id="fixedDepositControllerRest">
+        <property name="fixedDepositService" ref="fixedDepositService" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.controller.HelloWorldController" id="helloWorldController" />
+
+    <bean class="com.example.mybank_xml.controller.HomeController" id="homeController" />
+</beans>

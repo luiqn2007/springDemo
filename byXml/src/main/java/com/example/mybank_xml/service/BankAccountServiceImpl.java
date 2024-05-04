@@ -1,16 +1,14 @@
 package com.example.mybank_xml.service;
 
 import com.example.mybank_xml.domain.BankAccountDetails;
-import com.example.mybank.domain.QBankAccountDetails;
-import com.example.mybank.repository.BankAccountRepository;
+import com.example.mybank_xml.domain.QBankAccountDetails;
+import com.example.mybank_xml.respository.BankAccountRepository;
 import com.querydsl.core.types.Predicate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.Setter;
 
-@Service("accountService")
+@Setter
 public class BankAccountServiceImpl implements BankAccountService {
 
-    @Autowired
     private BankAccountRepository bankAccountRepository;
 
     @Override

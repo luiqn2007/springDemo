@@ -16,8 +16,8 @@ import java.util.List;
 
 // REST 风格
 @Controller
-@RequestMapping("/fixedDeposits")
-public class FixedDepositsController {
+@RequestMapping("/fixedDepositRest")
+public class FixedDepositControllerRest {
 
     private final Gson gson = new Gson();
 

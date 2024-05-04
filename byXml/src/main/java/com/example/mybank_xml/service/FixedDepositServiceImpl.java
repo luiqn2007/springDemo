@@ -2,24 +2,22 @@ package com.example.mybank_xml.service;
 
 import com.example.mybank_xml.domain.BankAccountDetails;
 import com.example.mybank_xml.domain.FixedDepositDetails;
-import com.example.mybank.domain.QFixedDepositDetails;
-import com.example.mybank.repository.FixedDepositRepository;
+import com.example.mybank_xml.domain.QFixedDepositDetails;
+import com.example.mybank_xml.respository.FixedDepositRepository;
 import com.querydsl.core.types.Predicate;
+import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("fixedDepositService")
+@Setter
 public class FixedDepositServiceImpl implements FixedDepositService {
 
     private final static Logger LOGGER = LogManager.getLogger();
 
-    @Autowired
     private FixedDepositRepository fixedDepositRepository;
 
     @Override

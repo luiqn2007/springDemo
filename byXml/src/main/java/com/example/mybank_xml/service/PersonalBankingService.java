@@ -1,5 +1,6 @@
 package com.example.mybank_xml.service;
 
+import com.example.mybank_xml.dao.PersonalBankingDao;
 import com.example.mybank_xml.domain.BankStatement;
 
 /**
@@ -8,4 +9,6 @@ import com.example.mybank_xml.domain.BankStatement;
 public interface PersonalBankingService {
 
     BankStatement getMiniStatement();
+
+    void setPersonalBankingDao(PersonalBankingDao personalBankingDao);
 }

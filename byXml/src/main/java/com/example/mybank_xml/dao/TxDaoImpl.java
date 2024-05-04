@@ -1,14 +1,10 @@
 package com.example.mybank_xml.dao;
 
 import com.example.mybank_xml.domain.Tx;
-import jakarta.inject.Named;
-import jakarta.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
-@Named("txDao")
 public class TxDaoImpl implements TxDao {
 
     @Override

@@ -1,6 +1,6 @@
 package com.example.mybank_xml.domain;
 
-import com.example.mybank.annotation.MoneyFormatter;
+import com.example.mybank_xml.annotation.MoneyFormatter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;

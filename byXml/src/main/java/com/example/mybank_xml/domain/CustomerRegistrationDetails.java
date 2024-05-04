@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@Component
-@Scope("prototype")
 public class CustomerRegistrationDetails {
 
     private String accountNumber, address, cardNumber;

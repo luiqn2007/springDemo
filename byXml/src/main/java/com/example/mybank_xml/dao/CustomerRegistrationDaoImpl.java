@@ -1,8 +1,6 @@
 package com.example.mybank_xml.dao;
 
 import com.example.mybank_xml.domain.CustomerRegistrationDetails;
-import jakarta.inject.Named;
-import jakarta.inject.Singleton;
 import lombok.Setter;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -11,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Setter
-@Singleton
-@Named("customerRegistrationDao")
 public class CustomerRegistrationDaoImpl implements CustomerRegistrationDao {
 
     private static final String SQL_INSERT_CUSTOMER_REGISTRATION =

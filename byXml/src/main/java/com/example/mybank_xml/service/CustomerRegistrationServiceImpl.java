@@ -4,15 +4,13 @@ import com.example.mybank_xml.dao.CustomerRegistrationDao;
 import com.example.mybank_xml.domain.CustomerRegistrationDetails;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-@Named("customerRegistrationService")
-@Qualifier("service")
+@Setter
 public class CustomerRegistrationServiceImpl implements CustomerRegistrationService {
 
-    @Inject
     private CustomerRegistrationDetails customerRegistrationDetails;
-    @Inject
     private CustomerRegistrationDao customerRegistrationDao;
 
     @Override

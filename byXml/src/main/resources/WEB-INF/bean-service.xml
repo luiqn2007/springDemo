@@ -3,4 +3,52 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="bean-dao.xml" />
+
+    <bean class="com.example.mybank_xml.service.AccountStatementServiceImpl" id="accountStatementService">
+        <property name="accountStatementDao" ref="accountStatementDao" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.BankAccountServiceImpl" id="bankAccountService">
+        <property name="bankAccountRepository" ref="bankAccountRepository" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.CustomerRegistrationServiceImpl" id="customerRegistrationService" >
+        <property name="customerRegistrationDetails">
+            <bean class="com.example.mybank_xml.domain.CustomerRegistrationDetails" />
+        </property>
+        <property name="customerRegistrationDao" ref="customerRegistrationDao" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.FixedDepositServiceImpl" id="fixedDepositService">
+        <property name="fixedDepositRepository" ref="fixedDepositRepository" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.FundTransferProcessor" id="fundTransferProcessor">
+        <property name="diffBankImmediateFundTransferService">
+            <bean class="com.example.mybank_xml.service.ImmediateDiffBank" />
+        </property>
+        <property name="diffBankNormalFundTransferService">
+            <bean class="com.example.mybank_xml.service.NormalDiffBank" />
+        </property>
+        <property name="sameBankImmediateFundTransferService">
+            <bean class="com.example.mybank_xml.service.ImmediateSameBank" />
+        </property>
+        <property name="sameBankNormalFundTransferService">
+            <bean class="com.example.mybank_xml.service.NormalSameBank" />
+        </property>
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.PersonalBankingServiceImpl" id="personalBankingService">
+        <property name="personalBankingDao" ref="personalBankingDao" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.TransferFundsServiceImpl" id="transferFundsService">
+        <property name="webServiceUrl" value="http://someUrl.com/xyz" />
+        <property name="active" value="true" />
+        <property name="timeout" value="200" />
+        <property name="numberOfRetrialAttempts" value="5" />
+    </bean>
+
+    <bean class="com.example.mybank_xml.service.TxServiceImpl" id="txService" />
 </beans>

@@ -2,37 +2,39 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:task="http://www.springframework.org/schema/task"
-       xmlns:jms="http://www.springframework.org/schema/jms"
-       xmlns:amq="http://activemq.apache.org/schema/core"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <amq:broker>
-        <amq:transportConnectors>
-            <amq:transportConnector uri="tcp://localhost:61616"/>
-        </amq:transportConnectors>
-    </amq:broker>
+    <import resource="config-database.xml" />
 
-    <amq:connectionFactory id="jmsFactory" brokerURL="${spring.activemq.broker-url}">
-        <amq:trustedPackages>
-            <value>com.example.mybank_xml</value>
-            <value>java.util</value>
-        </amq:trustedPackages>
-    </amq:connectionFactory>
-
-    <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-        <property name="targetConnectionFactory" ref="jmsFactory" />
+    <bean id="processedReceivedTemplate" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="${email.from}" />
+        <property name="subject" value="${email.processed.subject}" />
+        <property name="text" value="${email.processed.text}" />
     </bean>
 
-    <amq:queue id="fixedDepositDestination" physicalName="aQueueDestination" />
-    <amq:queue id="emailMessageDestination" physicalName="emailQueueDestination" />
-
-    <bean id="jmsTxManager" class="org.springframework.jms.connection.JmsTransactionManager">
-        <property name="connectionFactory" ref="cachingConnectionFactory" />
+    <bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
+        <property name="host" value="${spring.mail.host}" />
+        <property name="protocol" value="${spring.mail.protocol}" />
+        <property name="port" value="${spring.mail.port}" />
+        <property name="username" value="${spring.mail.username}" />
+        <property name="password" value="${spring.mail.password}" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
     </bean>
-    
-    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="cachingConnectionFactory" />
-        <property name="defaultDestination" ref="fixedDepositDestination" />
+
+    <bean class="com.example.mybank_xml.job.FixedDepositProcessorJob" id="sendProcessedEmailTask">
+        <property name="fixedDepositRepository" ref="fixedDepositRepository" />
+        <property name="mailSender" ref="mailSender" />
+        <property name="processedMailMessage" ref="processedReceivedTemplate" />
     </bean>
 
+    <task:executor id="myTaskExecutor" pool-size="5-10" queue-capacity="15" rejection-policy="ABORT" />
+    <task:scheduled-tasks>
+        <task:scheduled ref="sendProcessedEmailTask" method="onSendProcessedEmail" fixed-rate="1000" />
+    </task:scheduled-tasks>
 </beans>

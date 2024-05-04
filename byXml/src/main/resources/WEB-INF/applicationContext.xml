@@ -4,13 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="org.springframework.beans.factory.annotation.CustomAutowireConfigurer">
-        <property name="customQualifierTypes">
-            <set>
-                <value>com.example.mybank.annotation.FundTransfer</value>
-            </set>
-        </property>
-    </bean>
+    <context:property-placeholder location="application.properties, properties/test.properties" />
 
     <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
         <property name="propertyEditorRegistrars">
@@ -20,23 +14,11 @@
         </property>
     </bean>
 
-    <context:property-placeholder location="application.properties" />
-    <context:property-placeholder location="classpath:properties/test.properties" />
-
     <import resource="config-database.xml" />
     <import resource="config-task.xml" />
+    <import resource="config-aop.xml" />
     <import resource="bean-dao.xml" />
     <import resource="bean-service.xml" />
-
-    <bean id="requestReceivedTemplate" class="org.springframework.mail.SimpleMailMessage">
-        <property name="from" value="${email.from}" />
-        <property name="subject" value="${email.received.subject}" />
-        <property name="text" value="${email.received.text}" />
-    </bean>
-
-    <bean id="processedReceivedTemplate" class="org.springframework.mail.SimpleMailMessage">
-        <property name="from" value="${email.from}" />
-        <property name="subject" value="${email.processed.subject}" />
-        <property name="text" value="${email.processed.text}" />
-    </bean>
+    <import resource="bean-controller.xml" />
+    <import resource="config-web.xml" />
 </beans>

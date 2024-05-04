@@ -1,6 +1,7 @@
 package com.example.mybank_xml.service;
 
 import com.example.mybank_xml.domain.BankAccountDetails;
+import com.example.mybank_xml.respository.BankAccountRepository;
 
 public interface BankAccountService {
 
@@ -11,4 +12,6 @@ public interface BankAccountService {
     void subtractAmount(int bankAccountId, float amount);
 
     boolean isDuplicateAccount(int accountId);
+
+    void setBankAccountRepository(BankAccountRepository bankAccountRepository);
 }
