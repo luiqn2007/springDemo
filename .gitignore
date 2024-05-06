@@ -40,3 +40,4 @@ out/
 
 /activemq-data/
 /src/main/resources/private.properties
+/upload-file/
