@@ -2,13 +2,59 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <import resource="config-database.xml"/>
+
+    <bean id="authFailureHandler" class="com.example.mybank_xml.handler.MyAuthFailureHandler"/>
 
     <security:http>
-
+        <security:access-denied-handler error-page="/access-denied"/>
+        <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
+        <security:form-login login-page="/login" authentication-failure-handler-ref="authFailureHandler"/>
+        <security:logout/>
+        <security:remember-me/>
+        <security:headers>
+            <security:cache-control/>
+            <security:xss-protection/>
+        </security:headers>
     </security:http>
 
-    <security:authentication-manager>
+    <!-- security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder hash="bcrypt" />
+            <security:user-service>
+                <security:user name="admin" password="$2a$10$tedljrxGtyQ/IjpfhTYblOSgBhtCYUMFVoWBdhzCtsGWxwxR2aCZu" authorities="ROLE_ADMIN" />
+                <security:user name="cust1" password="$2a$10$GAyoJ5qh2tejzVzW8jYPQetLLbvHyZwM5WprAzk4Uthh.LqhSIW9G" authorities="ROLE_CUSTOMER" />
+                <security:user name="cust2" password="$2a$10$CX7U5Q4gShRnPMVPq6n43O16D9yYC3fRc6BeuRW5mNqGj6aN596ai" authorities="ROLE_CUSTOMER" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager -->
 
+    <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled"
+                                     pre-post-annotations="enabled"/>
+
+    <bean id="userDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder hash="bcrypt"/>
+        </security:authentication-provider>
     </security:authentication-manager>
+
+    <bean id="aclCache" class="org.springframework.security.acls.domain.SpringCacheBasedAclCache">
+        <constructor-arg
+    </bean>
+
+    <bean id="aclService" class="org.springframework.security.acls.jdbc.JdbcMutableAclService"
+          c:_0-ref="dataSource" c:_1-ref="lookupStrategy" c:_2-ref="aclCache"/>
+
+    <bean id="lookupStrategy" class="org.springframework.security.acls.jdbc.BasicLookupStrategy"
+          c:_0-ref="dataSource" c:_1-ref="aclCache" c:_2-ref="aclAuthorizationStrategy"
+          c:_3-ref="permissionGrantingStrategy"/>
+
 </beans>
