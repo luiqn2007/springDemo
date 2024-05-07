@@ -1,23 +1,23 @@
 package com.example.mybank.config;
 
 import com.example.mybank.handler.MyAuthFailureHandler;
-import org.ehcache.core.EhcacheManager;
-import org.ehcache.core.EhcachePrefixLoggerFactory;
-import org.ehcache.jsr107.EhcacheCachingProvider;
-import org.ehcache.xml.XmlConfiguration;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
-import org.springframework.cache.Cache;
+import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.jcache.JCacheCache;
 import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.access.expression.SecurityExpressionHandler;
+import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
+import org.springframework.security.acls.AclPermissionCacheOptimizer;
+import org.springframework.security.acls.AclPermissionEvaluator;
 import org.springframework.security.acls.domain.*;
 import org.springframework.security.acls.jdbc.BasicLookupStrategy;
 import org.springframework.security.acls.jdbc.JdbcMutableAclService;
 import org.springframework.security.acls.jdbc.LookupStrategy;
 import org.springframework.security.acls.model.AclCache;
+import org.springframework.security.acls.model.AclService;
 import org.springframework.security.acls.model.PermissionGrantingStrategy;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,7 +40,16 @@ import java.io.IOException;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, DataSource dataSource) throws Exception {
+    public SecurityExpressionHandler<MethodInvocation> securityExpressionHandler(AclService aclService) {
+        DefaultMethodSecurityExpressionHandler expressionHandler = new DefaultMethodSecurityExpressionHandler();
+        expressionHandler.setPermissionEvaluator(new AclPermissionEvaluator(aclService));
+        expressionHandler.setPermissionCacheOptimizer(new AclPermissionCacheOptimizer(aclService));
+        return expressionHandler;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity,
+                                                   @Qualifier("securityDataSource") DataSource dataSource) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         JdbcDaoImpl userDetailsManager = new JdbcDaoImpl();
@@ -64,13 +73,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    public EhcacheManager cacheManager() throws IOException {
-        ClassPathResource resource = new ClassPathResource("ehcache.xml");
-        XmlConfiguration configuration = new XmlConfiguration(resource.getURL());
-        return new EhcacheManager(configuration);
-    }
-
-    @Bean
     public AclAuthorizationStrategyImpl aclAuthorizationStrategy() {
         return new AclAuthorizationStrategyImpl(new SimpleGrantedAuthority("ROLE_CUSTOMER"));
     }
@@ -91,7 +93,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public BasicLookupStrategy lookupStrategy(DataSource dataSource, AclCache aclCache,
+    public BasicLookupStrategy lookupStrategy(@Qualifier("securityDataSource") DataSource dataSource,
+                                              AclCache aclCache,
                                               AclAuthorizationStrategy aclAuthorizationStrategy,
                                               PermissionGrantingStrategy permissionGrantingStrategy) {
         return new BasicLookupStrategy(dataSource, aclCache, aclAuthorizationStrategy, permissionGrantingStrategy);
