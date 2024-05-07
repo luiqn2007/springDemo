@@ -22,3 +22,5 @@ include 'byXml'
 include 'byAnnotation'
 include 'thymeleaf'
 include 'webClient'
+include 'rxjava'
+
