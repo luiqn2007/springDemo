@@ -30,4 +30,9 @@ public class FixedDepositRepositoryImpl implements FixedDepositRepositoryCustom 
         entityManager.persist(fd);
         inactiveFds.remove(fd);
     }
+
+    @Override
+    public void closeFixedDeposit(int id) {
+
+    }
 }

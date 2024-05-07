@@ -11,4 +11,6 @@ public interface FixedDepositRepositoryCustom {
     void addInactiveFixedDeposit(FixedDepositDetails fd);
 
     void setFixedDepositAsActive(FixedDepositDetails fd);
+
+    void closeFixedDeposit(int id);
 }

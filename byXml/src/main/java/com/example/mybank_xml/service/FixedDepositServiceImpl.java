@@ -8,8 +8,13 @@ import com.querydsl.core.types.Predicate;
 import lombok.Setter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.model.*;
 
 import java.util.List;
 
@@ -64,5 +69,41 @@ public class FixedDepositServiceImpl implements FixedDepositService {
     @Override
     public List<FixedDepositDetails> getFixedDeposits() {
         return fixedDepositRepository.findAll();
+    }
+
+    @Override
+    public void editFixedDeposit(FixedDepositDetails fixedDepositDetails) {
+        fixedDepositRepository.save(fixedDepositDetails);
+    }
+
+    @Autowired
+    private MutableAclService mutableAclService;
+
+    @Override
+    public void provideAccessToAdmin(int fixedDepositId) {
+        addPermission(fixedDepositId, new PrincipalSid("admin"), BasePermission.READ);
+        addPermission(fixedDepositId, new PrincipalSid("admin"), BasePermission.ADMINISTRATION);
+        addPermission(fixedDepositId, new PrincipalSid("admin"), BasePermission.DELETE);
+    }
+
+    @Override
+    public void closeFixedDeposit(int fixedDepositId) {
+        fixedDepositRepository.closeFixedDeposit(fixedDepositId);
+        ObjectIdentity old = new ObjectIdentityImpl(FixedDepositDetails.class, fixedDepositId);
+        mutableAclService.deleteAcl(old, false);
+    }
+
+    private void addPermission(int fixedDepositId, Sid recipient, Permission permission) {
+        MutableAcl acl;
+        ObjectIdentity old = new ObjectIdentityImpl(FixedDepositDetails.class, fixedDepositId);
+
+        try {
+            acl = (MutableAcl) mutableAclService.readAclById(old);
+        } catch (NotFoundException e) {
+            acl = mutableAclService.createAcl(old);
+        }
+
+        acl.insertAce(acl.getEntries().size(), permission, recipient, true);
+        mutableAclService.updateAcl(acl);
     }
 }
