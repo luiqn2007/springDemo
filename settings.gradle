@@ -23,4 +23,5 @@ include 'byAnnotation'
 include 'thymeleaf'
 include 'webClient'
 include 'rxjava'
+include 'webFlux'
 
