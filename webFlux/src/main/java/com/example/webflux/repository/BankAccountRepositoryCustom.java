@@ -1,8 +1,12 @@
 package com.example.webflux.repository;
 
+import reactor.core.publisher.Mono;
+
 public interface BankAccountRepositoryCustom {
 
-    void subtractFromAccount(int bankAccountId, float amount);
+    Mono<Void> subtractFromAccount(String bankAccountId, int amount);
 
-    boolean isDuplicateAccount(int bankAccountId);
+    Mono<Boolean> isDuplicateAccount(String bankAccountId);
+
+    Mono<Void> addFixedDeposit(String bankAccountId, int amount);
 }

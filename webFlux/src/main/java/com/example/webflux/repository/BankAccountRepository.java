@@ -1,15 +1,17 @@
 package com.example.webflux.repository;
 
 import com.example.webflux.domain.BankAccountDetails;
-import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.Single;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface BankAccountRepository extends ReactiveMongoRepository<BankAccountDetails, String> {
 
-    Single<Long> countByBalanceAmount(float balance);
+    Mono<Long> countByBalance(float balance);
 
-    Flowable<BankAccountDetails> removeByBalanceAmount(float balanceAmount);
+    Flux<BankAccountDetails> removeByBalance(float balanceAmount);
 
-
+    @Query("{'balance' : {'$lte':  ?0}}")
+    Flux<BankAccountDetails> findByCustomQuery(int balanceAmount);
 }

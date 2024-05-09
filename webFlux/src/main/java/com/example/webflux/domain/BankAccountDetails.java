@@ -1,37 +1,32 @@
 package com.example.webflux.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Id;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
-@Builder
+@EqualsAndHashCode(exclude = {"balance", "lastTransactionTimestamp", "fixedDeposits", "count", "findOne"})
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Entity
-@Table(name = "bank_account_details")
-public class BankAccountDetails implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+@Document(collection = "bankaccounts")
+public class BankAccountDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ACCOUNT_ID")
-    int accountId;
+    private String accountId;
 
-    @Column(name = "BALANCE_AMOUNT")
-    float balanceAmount;
+    private int balance;
 
-    @Column(name = "LAST_TRANSACTION_TS")
-    Date lastTransactionDate;
+    private Date lastTransactionTimestamp;
 
-    public BankAccountDetails(int accountId) {
-        this.accountId = accountId;
-        this.balanceAmount = 0;
-        this.lastTransactionDate = new Date();
-    }
+    private List<FixedDepositDetails> fixedDeposits = new ArrayList<>();
+
+    private long count;
+
+    private long findOne;
 }
